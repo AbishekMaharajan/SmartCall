@@ -1,0 +1,205 @@
+<div *ngIf="usersSandbox.statusTrackerListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main *ngIf="!(usersSandbox.statusTrackerListLoading$ | async)">
+  <section class="header">
+    <p>Status Tracker</p>
+    <div class="bttn-box">
+      <div
+        class="search"
+        *ngIf="(usersSandbox.statusTrackerListCount$ | async) > 0"
+      >
+        <input
+          class="input-search"
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="keyword"
+          (change)="onSearch()"
+          (keyup)="keyFunc($event)"
+          [ngClass]="keyword && keyword !== '' ? 'expand' : null"
+        />
+        <button class="bttn-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onSubmit()"
+        [ngClass]="(usersSandbox.statusTrackerListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="usersSandbox.statusTrackerListLoading$ | async"
+        ></i
+        ><span> Search</span>
+      </button>
+    </div>
+  </section>
+  <section class="container-box">
+    <form [formGroup]="form" (ngSubmit)="doSubmit()">
+      <div class="filter-box">
+        <div class="input-container">
+          <label>Agent Name <Sup>*</Sup></label>
+          <ng-select
+            [items]="usersSandbox.agentList$ | async"
+            bindLabel="member_name"
+            bindValue="id"
+            placeholder="All Agents"
+            formControlName="agent"
+          >
+          </ng-select>
+        </div>
+        <div class="input-container">
+          <mat-form-field (click)="fromDate.open()">
+            <label style="margin-bottom: 1.2rem">From Date <Sup>*</Sup></label>
+            <input
+              matInput
+              [matDatepicker]="fromDate"
+              [min]="fromMinDate"
+              [max]="fromMaxDate"
+              readonly
+              placeholder="From Date"
+              id="fromDate"
+              formControlName="fromDate"
+              (dateChange)="onChangeFromDate($event)"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="fromDate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #fromDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="input-container">
+          <mat-form-field (click)="toDate.open()">
+            <label style="margin-bottom: 1.2rem">To Date <Sup>*</Sup></label>
+
+            <input
+              matInput
+              [matDatepicker]="toDate"
+              [min]="toMinDate"
+              [max]="toMaxDate"
+              readonly
+              placeholder="To Date"
+              formControlName="toDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="toDate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #toDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="input-container"></div>
+      </div>
+      <div class="filter-box-2">
+        <div>
+          <label>Availability Status</label>
+          <p class="availability-option">
+            <span
+              *ngFor="let state of availability"
+              class="{{ state.class }} active"
+              [ngClass]="{ active: state.active == true }"
+              (click)="OnChangeAvailability(state)"
+            >
+              {{ state.unnest }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </form>
+    <div
+      class="notification"
+      *ngIf="
+        !(usersSandbox.statusTrackerList$ | async)?.length &&
+        !(usersSandbox.statusTrackerListLoaded$ | async)
+      "
+    >
+      Apply filters to generate reports !
+    </div>
+    <div
+      class="notification"
+      *ngIf="
+        !(usersSandbox.statusTrackerList$ | async)?.length &&
+        (usersSandbox.statusTrackerListLoaded$ | async)
+      "
+    >
+      <div class="figg">
+        <img src="../../../../../assets/imgs/nodata.png" alt="" />
+      </div>
+
+      <div>No records found !</div>
+    </div>
+    <div
+      class="table-box customScroll"
+      *ngIf="(usersSandbox.statusTrackerList$ | async)?.length > 0"
+    >
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Agent</th>
+            <th>Status</th>
+            <th>Updated By</th>
+            <th>Updated On</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let data of usersSandbox.statusTrackerList$
+                | async
+                | paginate: config;
+              let i = index
+            "
+          >
+            <td>
+              {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+            </td>
+            <td>{{ data.member_name }}</td>
+            <td>
+              <span
+                class="status"
+                [ngClass]="
+                  data.status_marked === 'Available' ||
+                  data.status_marked === 'On Duty'
+                    ? 'available'
+                    : data.status_marked === 'Not Available' ||
+                      data.status_marked === 'On Leave'
+                    ? 'notAvailable'
+                    : 'onBreak'
+                "
+              >
+                {{ data.status_marked }}
+              </span>
+            </td>
+            <td>{{ data.updated_by }}</td>
+            <td>{{ data.updated_on }}</td>
+            <td>{{ data.remarks === "" ? "N / A" : data.remarks }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(usersSandbox.statusTrackerListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

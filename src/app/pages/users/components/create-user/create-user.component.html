@@ -1,0 +1,289 @@
+<div *ngIf="usersSandbox.fetchUpdateDataLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>
+      <span>{{ userId === 0 ? "Create" : "Update" }} </span> User
+    </p>
+    <div class="bttn-box">
+      <button
+        style="width: 13rem"
+        class="bttn warning-outline"
+        (click)="onCancelBtnClick()"
+      >
+        <span> Cancel </span>
+      </button>
+      <button
+        style="width: 13rem"
+        class="bttn"
+        *ngIf="!userId"
+        (click)="onCreateBtnClick()"
+        [ngClass]="(usersSandbox.createUserLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="usersSandbox.createUserLoading$ | async"
+        ></i>
+        <span> Create User </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onUpdateBtnClick()"
+        *ngIf="userId"
+        [ngClass]="(usersSandbox.updateUserLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="usersSandbox.updateUserLoading$ | async"
+        ></i>
+        <span> Update </span>
+      </button>
+    </div>
+  </section>
+  <section class="container-box customScroll">
+    <div class="upload-foto-container-box">
+      <div class="upload-foto">
+        <input
+          type="file"
+          name="userImg"
+          (change)="uploadImage($event)"
+          accept="image/*"
+          #filePath
+        />
+        <img [src]="postUrl" onError="this.src='assets/imgs/users.svg'" />
+      </div>
+      <div class="description">
+        <p class="main-heading">Choose User Photo</p>
+        <p class="sub-heading">
+          <!-- Lorem ipsum dolor sit amet ipsum dolor
+          <br />
+          consectetur adipisicing elit. -->
+        </p>
+      </div>
+      <button style="width: 15rem" class="bttn" (click)="uploadButtonClick()">
+        <span> Upload Photo </span>
+      </button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="doCreateUser('')">
+      <div class="input-box">
+        <div class="username">
+          <label>User Name <sup>*</sup></label>
+          <input
+            type="text"
+            formControlName="member_name"
+            placeholder="Enter Username"
+            [ngClass]="
+              form.controls['member_name'].hasError('required') &&
+              form.controls['member_name'].touched
+                ? 'error'
+                : null
+            "
+          />
+          <span
+            *ngIf="
+              form.controls['member_name'].hasError('required') &&
+              form.controls['member_name'].touched
+            "
+            class="error-data"
+          >
+            UserName is required.
+          </span>
+        </div>
+        <div class="mail">
+          <label>Email Id <sup>*</sup></label>
+          <input
+            type="text"
+            formControlName="email_id"
+            placeholder="Enter Email"
+            [ngClass]="
+              form.controls['email_id'].hasError('required') &&
+              form.controls['email_id'].touched
+                ? 'error'
+                : null
+            "
+          />
+          <span
+            class="text-danger error-data"
+            *ngIf="
+              form.controls['email_id'].hasError('pattern') &&
+              form.controls['email_id'].touched
+            "
+          >
+            Please enter valid email
+          </span>
+          <span
+            *ngIf="
+              form.controls['email_id'].hasError('required') &&
+              form.controls['email_id'].touched
+            "
+            class="error-data"
+          >
+            Email is required.
+          </span>
+        </div>
+        <div class="mobile">
+          <label>Mobile No <sup>*</sup></label>
+          <input
+            type="text"
+            Decimalnumeric
+            numericType="number"
+            minlength="10"
+            [maxlength]="10"
+            formControlName="mobile_number"
+            placeholder="Enter Mobile No"
+            [ngClass]="
+              form.controls['mobile_number'].hasError('required') &&
+              form.controls['mobile_number'].touched
+                ? 'error'
+                : null
+            "
+          />
+          <span
+            class="text-danger error-data"
+            *ngIf="
+              form.controls['mobile_number'].errors?.minlength &&
+              form.controls['mobile_number'].touched
+            "
+          >
+            Please enter valid mobile number
+          </span>
+          <span
+            *ngIf="
+              form.controls['mobile_number'].hasError('required') &&
+              form.controls['mobile_number'].touched
+            "
+            class="error-data"
+          >
+            Mobile number is required.
+          </span>
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="user-type">
+          <label> User Type <sup>*</sup></label>
+          <span>
+            <ng-select
+              [items]="usersSandbox.userType$ | async"
+              bindLabel="user_type_description"
+              bindValue="id"
+              [searchable]="false"
+              placeholder="Select"
+              formControlName="user_type"
+              [ngClass]="
+                form.controls['user_type'].hasError('required') &&
+                form.controls['user_type'].touched
+                  ? 'border'
+                  : null
+              "
+            >
+            </ng-select>
+            <span
+              *ngIf="
+                form.controls['user_type'].hasError('required') &&
+                form.controls['user_type'].touched
+              "
+              class="error-data"
+            >
+              Please select a valid user Type.
+            </span>
+          </span>
+        </div>
+        <div class="phone-type">
+          <label> Phone Type <sup>*</sup></label>
+          <span>
+            <ng-select
+              [items]="usersSandbox.phoneType$ | async"
+              bindLabel="unnest"
+              bindValue="unnest"
+              [searchable]="false"
+              formControlName="phone_type"
+              placeholder="Select"
+              (change)="onSelectPhoneType($event)"
+              [ngClass]="
+                form.controls['phone_type'].hasError('required') &&
+                form.controls['phone_type'].touched
+                  ? 'border'
+                  : null
+              "
+            >
+            </ng-select>
+            <span
+              *ngIf="
+                form.controls['phone_type'].hasError('required') &&
+                form.controls['phone_type'].touched
+              "
+              class="error-data"
+            >
+              Please select a valid phone Type.
+            </span>
+          </span>
+        </div>
+        <div class="reporting">
+          <label> Reporting To <sup>*</sup></label>
+          <span>
+            <ng-select
+              [items]="usersSandbox.reporting$ | async"
+              bindLabel="member_name"
+              bindValue="id"
+              [searchable]="false"
+              placeholder="Select"
+              formControlName="reporting_to"
+              [ngClass]="
+                form.controls['reporting_to'].hasError('required') &&
+                form.controls['reporting_to'].touched
+                  ? 'border'
+                  : null
+              "
+            >
+            </ng-select>
+            <span
+              *ngIf="
+                form.controls['reporting_to'].hasError('required') &&
+                form.controls['reporting_to'].touched
+              "
+              class="error-data"
+            >
+              Please select reporting to.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="sip">
+          <label
+            >Active Status &nbsp;&nbsp;
+            <span style="color: var(--warning)"> Inactive </span>/
+            <span style="color: var(--success)"> Active </span></label
+          >
+          <span>
+            <mat-slide-toggle formControlName="status"></mat-slide-toggle>
+          </span>
+        </div>
+        <div class="sip" *ngIf="sipActiveStatus">
+          <label>Sip IP Address <sup>*</sup></label>
+          <input type="text" formControlName="soft_phone_ip" />
+        </div>
+        <div class="sip" style="visibility: hidden">
+          <label></label>
+          <input type="text" />
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="availability">
+          <label>Availability Status</label>
+          <p class="availability-option">
+            <span
+              *ngFor="let state of availability"
+              class="{{ state.class }} active"
+              [ngClass]="{ active: state.active == true }"
+              (click)="OnChangeAvailability(state)"
+            >
+              {{ state.unnest }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>

@@ -1,0 +1,128 @@
+<div *ngIf="didSandbox.didListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>Manage DID</p>
+    <div class="bttn-box">
+      <div class="search">
+        <input
+          class="input-search"
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="keyword"
+          (change)="onSearch()"
+          (keyup)="keyFunc($event)"
+          [ngClass]="keyword && keyword !== '' ? 'expand' : null"
+        />
+        <button class="bttn-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="container-box customScroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>DID</th>
+          <th>Projects</th>
+          <th>Status</th>
+          <th style="text-align: center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let did of DidArr | paginate: config; let i = index">
+          <td>
+            {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+          </td>
+          <td>{{ did.did_number }}</td>
+
+          <td>{{ !did.project_name ? " N / A " : did.project_name }}</td>
+          <td>
+            <span
+              class="status"
+              [ngClass]="did.status === 'Allocated' ? 'success' : 'warning'"
+              >{{ did.status }}</span
+            >
+          </td>
+          <td>
+            <div class="bttn-box-2" *ngIf="did.status === 'UnAllocated'">
+              <span *ngIf="!did.isAssigned">
+                <button
+                  class="bttn"
+                  (click)="onClickAssign(did)"
+                  style="background-color: var(--purple)"
+                >
+                  Assign Project
+                </button>
+              </span>
+            </div>
+            <div class="bttn-box-2" *ngIf="did.status === 'Allocated'">
+              <button class="bttn" (click)="onReleaseBtnClick(did)">
+                Release DID
+              </button>
+            </div>
+
+            <div class="select-box" *ngIf="did.isAssigned">
+              <span
+                style="
+                  width: 20rem;
+                  height: 3rem;
+                  display: flex;
+                  align-items: center;
+                "
+              >
+                <ng-select
+                  style="flex: 1"
+                  [items]="didSandbox.projectList$ | async"
+                  bindLabel="project_name"
+                  bindValue="project_name"
+                  [searchable]="true"
+                  [(ngModel)]="did.selectedProject"
+                  (change)="onSelectProject($event.id)"
+                >
+                </ng-select>
+              </span>
+              <span
+                class="save-box"
+                *ngIf="did.selectedProject !== 'Select Project'"
+              >
+                <button class="bttn-save" (click)="onSave(did)">
+                  <span class="flex-center"> <mat-icon>check</mat-icon></span>
+                </button>
+              </span>
+              <span class="save-box" *ngIf="did.isAssigned">
+                <button class="bttn-save cancel" (click)="onCancel(did)">
+                  <span class="flex-center"> <mat-icon>close</mat-icon></span>
+                </button>
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(didSandbox.didListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

@@ -1,0 +1,129 @@
+<div
+  *ngIf="
+    (userSandbox.agentListLoading$ | async) ||
+    (userSandbox.mappingListLoading$ | async)
+  "
+>
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>Project-Agent Mapping</p>
+    <div class="bttn-box">
+      <button class="bttn warning-outline" (click)="onCancelBtnClick()">
+        <span> Cancel </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onSaveBtnClick()"
+        [ngClass]="(userSandbox.projectMappingLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="userSandbox.projectMappingLoading$ | async"
+        ></i>
+        <span> Save </span>
+      </button>
+    </div>
+  </section>
+  <section class="container-box">
+    <div
+      class="content"
+      *ngIf="
+        !(userSandbox.agentListLoading$ | async) ||
+        !(userSandbox.mappingListLoading$ | async)
+      "
+    >
+      <div class="user-box customScroll">
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="Agent Name..."
+            (change)="onAgentSearch($event)"
+            [(ngModel)]="userSearch"
+            (keyup)="onAgentKeypress($event)"
+          />
+          <span class="icon">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </span>
+        </div>
+        <div class="user" *ngFor="let user of users" [dndDraggable]="user">
+          {{ user.member_name }}
+        </div>
+      </div>
+      <div class="project-container customScroll">
+        <div class="project-search-box">
+          <!-- Drag and drop Agents to project -->
+          <div style="position: relative">
+            <input
+              type="text"
+              placeholder="Project Name..."
+              (change)="onProjectSearch()"
+              (keyup)="onProjectKeypress($event)"
+              [(ngModel)]="projectSearch"
+            />
+            <span class="icon">
+              <fa-icon [icon]="faSearch"></fa-icon>
+            </span>
+          </div>
+        </div>
+        <div class="project-box">
+          <div
+            class="project"
+            *ngFor="let project of projectArr"
+            dndDropzone
+            (dndDrop)="onMove($event, project)"
+          >
+            <div class="project-head">
+              <span class="span-1">{{ project.project_name }}</span>
+              <span class="span-2"> {{ project.json_data.length }}</span>
+            </div>
+            <div class="agent-container customScroll">
+              <div
+                class="agents"
+                *ngFor="let agent of project.json_data; let i = index"
+              >
+                <span class="angent-name">{{ agent.member_name }} </span>
+                <span class="box-2">
+                  <span class="days" (click)="onClickDays(project, agent)"
+                    >{{ agent.days }} day(s)</span
+                  >
+                  <span class="img-box" (click)="removeAgent(project, i)">
+                    <img src="../../../../../assets/imgs/close.png" alt="" />
+                  </span>
+                </span>
+              </div>
+            </div>
+            <span class="_notification" *ngIf="project.json_data?.length === 0"
+              >No Agents Mapped</span
+            >
+
+            <div class="overlay" dndPlaceholderRef>
+              <div class="project-head">
+                <span class="span-1">{{ project.project_name }}</span>
+                <span class="span-2"> {{ project.json_data.length }}</span>
+              </div>
+              <div class="agent-container customScroll">
+                <div
+                  class="agents"
+                  *ngFor="let agent of project.json_data; let i = index"
+                >
+                  <span class="angent-name">{{ agent.member_name }} </span>
+                  <span class="box-2">
+                    <span class="days">{{ agent.days }} day(s)</span>
+                    <span class="img-box" (click)="removeAgent(project, i)"
+                      ><img src="../../../../../assets/imgs/close.png" alt=""
+                    /></span>
+                  </span>
+                </div>
+              </div>
+              <span class="_notification" *ngIf="project.json_data.length === 0"
+                >No Agents Mapped</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

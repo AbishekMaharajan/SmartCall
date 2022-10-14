@@ -1,0 +1,90 @@
+.modal_container {
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 2rem;
+  padding-bottom: 1rem;
+  position: relative;
+  .modal_header {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+
+    .heading {
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--primary);
+      display: flex;
+      width: 100%;
+      padding-inline: 5%;
+      div {
+        flex: 1;
+      }
+
+      .bttn {
+        margin-left: auto;
+        font-size: 1.6rem;
+      }
+    }
+    .user {
+      margin-left: 0.5rem;
+      color: var(--purple);
+      text-transform: capitalize;
+    }
+    .close {
+      position: absolute;
+      right: 2rem;
+      top: 1rem;
+      font-size: 3.5rem;
+      color: var(--font-muted);
+      background-color: transparent;
+    }
+  }
+  .modal_content {
+    width: 100%;
+    height: 80%;
+    overflow-y: auto;
+    .audio-box {
+      width: 22rem;
+    }
+    .audio {
+      width: 22rem;
+      height: 4rem;
+      cursor: pointer;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding-inline: 1rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+      width: 8rem;
+
+      &.success {
+        background-color: var(--success-light);
+        color: var(--success);
+      }
+      &.warning {
+        background-color: var(--warning-light);
+        color: var(--warning);
+      }
+    }
+  }
+  .modal_footer {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 4rem;
+    .bttn {
+      width: 12rem;
+    }
+  }
+}

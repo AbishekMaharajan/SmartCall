@@ -1,0 +1,203 @@
+<div *ngIf="customerSandbox.projectAgentListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+
+<main>
+  <section class="header">
+    <p>Project / Agent Report</p>
+
+    <div class="bttn-box">
+      <div class="search">
+        <input
+          class="input-search"
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="keyword"
+          (change)="onSearch()"
+          (keyup)="keyFunc($event)"
+          [ngClass]="keyword && keyword !== '' ? 'expand' : null"
+        />
+        <button class="bttn-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onSubmit()"
+        [ngClass]="
+          (customerSandbox.projectAgentListLoading$ | async) && 'block'
+        "
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="customerSandbox.projectAgentListLoading$ | async"
+        ></i>
+        <span> Search </span>
+      </button>
+    </div>
+  </section>
+  <section class="container-box">
+    <div class="filter-box">
+      <span class="select-box">
+        <label>Agent Name <sup>*</sup></label>
+        <ng-select
+          [items]="userSandbox.agentList$ | async"
+          bindLabel="member_name"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="Select"
+          [(ngModel)]="agent"
+        >
+        </ng-select>
+      </span>
+      <span class="select-box">
+        <label>Project Name <sup>*</sup></label>
+        <ng-select
+          [items]="customerSandbox.projectList$ | async"
+          bindLabel="project_name"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="Select"
+          [(ngModel)]="projectDid"
+        >
+        </ng-select>
+      </span>
+      <span class="input-container" (click)="fromDate.open()">
+        <mat-form-field (click)="fromDate.open()">
+          <label style="margin-bottom: 1.2rem">From Date <sup>*</sup></label>
+          <input
+            matInput
+            [matDatepicker]="fromDate"
+            [min]="fromMinDate"
+            [max]="fromMaxDate"
+            readonly
+            placeholder="From Date"
+            id="fromDate"
+            [(ngModel)]="onFromDate"
+            (dateChange)="onChangeFromDate($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="fromDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+      </span>
+
+      <span class="input-container" (click)="toDate.open()">
+        <mat-form-field (click)="toDate.open()">
+          <label style="margin-bottom: 1.2rem">To Date <sup>*</sup></label>
+
+          <input
+            matInput
+            [matDatepicker]="toDate"
+            [min]="toMinDate"
+            [max]="toMaxDate"
+            readonly
+            placeholder="To Date"
+            [(ngModel)]="onToDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="toDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+      </span>
+    </div>
+    <div class="table-box customScroll">
+      <div
+        class="notification"
+        *ngIf="!(customerSandbox.projectAgentListLoaded$ | async)"
+      >
+        Apply filters to generate reports !
+      </div>
+      <div
+        class="notification"
+        *ngIf="
+          (customerSandbox.projectAgentListLoaded$ | async) &&
+          (customerSandbox.projectAgentListCount$ | async) === 0
+        "
+      >
+        <div class="figg">
+          <img src="../../../../../assets/imgs/nodata.png" alt="" />
+        </div>
+        <div>No records found !</div>
+      </div>
+      <table
+        class="table"
+        *ngIf="(customerSandbox.projectAgentListCount$ | async) > 0"
+      >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Agent</th>
+            <th>Agent No</th>
+            <th>customer</th>
+            <th>customer No</th>
+            <th>Called On</th>
+            <th>Call Status</th>
+            <th>Duration</th>
+            <th>Followup Time</th>
+            <th>Recording</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let data of customerSandbox.projectAgentList$
+                | async
+                | paginate: config;
+              let i = index
+            "
+          >
+            <td>
+              {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+            </td>
+            <td>{{ data.agent_name }}</td>
+            <td>{{ data.agent_number }}</td>
+            <td>{{ data.customer_name }}</td>
+            <td>{{ data.customer_number }}</td>
+            <td>{{ data.called_date }} {{ data.called_time }}</td>
+            <td>
+              <!-- class="status"
+                [ngClass]="data.status === 'Connected' ? 'success' : 'warning'" -->
+              <span>{{ data.call_status }} </span>
+            </td>
+            <td>{{ data.duration }}</td>
+            <td>{{ data.follow_up_date }} {{ data.follow_up_time }}</td>
+            <td>
+              <button
+                style="color: steelblue; cursor: pointer"
+                mat-icon-button
+                (click)="playRecording(data)"
+              >
+                <mat-icon>play_circle_filled</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(customerSandbox.projectAgentListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

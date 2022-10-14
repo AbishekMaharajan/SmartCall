@@ -1,0 +1,41 @@
+<aside class="sidebar">
+  <div class="logo-box">
+    <figure class="fig">
+      <img src="../../../../assets/imgs/logo.png" alt="logo" />
+    </figure>
+  </div>
+  <nav class="customScroll">
+    <div class="navigation" *ngFor="let nav of menu">
+      <div class="title">
+        {{ nav.title }}
+      </div>
+      <div
+        class="main-container-box"
+        (click)="openMainMenu(main)"
+        *ngFor="let main of nav.main"
+      >
+        <div class="main_title" [ngClass]="{ active: main.path == activeMenu }">
+          <figure class="span-1">
+            <!-- <fa-icon [icon]="main.icon"></fa-icon> -->
+            <mat-icon class="icon">{{ main.icon }}</mat-icon>
+          </figure>
+          <span class="text">{{ main.title }}</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="profile-container-box">
+    <span class="user-name">Welcome, {{ userName }} !</span>
+    <div class="icon-box">
+      <figure>
+        <img src="../../../../assets/imgs/userlogo.png" alt="user" />
+      </figure>
+      <span>
+        <fa-icon [icon]="faGear"></fa-icon>
+      </span>
+      <span (click)="logout()">
+        <fa-icon [icon]="faRightToBracket"></fa-icon>
+      </span>
+    </div>
+  </section>
+</aside>

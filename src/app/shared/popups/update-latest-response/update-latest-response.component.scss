@@ -1,0 +1,97 @@
+.modal_container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 2rem 4rem;
+  position: relative;
+  .modal_header {
+    height: 10%;
+    width: 100%;
+    text-align: center;
+    span {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    button {
+      position: absolute;
+      right: 2rem;
+      top: 1rem;
+      font-size: 3.5rem;
+      color: var(--font-muted);
+      background-color: transparent;
+    }
+  }
+  .modal_content {
+    width: 100%;
+    height: 80%;
+    form {
+      display: flex;
+      flex-flow: column wrap;
+      gap: 1rem;
+      // margin-top: 2rem;
+      align-items: center;
+
+      .input-box {
+        display: flex;
+        gap: 3rem;
+        div {
+          display: flex;
+          flex-direction: column;
+          width: 30rem;
+          label {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+          }
+          input {
+            padding: 0.8rem;
+            border: var(--border);
+            width: 100%;
+            border-radius: 0.5rem;
+            letter-spacing: 1px;
+            box-shadow: var(--box-shadow-primary);
+          }
+        }
+        textarea {
+          border: var(--border);
+          border-radius: 0.5rem;
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+  .modal_footer {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 4rem;
+    .bttn {
+      width: 12rem;
+    }
+  }
+  ::ng-deep .ng-select-container {
+    height: 43px !important;
+  }
+}
+
+input#session-date {
+  display: inline-block;
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}

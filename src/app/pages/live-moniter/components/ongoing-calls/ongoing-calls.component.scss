@@ -1,0 +1,31 @@
+.container-box {
+  height: calc(100% - 8rem);
+  label {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.box {
+  width: 30rem;
+  color: var(--font-muted);
+  strong {
+    padding-left: 1rem;
+    color: var(--primary);
+  }
+}
+.select-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
+  color: var(--font-primary);
+  .input-box {
+    width: 18rem;
+  }
+}
+.table {
+  .bttn {
+    height: 3rem !important;
+  }
+}

@@ -1,0 +1,116 @@
+<div *ngIf="customerSandbox.customerListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+
+<main>
+  <section class="header">
+    <p>Customer Info</p>
+    <div class="bttn-box">
+      <div class="search">
+        <input
+          class="input-search"
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="keyword"
+          (change)="onSearch()"
+          (keyup)="keyFunc($event)"
+          [ngClass]="keyword && keyword !== '' ? 'expand' : null"
+        />
+        <button class="bttn-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+    </div>
+  </section>
+  <section class="container-box customScroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Mobie</th>
+          <th>Alternate Number</th>
+          <th>Email</th>
+          <th style="width: 16rem">Address</th>
+          <th>Action Taken</th>
+          <th>Followup Date</th>
+          <th>Followup Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let customer of customerSandbox.customerList$
+              | async
+              | paginate: config;
+            let i = index
+          "
+        >
+          <td>
+            {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+          </td>
+          <td>
+            {{ customer.customer_name ? customer.customer_name : "N / A" }}
+          </td>
+          <td>
+            {{ customer.customer_mobile ? customer.customer_mobile : "N / A" }}
+          </td>
+          <td>
+            {{
+              customer.alternate_number1 ? customer.alternate_number1 : "N / A"
+            }}
+          </td>
+          <td>
+            {{ customer.customer_email ? customer.customer_email : "N / A" }}
+          </td>
+          <td>
+            {{ customer.address ? customer.address : "N / A" }}
+          </td>
+          <td>{{ customer.action_taken ? customer.action_taken : "N / A" }}</td>
+          <td>
+            {{ customer.follow_up_date ? customer.follow_up_date : "N / A" }}
+          </td>
+          <td>
+            {{ customer.follow_up_time ? customer.follow_up_time : "N / A" }}
+          </td>
+          <td>
+            <button
+              style="color: red"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editCustomer(customer)">
+                <mat-icon style="color: steelblue">edit</mat-icon>
+                <span>Edit Customer</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(customerSandbox.customerListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

@@ -1,0 +1,172 @@
+<div *ngIf="usersSandbox.userListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>Users List</p>
+    <div class="bttn-box">
+      <div class="search">
+        <input
+          class="input-search"
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="keyword"
+          (change)="onSearch()"
+        />
+        <button class="bttn-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+      <button style="width: 12rem" class="bttn" (click)="onAddBtnClick()">
+        <span> Add User </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="container-box customScroll">
+    <div
+      class="notification"
+      *ngIf="(usersSandbox.userListCount$ | async) === 0"
+    >
+      <div class="figg">
+        <img src="../../../../../assets/imgs/nodata.png" alt="" />
+      </div>
+      <div>No records found !</div>
+    </div>
+    <table class="table" *ngIf="(usersSandbox.userListCount$ | async) > 0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>User</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>User Type</th>
+          <th>Phone Type</th>
+          <th>Reporting To</th>
+          <th>Availability</th>
+          <th>Inactive / Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let user of usersSandbox.userList$ | async | paginate: config;
+            let i = index
+          "
+        >
+          <td>
+            {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+          </td>
+          <td
+            style="display: flex; justify-content: start; align-items: flex-end"
+          >
+            <img
+              [src]="item?.logo"
+              onError="this.src='assets/imgs/users.svg';"
+              style="
+                border-radius: 50%;
+                width: 3rem;
+                height: 3rem;
+                margin-right: 0.5rem;
+              "
+            />
+            {{ user.member_name }}
+          </td>
+          <td>{{ user.email_id ? user.email_id : "N / A" }}</td>
+          <td>{{ user.mobile_number ? user.mobile_number : "N / A" }}</td>
+          <td>
+            <span
+              class="status"
+              [ngClass]="
+                user.user_type === 'Executive'
+                  ? '_alert'
+                  : user.user_type === 'Admin' || user.user_type === 'Manager'
+                  ? 'success'
+                  : 'warning'
+              "
+              >{{ user.user_type ? user.user_type : "N / A" }}
+            </span>
+          </td>
+          <td>{{ user.phone_type ? user.phone_type : "N / A" }}</td>
+          <td>
+            {{
+              user.reporting_to == 1
+                ? "Manager"
+                : user.reporting_to == 2
+                ? "Team Lead"
+                : user.reporting_to == 3
+                ? "Sales Head"
+                : user.reporting_to == ""
+                ? "N / A"
+                : user.reporting_to
+            }}
+          </td>
+          <td>
+            <span
+              class="status"
+              [ngClass]="
+                user.call_availability === 'Available' ||
+                user.call_availability === 'On Duty'
+                  ? 'success'
+                  : user.call_availability === 'On Leave' ||
+                    user.call_availability === 'Not Available'
+                  ? 'warning'
+                  : user.call_availability === 'On Break'
+                  ? '_alert'
+                  : null
+              "
+              >{{ user.call_availability }}</span
+            >
+          </td>
+          <td style="padding-left: 2rem">
+            <mat-slide-toggle
+              [checked]="user.status === 1 ? true : false"
+              (change)="onToggleActiveStatus($event, user)"
+            ></mat-slide-toggle>
+          </td>
+          <td>
+            <button
+              style="color: red"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              status
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editUser(user.id)">
+                <mat-icon style="color: slateblue">edit</mat-icon>
+                <span>Edit User</span>
+              </button>
+              <button mat-menu-item (click)="deleteUser(user.id)">
+                <mat-icon style="color: #dc143c">delete</mat-icon>
+                <span>Delete User</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(usersSandbox.userListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

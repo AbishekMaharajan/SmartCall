@@ -1,0 +1,23 @@
+<main class="modal_container">
+  <section class="modal_header">
+    <div class="heading">Voice file</div>
+    <button class="close" (click)="close()">&times;</button>
+  </section>
+  <section class="modal_content flex-center customScroll">
+    <audio controls autoplay class="audio" *ngIf="user.file_recording">
+      <source [src]="user.file_recording" type="audio/wav" />
+    </audio>
+
+    <audio controls autoplay class="audio" *ngIf="user.voicefile">
+      <source [src]="user.voicefile" type="audio/wav" />
+    </audio>
+    <div *ngIf="!user.voicefile && !user.file_recording">
+      No records found !
+    </div>
+  </section>
+  <!-- <section class="modal_footer"> -->
+  <!-- <section class="modal_footer"> -->
+  <!-- <button class="bttn" (click)="onConfirm()"><span>Close</span></button> -->
+  <!-- </section> -->
+  <!-- </section> -->
+</main>

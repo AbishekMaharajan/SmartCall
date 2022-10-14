@@ -1,0 +1,130 @@
+<main>
+  <section class="header">
+    <p>Monthwise Call Count</p>
+    <div class="bttn-box">
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onSubmit()"
+        [ngClass]="
+          (commonSandbox.monthwiseCallCountLoading$ | async) && 'block'
+        "
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.monthwiseCallCountLoading$ | async"
+        ></i
+        ><span> Search</span>
+      </button>
+    </div>
+  </section>
+  <section class="container-box">
+    <div class="filter-box">
+      <span class="input-container">
+        <label>Year <sup>*</sup></label>
+        <ng-select
+          [items]="yearArr"
+          bindLabel="id"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="select"
+          [(ngModel)]="year"
+        >
+        </ng-select>
+      </span>
+      <span class="input-container">
+        <label>Month <sup>*</sup> </label>
+        <ng-select
+          [items]="monthArr"
+          bindLabel="month"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="select"
+          [(ngModel)]="month"
+        >
+        </ng-select>
+      </span>
+    </div>
+    <div
+      class="notification"
+      *ngIf="
+        !dataArr.length && !(commonSandbox.monthwiseCallCountLoaded$ | async)
+      "
+    >
+      Apply filters to generate reports !
+    </div>
+    <div
+      class="notification"
+      *ngIf="
+        !dataArr.length && (commonSandbox.monthwiseCallCountLoaded$ | async)
+      "
+    >
+      <div class="figg">
+        <img src="../../../../../assets/imgs/nodata.png" alt="" />
+      </div>
+
+      <div>No records found !</div>
+    </div>
+    <div class="table-box customScroll">
+      <table
+        *ngIf="
+          dataArr.length > 0 &&
+          (commonSandbox.monthwiseCallCountLoaded$ | async)
+        "
+      >
+        <thead>
+          <tr>
+            <th rowspan="2">#</th>
+            <th rowspan="2">Date</th>
+            <th colspan="2" class="collspan">Inbound</th>
+            <th colspan="2" class="collspan">Outbound</th>
+            <th rowspan="2">Bargin</th>
+          </tr>
+          <tr>
+            <th>Connected</th>
+            <th>Missed &nbsp; &nbsp; &nbsp;</th>
+            <th>Connected</th>
+            <th>Missed&nbsp; &nbsp; &nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dataArr; let i = index">
+            <td style="width: 10%">{{ i + 1 }}</td>
+            <td style="width: 15%">{{ data.called_date }}</td>
+            <td style="width: 15%">{{ data.incoming_connected_count }}</td>
+            <td style="width: 15%">{{ data.incoming_missed_count }}</td>
+            <td style="width: 15%">{{ data.outgoing_connected_count }}</td>
+            <td style="width: 15%">{{ data.outgoing_missed_count }}</td>
+            <td style="width: 15%">{{ data.barge_in_count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <table
+      class="total"
+      *ngIf="
+        dataArr.length > 0 && (commonSandbox.monthwiseCallCountLoaded$ | async)
+      "
+    >
+      <tr>
+        <td style="width: 10%"></td>
+        <td>Total</td>
+        <td>{{ total.incoming_connected_count }}</td>
+        <td>{{ total.incoming_missed_count }}</td>
+        <td>{{ total.outgoing_connected_count }}</td>
+        <td>{{ total.outgoing_missed_count }}</td>
+        <td>{{ total.barge_in_count }}</td>
+      </tr>
+    </table>
+  </section>
+</main>

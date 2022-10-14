@@ -1,0 +1,87 @@
+<main class="login-box">
+  <div class="container-box">
+    <div class="description">
+      <figure class="fig">
+        <img src="../../../../assets/imgs/image.png" alt="login" />
+      </figure>
+    </div>
+    <div class="form-container-box">
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="doLogin()">
+        <div class="login">
+          Member Login
+          <figure class="logo-img">
+            <img src="../../../../assets/imgs/logo.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="username">
+          <figure class="user">
+            <img src="../../../../assets/imgs/user.png" alt="user" />
+          </figure>
+          <p>Username</p>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            formControlName="userName"
+            #username
+            (keypress)="onEnterKeyPress($event)"
+          />
+          <div
+            *ngIf="
+              loginForm.controls['userName'].hasError('required') &&
+              loginForm.controls['userName'].touched
+            "
+            class="error-data"
+          >
+            Username is required.
+          </div>
+        </div>
+
+        <div class="password">
+          <figure class="user">
+            <img
+              src="../../../../assets/imgs/hidden.png"
+              alt=" hidden"
+              (click)="onClickVisible()"
+              *ngIf="!isVisible"
+            />
+            <img
+              src="../../../../assets/imgs/eye.png"
+              alt="visible"
+              (click)="onClickVisible()"
+              *ngIf="isVisible"
+            />
+          </figure>
+
+          <p>Password</p>
+          <input
+            [type]="!isVisible ? 'password' : 'text'"
+            placeholder="Enter Password"
+            formControlName="password"
+            #password
+          />
+          <div
+            *ngIf="
+              loginForm.controls['password'].hasError('required') &&
+              loginForm.controls['password'].touched
+            "
+            class="error-data"
+          >
+            Password is required.
+          </div>
+        </div>
+        <span>Forgot Password?</span>
+        <button
+          type="submit"
+          [ngClass]="(authSandbox.loginLoading$ | async) && 'block'"
+        >
+          <i
+            class="fa fa-spinner fa-spin"
+            *ngIf="authSandbox.loginLoading$ | async"
+          ></i>
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</main>

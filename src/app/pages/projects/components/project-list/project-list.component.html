@@ -1,0 +1,152 @@
+<div *ngIf="projectsSandbox.projectListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>My Projects</p>
+    <div class="bttn-box">
+      <div class="search">
+        <input
+          class="input-search"
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="keyword"
+          (change)="onSearch()"
+          (keyup)="keyFunc($event)"
+          [ngClass]="keyword && keyword !== '' ? 'expand' : null"
+        />
+        <button class="bttn-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+      <button style="width: 12rem" class="bttn" (click)="onAddBtnClick()">
+        <span> Add New </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="container-box customScroll">
+    <div
+      class="notification"
+      *ngIf="(projectsSandbox.projectListCount$ | async) === 0"
+    >
+      <div class="figg">
+        <img src="../../../../../assets/imgs/nodata.png" alt="" />
+      </div>
+      <div>No records found !</div>
+    </div>
+
+    <table
+      class="table"
+      *ngIf="(projectsSandbox.projectListCount$ | async) > 0"
+    >
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Code</th>
+          <th>Project</th>
+          <th>Description</th>
+          <th>Created On</th>
+          <th>Created By</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- projectsSandbox.projectList$ | async -->
+        <tr
+          *ngFor="
+            let item of projectsSandbox.projectList$ | async | paginate: config;
+            let i = index
+          "
+        >
+          <td>
+            {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+          </td>
+          <td style="width: 10%">{{ item.project_code }}</td>
+          <td
+            style="
+              display: flex;
+              justify-content: start;
+              align-items: center;
+              gap: 1rem;
+            "
+          >
+            <img
+              [src]="item.project_logo"
+              onError="this.src='assets/imgs/users.svg';"
+              style="
+                border-radius: 50%;
+                width: 3rem;
+                height: 3rem;
+                margin-right: 0.5rem;
+              "
+            />
+
+            {{ item.project_name }}
+          </td>
+          <td>{{ item.description ? item.description : N / A }}</td>
+          <td>{{ item.created_on }}</td>
+          <td>{{ item.created_by }}</td>
+          <td [style.color]="item.status === '' ? '#058c42' : 'red'">
+            <span
+              class="status"
+              [ngClass]="item.status === 'Completed' ? 'success' : 'warning'"
+            >
+              {{ item.status }}
+            </span>
+          </td>
+          <td>
+            <button
+              style="color: red"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editProject(item)">
+                <mat-icon style="color: var(--dark)">edit</mat-icon>
+                <span>Edit Project</span>
+              </button>
+              <button mat-menu-item (click)="deleteProject(item.id)">
+                <mat-icon style="color: #dc143c">delete</mat-icon>
+                <span>Delete Project</span>
+              </button>
+              <button mat-menu-item (click)="uploadFile()">
+                <mat-icon style="color: slateblue">cloud_upload</mat-icon>
+                <span>Upload file </span>
+              </button>
+
+              <button mat-menu-item (click)="viewFile()">
+                <mat-icon style="color: slategray">insert_drive_file</mat-icon>
+                <span>view file </span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section
+    class="pagination-box"
+    *ngIf="(projectsSandbox.projectListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

@@ -1,0 +1,123 @@
+<div *ngIf="customerSandbox.reassignListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+
+<main>
+  <section class="header">
+    <p>Reassign Agents</p>
+    <div class="bttn-box"></div>
+  </section>
+  <section class="container-box">
+    <div class="filter-box">
+      <div class="box">
+        <label for="">Reassign From <sup>*</sup></label>
+        <span class="select-box">
+          <ng-select
+            [items]="userSandbox.agentList$ | async"
+            bindLabel="member_name"
+            bindValue="id"
+            [searchable]="true"
+            placeholder="Select"
+            [(ngModel)]="from"
+            (change)="reassignFrom($event)"
+          >
+          </ng-select>
+        </span>
+      </div>
+      <div class="box">
+        <label>Reassign To <sup>*</sup></label>
+        <span class="select-box">
+          <ng-select
+            [items]="users"
+            bindLabel="member_name"
+            bindValue="id"
+            [searchable]="true"
+            placeholder="Select"
+            [(ngModel)]="to"
+            (change)="reassignTo($event)"
+          >
+          </ng-select>
+        </span>
+      </div>
+      <div class="box bttn-box">
+        <button class="bttn" (click)="reassignSelectedCustomer()">
+          <span> Reassign Selected Customers</span>
+        </button>
+        <button
+          class="bttn"
+          style="background-color: var(--purple)"
+          (click)="reassignAllCustomer()"
+        >
+          <span> Reassign All Customers</span>
+        </button>
+      </div>
+      <!-- <div class="box"></div> -->
+    </div>
+    <div
+      class="notification"
+      *ngIf="!(customerSandbox.reassignListLoaded$ | async)"
+    >
+      Select reassign from to view data !
+    </div>
+
+    <div
+      class="notification"
+      *ngIf="
+        (customerSandbox.reassignListLoaded$ | async) &&
+        (customerSandbox.reassignListCount$ | async) === 0
+      "
+    >
+      <div class="figg">
+        <img src="../../../../../assets/imgs/nodata.png" alt="" />
+      </div>
+      <div>No records found !</div>
+    </div>
+    <div class="table-box customScroll" *ngIf="dataArr?.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Mobile</th>
+            <th>Called On</th>
+            <th>Project</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dataArr | paginate: config; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ data.customer_name ? data.customer_name : "N / A" }}</td>
+            <td>
+              {{ data.customer_mobile ? data.customer_mobile : "N  / A" }}
+            </td>
+            <td>
+              <div style="display: flex; flex-direction: column">
+                <span>{{ data.called_date }}</span>
+                <span style="font-size: 1.3rem">{{ data.called_time }}</span>
+              </div>
+            </td>
+            <td>{{ data.project_name }}</td>
+            <td>
+              <span class="check"
+                ><input
+                  type="checkbox"
+                  [checked]="data.checked"
+                  (change)="checkSingleBoxFunc(data)"
+              /></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(customerSandbox.reassignListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

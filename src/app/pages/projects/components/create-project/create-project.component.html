@@ -1,0 +1,171 @@
+<div *ngIf="projectsSandbox.createProjectLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>Create New Project</p>
+    <div class="bttn-box">
+      <button class="bttn warning-outline" (click)="onCancelBtnClick()">
+        <span> Cancel </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onCreateBtnClick()"
+        *ngIf="!projectId"
+        [ngClass]="(projectsSandbox.createProjectLoading$ | async) && 'block'"
+      >
+        <span>
+          <i
+            class="fa fa-spinner fa-spin"
+            *ngIf="projectsSandbox.createProjectLoading$ | async"
+          ></i>
+          Create
+        </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onUpdateBtnClick()"
+        *ngIf="projectId"
+        [ngClass]="(projectsSandbox.updateProjectLoading$ | async) && 'block'"
+      >
+        <span>
+          <i
+            class="fa fa-spinner fa-spin"
+            *ngIf="projectsSandbox.updateProjectLoading$ | async"
+          ></i
+          >Update
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="container-box customScroll">
+    <div class="upload-foto-container-box">
+      <div class="upload-foto">
+        <input
+          type="file"
+          name="userImg"
+          (change)="uploadImage($event)"
+          accept="image/*"
+          #filePath
+        />
+        <img [src]="postUrl" onError="this.src='assets/imgs/users.svg'" />
+      </div>
+      <div class="description">
+        <p class="main-heading">Choose Project Photo</p>
+        <p class="sub-heading">
+          <!-- Lorem ipsum dolor sit amet ipsum dolor
+          <br />
+          consectetur adipisicing elit. -->
+        </p>
+      </div>
+      <button style="width: 15rem" class="bttn" (click)="uploadButtonClick()">
+        <span> Upload Photo </span>
+      </button>
+    </div>
+    <form [formGroup]="createProjectForm" (ngSubmit)="onCreateProject('')">
+      <div class="input-box">
+        <div class="input-container-box">
+          <label for=""> Project Name <sup>*</sup></label>
+          <input
+            type="text"
+            class="input"
+            formControlName="project_name"
+            [ngClass]="
+              createProjectForm.controls['project_name'].hasError('required') &&
+              createProjectForm.controls['project_name'].touched
+                ? 'error'
+                : null
+            "
+          />
+          <span
+            *ngIf="
+              createProjectForm.controls['project_name'].hasError('required') &&
+              createProjectForm.controls['project_name'].touched
+            "
+            class="error-data"
+          >
+            project name is required.
+          </span>
+        </div>
+        <div class="input-container-box">
+          <label for=""> Project Code <sup>*</sup> </label>
+          <input
+            type="text"
+            class="input"
+            formControlName="project_code"
+            [ngClass]="
+              createProjectForm.controls['project_code'].hasError('required') &&
+              createProjectForm.controls['project_code'].touched
+                ? 'error'
+                : null
+            "
+          />
+          <span
+            *ngIf="
+              createProjectForm.controls['project_code'].hasError('required') &&
+              createProjectForm.controls['project_code'].touched
+            "
+            class="error-data"
+          >
+            project code is required.
+          </span>
+        </div>
+      </div>
+      <div style="width: 63%" class="input-container-box">
+        <label for=""> Description <Sup>*</Sup></label>
+        <textarea
+          name=""
+          id=""
+          cols="100"
+          rows="5"
+          formControlName="description"
+          [ngClass]="
+            createProjectForm.controls['description'].hasError('required') &&
+            createProjectForm.controls['description'].touched
+              ? 'error'
+              : null
+          "
+        ></textarea>
+        <span
+          *ngIf="
+            createProjectForm.controls['description'].hasError('required') &&
+            createProjectForm.controls['description'].touched
+          "
+          class="error-data"
+        >
+          project description is required.
+        </span>
+      </div>
+      <div class="input-radio-box">
+        <label>Project Status</label>
+        <div style="display: flex; gap: 4rem">
+          <div class="radio-box">
+            <input
+              class="radio"
+              type="radio"
+              id="status"
+              name="status"
+              value="Ongoing"
+              formControlName="status"
+            />
+               
+            <label for="status">Ongoing</label>
+          </div>
+          <div class="radio-box">
+            <input
+              class="radio"
+              type="radio"
+              id="status"
+              name="status"
+              value="Completed"
+              formControlName="status"
+            />
+             
+            <label for="status">Completed</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>

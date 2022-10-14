@@ -1,0 +1,184 @@
+<div *ngIf="customerSandbox.projectAgentListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>Agent / Project Call Count</p>
+    <div class="bttn-box">
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onSubmit()"
+        [ngClass]="
+          (customerSandbox.projectAgentListLoading$ | async) && 'block'
+        "
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="customerSandbox.projectAgentListLoading$ | async"
+        ></i>
+        <span> Search </span>
+      </button>
+    </div>
+  </section>
+  <section class="container-box">
+    <div class="filter-box">
+      <span class="select-box">
+        <label>Agent Name <sup>*</sup></label>
+        <ng-select
+          [items]="userSandbox.agentList$ | async"
+          bindLabel="member_name"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="All Agents"
+          [(ngModel)]="agent"
+        >
+        </ng-select>
+      </span>
+      <span class="select-box">
+        <label>Project Name <sup>*</sup></label>
+        <ng-select
+          [items]="customerSandbox.projectList$ | async"
+          bindLabel="project_name"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="All Project"
+          [(ngModel)]="projectDid"
+        >
+        </ng-select>
+      </span>
+      <span class="input-container" (click)="fromDate.open()">
+        <mat-form-field (click)="fromDate.open()">
+          <label style="margin-bottom: 1.2rem">From Date <sup>*</sup></label>
+          <input
+            matInput
+            [matDatepicker]="fromDate"
+            [min]="fromMinDate"
+            [max]="fromMaxDate"
+            readonly
+            placeholder="From Date"
+            id="fromDate"
+            [(ngModel)]="onFromDate"
+            (dateChange)="onChangeFromDate($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="fromDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+      </span>
+
+      <span class="input-container" (click)="toDate.open()">
+        <mat-form-field (click)="toDate.open()">
+          <label style="margin-bottom: 1.2rem">To Date <sup>*</sup></label>
+
+          <input
+            matInput
+            [matDatepicker]="toDate"
+            [min]="toMinDate"
+            [max]="toMaxDate"
+            readonly
+            placeholder="To Date"
+            [(ngModel)]="onToDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="toDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+      </span>
+    </div>
+    <div class="table-box customScroll">
+      <div
+        class="notification"
+        *ngIf="!(customerSandbox.projectAgentListLoaded$ | async)"
+      >
+        Apply filters to generate reports !
+      </div>
+      <div
+        class="notification"
+        *ngIf="
+          (customerSandbox.projectAgentListLoaded$ | async) &&
+          (customerSandbox.projectAgentListCount$ | async) === 0
+        "
+      >
+        <div class="figg">
+          <img src="../../../../../assets/imgs/nodata.png" alt="" />
+        </div>
+        <div>No records found !</div>
+      </div>
+      <table *ngIf="(customerSandbox.projectAgentListCount$ | async) > 0">
+        <thead>
+          <tr>
+            <th rowspan="2">#</th>
+            <th rowspan="2">Date</th>
+            <th rowspan="2">Agent</th>
+            <th rowspan="2">Project</th>
+            <th rowspan="2">DID</th>
+            <th colspan="2">Inbound</th>
+            <th colspan="2">OutBound</th>
+            <th rowspan="2">Bargin</th>
+          </tr>
+          <tr>
+            <th>Connected</th>
+            <th>Missed &nbsp; &nbsp; &nbsp;</th>
+            <th>Connected</th>
+            <th>Missed &nbsp; &nbsp; &nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let data of customerSandbox.projectAgentList$
+                | async
+                | paginate: config;
+              let i = index
+            "
+          >
+            <td>
+              {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+            </td>
+            <td>{{ data.called_date }}</td>
+            <td>{{ data.agent_name }}</td>
+            <td>{{ data.project_name }}</td>
+            <td>{{ data.did_number }}</td>
+            <td>{{ data.incoming_connected_count }}</td>
+            <td>{{ data.incoming_missed_count }}</td>
+            <td>{{ data.outgoing_connected_count }}</td>
+            <td>{{ data.outgoing_missed_count }}</td>
+            <td>{{ data.barge_in_count }}</td>
+          </tr>
+          <tr style="color: crimson; font-size: 1.5rem; font-weight: 500">
+            <td colspan="5">Total</td>
+            <td>100</td>
+            <td>50</td>
+            <td>60</td>
+            <td>50</td>
+            <td>260</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(customerSandbox.projectAgentListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

@@ -1,0 +1,102 @@
+<main class="modal_container">
+  <section class="modal_header">
+    <span>Update Customer Info</span>
+    <button (click)="close()">&times;</button>
+  </section>
+  <section class="modal_content">
+    <form [formGroup]="form" (ngSubmit)="updateCustomer()">
+      <div class="input-box">
+        <div class="username">
+          <label>Name</label>
+          <input type="text" formControlName="name" />
+        </div>
+        <div class="mail">
+          <label>Email</label>
+          <input type="text" formControlName="mail" />
+        </div>
+      </div>
+      <div class="input-box">
+        <div>
+          <label>Mobile</label>
+          <input
+            type="text"
+            Decimalnumeric
+            numericType="number"
+            minlength="10"
+            [maxlength]="10"
+            formControlName="mobile"
+          />
+        </div>
+        <div>
+          <label>Alternate Mobile</label>
+          <input
+            type="text"
+            Decimalnumeric
+            numericType="number"
+            minlength="10"
+            [maxlength]="10"
+            formControlName="alterMobile"
+          />
+        </div>
+      </div>
+      <div class="input-box">
+        <div>
+          <label>Followup Date</label>
+          <input type="date" id="session-date" formControlName="followupDate" />
+        </div>
+
+        <div>
+          <label>Followup Time</label>
+          <input
+            [ngxTimepicker]="picker"
+            formControlName="followupTime"
+            readonly
+          />
+          <ngx-material-timepicker #picker> </ngx-material-timepicker>
+        </div>
+      </div>
+      <div class="input-box">
+        <div>
+          <label>Pin Code</label>
+          <input
+            type="text"
+            Decimalnumeric
+            numericType="number"
+            minlength="6"
+            [maxlength]="6"
+            formControlName="pinCode"
+            (keyup)="pincodeFunc()"
+          />
+        </div>
+        <div>
+          <label>Area</label>
+
+          <ng-select
+            [items]="areaArr"
+            bindLabel="name"
+            bindValue="name"
+            [searchable]="true"
+            placeholder="select"
+            formControlName="area"
+          >
+          </ng-select>
+          <!-- <input type="text" formControlName="area" /> -->
+        </div>
+      </div>
+
+      <div class="input-box">
+        <div>
+          <label>Action Taken</label>
+          <textarea formControlName="actionTaken" cols="100"></textarea>
+        </div>
+        <div></div>
+      </div>
+    </form>
+  </section>
+  <section class="modal_footer">
+    <button class="bttn" (click)="onConfirm()"><span>Update</span></button>
+    <button class="bttn warning-outline" (click)="close()">
+      <span>Cancel</span>
+    </button>
+  </section>
+</main>

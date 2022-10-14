@@ -1,0 +1,57 @@
+<main class="modal_container">
+  <section class="modal_header">
+    <div class="heading">
+      <div>
+        User :
+        <span class="user" style="color: var(--primary)"
+          >{{ user.member_name }}
+        </span>
+      </div>
+      <div>
+        Project : <span class="user">{{ project.project_name }} </span>
+      </div>
+
+      <div>
+        Days In Project:
+        <span class="user">{{ days }}</span>
+      </div>
+    </div>
+    <button class="close" (click)="close()">&times;</button>
+  </section>
+  <section class="modal_content">
+    <div class="table-box customScroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Mapped On</th>
+            <th>Mapped By</th>
+            <th>Un Mapped On</th>
+            <th>Un Mapped By</th>
+            <th>Total Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of usersSandbox.mappingHistory$ | async;
+              let i = index
+            "
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.created_on }}</td>
+            <td>{{ item.created_by }}</td>
+            <td>{{ item.released_on ? item.released_on : "--" }}</td>
+            <td>{{ item.released_by ? item.released_by : "--" }}</td>
+            <td>{{ item.duration }} day(s)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="modal_footer">
+    <section class="modal_footer">
+      <button class="bttn" (click)="onConfirm()"><span>Close</span></button>
+    </section>
+  </section>
+</main>

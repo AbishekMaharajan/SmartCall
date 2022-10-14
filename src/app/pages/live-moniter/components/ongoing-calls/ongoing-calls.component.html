@@ -1,0 +1,96 @@
+<!-- <div *ngIf="liveMoniterSandbox.ongoingCallListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div> -->
+<main>
+  <section class="header">
+    <p>Ongoing Calls</p>
+    <div class="box">
+      <span
+        >Last refreshed on :<strong>{{ lastRefreshed }} </strong>
+      </span>
+      <div class="select-box">
+        <label> Refresh Every &nbsp;</label>
+        <div class="input-box">
+          <ng-select
+            [items]="refreshArr"
+            bindLabel="name"
+            bindValue="sec"
+            [searchable]="true"
+            placeholder="select"
+            [(ngModel)]="interval"
+            (change)="onSelectRefresh($event)"
+          >
+          </ng-select>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container-box customScroll">
+    <!-- <div class="filter-box">
+      <div class="select-box">
+        <label> Refresh Every :</label>
+        <ng-select
+          [items]="agentsArr"
+          bindLabel="name"
+          bindValue="name"
+          [searchable]="true"
+          [(ngModel)]="agent"
+          placeholder="Refresh"
+          [multiple]="true"
+        >
+        </ng-select>
+      </div>
+    </div> -->
+    <div class="table-box">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Agent</th>
+            <th>Project</th>
+            <th>DID</th>
+            <th>Call Connection Logic</th>
+            <th>Duration</th>
+            <th>Customer No</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let data of liveMoniterSandbox.ongoingCallList$ | async;
+              let i = index
+            "
+          >
+            <td>{{ i + 1 }}</td>
+            <td>{{ data.agent_name }}</td>
+            <td>{{ data.project_name }}</td>
+            <td>{{ data.did_number }}</td>
+            <td>{{ data.call_connection_logic }}</td>
+            <td>{{ data.duration }}</td>
+            <td>{{ data.customer_number }}</td>
+            <td>
+              <button
+                style="color: red"
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="customerDetails(data)">
+                  <mat-icon style="color: slateblue">person</mat-icon>
+                  <span>Customer Details</span>
+                </button>
+                <button mat-menu-item (click)="bargin(data)">
+                  <mat-icon style="color: #dc143c">call_merge</mat-icon>
+                  <span>Bargin</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>

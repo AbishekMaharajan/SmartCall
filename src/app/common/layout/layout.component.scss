@@ -1,0 +1,11 @@
+.components {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--white);
+  display: flex;
+  .sidebar-container-box {
+    flex: 0 0 18%;
+    height: 100%;
+  }
+}

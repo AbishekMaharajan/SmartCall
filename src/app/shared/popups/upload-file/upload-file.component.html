@@ -1,0 +1,43 @@
+<main class="modal_container">
+  <section class="modal_header">
+    <div class="heading">Upload Files</div>
+    <button class="close" (click)="close()">&times;</button>
+  </section>
+  <section class="modal_content">
+    <div class="upload-container">
+      <div class="box-1">
+        <div class="input-box">
+          <label>Document Name</label>
+          <input type="text" [(ngModel)]="docName" />
+        </div>
+        <div class="input-box">
+          <label>Document Description</label>
+          <input type="text" [(ngModel)]="docDescription" />
+        </div>
+      </div>
+      <div class="box-2">
+        <div class="file-box" (click)="chooseFile()">
+          <input type="file" #file (change)="selectFile($event)" />
+          <p style="margin-top: 1rem">
+            <span *ngIf="!fileName"> No file choosen..</span>
+            <span *ngIf="fileName" style="color: var(--warning)">{{
+              fileName
+            }}</span>
+          </p>
+          <figure class="icon">
+            <img src="../../../../assets/imgs/file.png" alt="upload" />
+          </figure>
+          <p class="choose">Browse file from device</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="modal_footer">
+    <section class="modal_footer">
+      <button class="bttn" (click)="onUpload()"><span>Upload</span></button>
+      <button class="bttn warning-outline" (click)="close()">
+        <span>Close</span>
+      </button>
+    </section>
+  </section>
+</main>

@@ -1,0 +1,39 @@
+<main class="modal_container">
+  <section class="modal_header">
+    <div class="heading">View Uploaded Files</div>
+    <button class="close" (click)="close()">&times;</button>
+  </section>
+  <section class="modal_content customScroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Project</th>
+          <th>Document Name</th>
+          <th>Document Description</th>
+          <th>Filename</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Vgn Demo</td>
+          <td>Did Data</td>
+          <td>List of all dids</td>
+          <td>did.xlxs</td>
+          <td>
+            <mat-icon class="delete">delete</mat-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="modal_footer">
+    <section class="modal_footer">
+      <button class="bttn" (click)="close()">
+        <span>Close</span>
+      </button>
+    </section>
+  </section>
+</main>

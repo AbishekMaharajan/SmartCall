@@ -1,0 +1,69 @@
+<div *ngIf="didSandbox.addDidLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+<main>
+  <section class="header">
+    <p>Add New DID</p>
+    <div class="bttn-box">
+      <button
+        style="width: 12rem"
+        class="bttn warning-outline"
+        (click)="onCancelBtnClick()"
+      >
+        <span>Cancel</span>
+      </button>
+      <button
+        style="width: 12rem"
+        class="bttn"
+        (click)="onSaveBtnClick()"
+        [ngClass]="(didSandbox.addDidLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="didSandbox.addDidLoading$ | async"
+        ></i>
+        <span>Save</span>
+      </button>
+    </div>
+  </section>
+  <hr />
+  <section class="container-box customScroll">
+    <div class="content">
+      <div class="item-box" *ngFor="let item of didArr; let i = index">
+        <span class="input-box"
+          ><input
+            [ngClass]="item.inValid && 'invalid'"
+            type="text"
+            [(ngModel)]="item.did_number"
+            placeholder="Enter DID"
+            Decimalnumeric
+            numericType="number"
+            minlength="8"
+            [maxlength]="8"
+            (keyup)="onInputChange(item)"
+          />
+          <mat-icon class="mat-icon" [ngClass]="item.inValid && 'valid'"
+            >error</mat-icon
+          >
+          <mat-icon
+            style="color: var(--green)"
+            [ngClass]="item.did_number.length == 8 && 'valid'"
+            >check_circle</mat-icon
+          >
+        </span>
+        <div class="bttn-box">
+          <button class="bttn" (click)="onAdd()">
+            <span> Add </span>
+          </button>
+          <button
+            class="bttn warning-outline"
+            (click)="onRemove()"
+            *ngIf="i > 0 && i === didArr.length - 1"
+          >
+            <span> Remove </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

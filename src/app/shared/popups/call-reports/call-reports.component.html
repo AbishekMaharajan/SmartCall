@@ -1,0 +1,80 @@
+<!-- <div *ngIf="liveMoniterSandbox.totalCallListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div> -->
+
+<main class="modal_container">
+  <section class="modal_header">
+    <div class="heading">
+      <div>
+        Call Report For :
+        <span class="user">{{
+          user.customer_name ? user.customer_name : "N / A"
+        }}</span>
+      </div>
+      <div>
+        Mob:
+        <span class="user">{{
+          user.customer_mobile ? user.customer_mobile : "N / A"
+        }}</span>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+    </div>
+    <button class="close" (click)="close()">&times;</button>
+  </section>
+  <section class="modal_content customScroll">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Agent</th>
+          <th>Project</th>
+          <th>Called On</th>
+          <th>Status</th>
+          <th class="audio-box">Recording</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let data of liveMoniterSandbox.totalCallList$ | async;
+            let i = index
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ data.agent_name }}</td>
+          <td>{{ data.project_name }}</td>
+          <td>
+            <div style="display: flex; flex-direction: column">
+              <span>{{ data.called_date }}</span>
+              <span style="font-size: 1.3rem"> {{ data.called_time }}</span>
+            </div>
+          </td>
+          <td>
+            <span>{{ data.call_status ? data.call_status : "N / A" }}</span>
+          </td>
+          <td>
+            <audio controls class="audio" *ngIf="data.voice_file !== ''">
+              <source [src]="data.voice_file" type="audio/wav" />
+            </audio>
+            <span *ngIf="data.voice_file === ''">N/A</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="modal_footer">
+    <section class="modal_footer">
+      <button class="bttn" (click)="onConfirm()"><span>Close</span></button>
+    </section>
+  </section>
+</main>

@@ -1,0 +1,155 @@
+.container-box {
+  overflow: hidden;
+  padding-top: 1rem;
+}
+.bttn {
+  width: 12rem;
+}
+.filter-box {
+  background-color: var(--light);
+  width: 100%;
+  height: 8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: 2rem;
+  font-weight: 400;
+
+  .bttn {
+    margin-left: auto;
+    margin-right: 1rem;
+    width: 14rem;
+  }
+  .input-container {
+    position: relative;
+    input {
+      padding: 0.25rem 1rem;
+      border: var(--border);
+      width: 100%;
+      border-radius: 0.5rem;
+      letter-spacing: 1px;
+      box-shadow: var(--box-shadow-primary);
+      height: 3.6rem;
+      margin-top: 0.5rem;
+    }
+    .mat-datepicker-toggle {
+      position: absolute;
+      right: 0.2rem;
+      top: -0.2rem;
+    }
+  }
+}
+.table-box {
+  height: calc(100% - 8rem);
+  overflow-y: auto;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  thead {
+    position: relative;
+    tr:first-child {
+      position: sticky;
+      top: 0;
+      th::after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: #dddddd;
+        position: absolute;
+        top: -1px;
+        left: 0;
+        right: 0;
+      }
+    }
+    tr:last-child {
+      position: sticky;
+      top: 2.6rem;
+    }
+  }
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background-color: var(--light-gray);
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  td {
+    padding: 0.6rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+    background-color: var(--white);
+  }
+  .collspan {
+    background-color: lightgoldenrodyellow;
+  }
+  .success {
+    background-color: var(--success-light);
+    color: var(--success);
+    position: relative;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: #dddddd;
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+    }
+  }
+  .warning {
+    background-color: var(--warning-light);
+    color: var(--warning);
+    position: relative;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 1px;
+      background-color: #dddddd;
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      color: c;
+    }
+  }
+}
+
+:host ::ng-deep .mat-form-field-suffix {
+  margin-top: 16px !important;
+  float: right !important;
+  position: absolute !important;
+  right: 10px !important;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  width: 100% !important;
+  border-top: 0px !important;
+  padding: 0 !important;
+  padding-bottom: 0px !important;
+}
+
+:host ::ng-deep .mat-form-field {
+  line-height: 0 !important;
+  width: 100% !important;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+  width: 0px !important;
+}
+
+:host ::ng-deep .mat-datepicker-toggle-default-icon {
+  width: 2rem !important;
+  position: absolute;
+  // top: 0.8rem;
+  // right: 0rem;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+  margin-top: 0px !important;
+}

@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-box {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white) f;
+}
+.container-box {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  overflow: hidden;
+  .description {
+    width: 50%;
+    background-color: #edf1f4;
+    .fig {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .form-container-box {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .logo-img {
+      width: 16rem;
+      img {
+        margin-top: 1rem;
+      }
+    }
+    .form {
+      width: 55%;
+      height: 60%;
+      margin-inline: auto;
+      .login {
+        font-size: 2.5rem;
+        font-weight: 500;
+        line-height: 62.4px;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .notificaton-1 {
+        font-size: 1.4rem;
+        font-weight: 400;
+      }
+      .username,
+      .password {
+        position: relative;
+        margin-bottom: 2rem;
+
+        p {
+          font-size: 1.8rem;
+          font-weight: 500;
+          margin-bottom: 1rem;
+        }
+        input {
+          background-color: transparent;
+          width: 100%;
+          height: 4.5rem;
+          border-radius: 0.5rem;
+          font-size: 1.6rem;
+          font-weight: 400;
+          padding-left: 2rem;
+          border: 1px solid var(--dark);
+          letter-spacing: 1px;
+          // border-color: #bc6c25;
+          //   border: 1px solid rgb(128, 189, 255);
+        }
+        input:focus {
+          transition: all 0.15s ease-in-out 0s;
+          border-color: rgb(128, 189, 255);
+          box-shadow: rgba(128, 189, 255, 0.5) 0px 0px 5px 0px;
+        }
+        .user {
+          width: 2rem;
+          height: 1.6rem;
+          position: absolute;
+          top: 5.2rem;
+          right: 2rem;
+          img {
+            opacity: 0.6;
+            cursor: pointer;
+          }
+        }
+        .error-data {
+          color: crimson;
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding-top: 0.5rem;
+          .mat-icon {
+            padding-top: 0.2rem;
+            font-size: 2rem;
+          }
+        }
+      }
+      span {
+        display: inline-block;
+        width: 100%;
+        font-size: 1.6rem;
+        color: #253870;
+        margin-bottom: 2rem;
+        cursor: pointer;
+        text-align: end;
+      }
+      button {
+        display: block;
+        width: 100%;
+        height: 4.5rem;
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 30px;
+        text-align: center;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
