@@ -83,6 +83,7 @@ export class CreateUserComponent implements OnInit {
       soft_phone_ip: [null],
       status: [true,],
       call_availability: ['Available', Validators.required],
+      remarks: [null]
     })
   }
   doCreateUser(state) {
@@ -118,6 +119,7 @@ export class CreateUserComponent implements OnInit {
         this.form.controls['soft_phone_ip'].setValue(res[0].soft_phone_ip);
         this.form.controls['status'].setValue(res[0].status);
         this.form.controls['call_availability'].setValue(res[0].call_availability);
+        this.form.controls['remarks'].setValue(res[0].remarks ? res[0].remarks : '');
         this.postUrl = res[0].image
         this.availability = this.availability.map((data) => {
           // data.active = false
