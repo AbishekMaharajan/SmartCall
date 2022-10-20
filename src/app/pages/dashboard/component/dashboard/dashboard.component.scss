@@ -4,10 +4,21 @@
 .select-box {
   min-width: 22rem;
   text-align: end;
+  position: relative;
+  .icon {
+    position: absolute;
+    right: 0.5rem;
+    font-size: 1.4rem;
+    top: 0.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .input {
     display: inline-block;
-    padding: 0.2rem 2rem;
+    padding: 0.2rem 3rem;
     border-radius: 0.5rem;
+    padding-left: 2rem;
     cursor: pointer;
     // border: var(--border);
     box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,

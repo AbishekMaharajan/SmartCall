@@ -11,6 +11,7 @@
   <section class="header">
     <p>Dashboard</p>
     <div class="select-box">
+      <mat-icon class="icon">calendar_today</mat-icon>
       <input
         class="input"
         type="date"
@@ -37,7 +38,7 @@
             <span class="count">{{ countObj.incoming_calls }}</span></span
           >
         </div>
-        <div class="_card-footer">Last 24 Hours</div>
+        <div class="_card-footer">{{ dateValue | date }}</div>
       </div>
       <div class="_card card-2">
         <figure class="fig red">
@@ -54,7 +55,7 @@
             }}</span></span
           >
         </div>
-        <div class="_card-footer">Last 24 Hours</div>
+        <div class="_card-footer">{{ dateValue | date }}</div>
       </div>
       <div class="_card card-3">
         <figure class="fig green">
@@ -71,7 +72,7 @@
             </span></span
           >
         </div>
-        <div class="_card-footer">Last 24 Hours</div>
+        <div class="_card-footer">{{ dateValue | date }}</div>
       </div>
     </div>
 
