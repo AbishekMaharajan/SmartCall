@@ -68,17 +68,18 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.router.navigate(['projects/create'])
   }
 
-  uploadFile() {
+  uploadFile(project) {
     const modalRef = this.modalService.open(UploadFileComponent, { size: 'lg', centered: true });
-
+    modalRef.componentInstance.project = project;
     modalRef.result.then((result) => {
       if (result == 'success') {
 
       }
     });
   }
-  viewFile() {
+  viewFile(project) {
     const modalRef = this.modalService.open(ViewFileComponent, { size: 'lg', centered: true });
+    modalRef.componentInstance.project = project;
 
     modalRef.result.then((result) => {
       if (result == 'success') {

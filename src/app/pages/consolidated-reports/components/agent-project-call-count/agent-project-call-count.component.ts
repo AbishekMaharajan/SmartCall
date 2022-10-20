@@ -32,14 +32,19 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
   toAgentId: number
   agent = null
   projectDid = null
-  dataArr = []
   fromMinDate = ''
   fromMaxDate = ''
   toMinDate = ''
   toMaxDate: any = ''
   onFromDate = null;
   onToDate = null
-  total: any = {}
+  total: any = {
+    incoming_connected_count: 0,
+    incoming_missed_count: 0,
+    outgoing_connected_count: 0,
+    outgoing_missed_count: 0,
+    barge_in_count: 0
+  }
   public subscriptions: Array<Subscription> = [];
 
 
@@ -84,12 +89,13 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
     this.customerSandbox.projectAgentList(params)
     this.subscriptions.push(this.customerSandbox.projectAgentList$.subscribe((res) => {
       if (res && res.length > 0) {
-        console.log('res: ', res);
-        this.total.incoming_connected_count = this.dataArr.reduce((a, b) => a + b.incoming_connected_count, 0)
-        this.total.incoming_missed_count = this.dataArr.reduce((a, b) => a + b.incoming_missed_count, 0)
-        this.total.outgoing_connected_count = this.dataArr.reduce((a, b) => a + b.outgoing_connected_count, 0)
-        this.total.outgoing_missed_count = this.dataArr.reduce((a, b) => a + b.outgoing_missed_count, 0)
-        this.total.barge_in_count = this.dataArr.reduce((a, b) => a + b.barge_in_count, 0)
+        res.forEach((data) => {
+          this.total['incoming_connected_count'] = this.total['incoming_connected_count'] + data.incoming_connected_count
+          this.total['incoming_missed_count'] = this.total['incoming_missed_count'] + data.incoming_missed_count
+          this.total['outgoing_connected_count'] = this.total['outgoing_connected_count'] + data.outgoing_connected_count
+          this.total['outgoing_missed_count'] = this.total['outgoing_missed_count'] + data.outgoing_missed_count
+          this.total['barge_in_count'] = this.total['barge_in_count'] + data.barge_in_count
+        })
       }
     }))
   }
@@ -124,10 +130,10 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.agent) return this.toster.error('Please select Agent and proceed')
-    if (!this.projectDid) return this.toster.error('Please select Project and proceed')
-    if (!this.onFromDate) return this.toster.error('Please select From date and proceed')
-    if (!this.onToDate) return this.toster.error('Please select To date and proceed')
+    // if (!this.agent) return this.toster.error('Please select Agent and proceed')
+    // if (!this.projectDid) return this.toster.error('Please select Project and proceed')
+    // if (!this.onFromDate) return this.toster.error('Please select From date and proceed')
+    // if (!this.onToDate) return this.toster.error('Please select To date and proceed')
 
     this.fetchProjectAgentList()
     this.fetchProjectAgentListCount()
@@ -142,8 +148,8 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
           payload: {
             from_date: this.datePipe.transform(this.onFromDate, "dd/MM/yyy"),
             to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy"),
-            agent_id: this.agent,
-            project_id: this.projectDid
+            agent_id: this.agent ? this.agent : 0,
+            project_id: this.projectDid ? this.projectDid : 0
           }
         }
         this.commonSandbox.export(params)
@@ -152,7 +158,6 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.dataArr = []
     this.customerSandbox.clearProjectAgentList()
     this.subscriptions.forEach(each => each.unsubscribe());
   }

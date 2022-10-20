@@ -34,7 +34,12 @@
     </div>
   </section>
 
-  <section class="container-box customScroll">
+  <section
+    class="container-box customScroll"
+    [ngClass]="
+      (usersSandbox.userListCount$ | async) <= pageSize && 'fullheight'
+    "
+  >
     <div
       class="notification"
       *ngIf="(usersSandbox.userListCount$ | async) === 0"

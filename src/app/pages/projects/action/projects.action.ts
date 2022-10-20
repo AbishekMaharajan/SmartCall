@@ -31,6 +31,18 @@ export const ActionTypes = {
     DELETE_PROJECT_SUCCESS: type('[project] delete Project Success'),
     DELETE_PROJECT_FAIL: type('[project] delete Project Fail'),
 
+    UPLOAD_FILE: type('[project] upload file '),
+    UPLOAD_FILE_SUCCESS: type('[project] upload file Success'),
+    UPLOAD_FILE_FAIL: type('[project] upload file Fail'),
+
+    FILE_LIST: type('[project] file list '),
+    FILE_LIST_SUCCESS: type('[project] file lsit Success'),
+    FILE_LIST_FAIL: type('[project] file lsit Fail'),
+
+    DELETE_DOCUMENT: type('[project] delete document '),
+    DELETE_DOCUMENT_SUCCESS: type('[project] delete document Success'),
+    DELETE_DOCUMENT_FAIL: type('[project] delete document Fail'),
+
 
 
 };
@@ -166,6 +178,72 @@ export class DeleteProjectFail implements Action {
     }
 }
 
+// UPLOAD FILES
+export class UploadFile implements Action {
+    type = ActionTypes.UPLOAD_FILE;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class UploadFileSuccess implements Action {
+    type = ActionTypes.UPLOAD_FILE_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class UploadFileFail implements Action {
+    type = ActionTypes.UPLOAD_FILE_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+//  FILE LIST
+export class FileList implements Action {
+    type = ActionTypes.FILE_LIST;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class FileListSuccess implements Action {
+    type = ActionTypes.FILE_LIST_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class FileListFail implements Action {
+    type = ActionTypes.FILE_LIST_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+//  DELETE DOCUMENT
+export class DeleteDocument implements Action {
+    type = ActionTypes.DELETE_DOCUMENT;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class DeleteDocumentSuccess implements Action {
+    type = ActionTypes.DELETE_DOCUMENT_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class DeleteDocumentFail implements Action {
+    type = ActionTypes.DELETE_DOCUMENT_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
 
 export type Actions =
     | ProjectList
@@ -191,6 +269,18 @@ export type Actions =
     | DeleteProject
     | DeleteProjectSuccess
     | DeleteProjectFail
+
+    | UploadFile
+    | UploadFileSuccess
+    | UploadFileFail
+
+    | FileList
+    | FileListSuccess
+    | FileListFail
+
+    | DeleteDocument
+    | DeleteDocumentSuccess
+    | DeleteDocumentFail
 
 
 

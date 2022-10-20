@@ -103,15 +103,6 @@ export class MappingComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(DaysMappedComponent, { size: 'lg', centered: true });
     modalRef.componentInstance.user = agent;
     modalRef.componentInstance.project = project;
-    // modalRef.componentInstance.moduleData = '';
-    modalRef.result.then((result) => {
-      if (result == 'success') {
-        // this.fetchProjectList();
-        // this.fetchProjectListCount();
-
-      }
-    });
-
   }
 
   onSaveBtnClick() {
@@ -138,7 +129,8 @@ export class MappingComponent implements OnInit, OnDestroy {
   }
 
   onCancelBtnClick() {
-
+    this.fetchAgentLsit()
+    this.fetchProjectAgentMapingList()
   }
 
   ngOnDestroy() {

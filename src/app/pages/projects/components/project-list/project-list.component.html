@@ -36,7 +36,12 @@
     </div>
   </section>
 
-  <section class="container-box customScroll">
+  <section
+    class="container-box customScroll"
+    [ngClass]="
+      (projectsSandbox.projectListCount$ | async) <= pageSize && 'fullheight'
+    "
+  >
     <div
       class="notification"
       *ngIf="(projectsSandbox.projectListCount$ | async) === 0"
@@ -124,12 +129,12 @@
                 <mat-icon style="color: #dc143c">delete</mat-icon>
                 <span>Delete Project</span>
               </button>
-              <button mat-menu-item (click)="uploadFile()">
+              <button mat-menu-item (click)="uploadFile(item)">
                 <mat-icon style="color: slateblue">cloud_upload</mat-icon>
                 <span>Upload file </span>
               </button>
 
-              <button mat-menu-item (click)="viewFile()">
+              <button mat-menu-item (click)="viewFile(item)">
                 <mat-icon style="color: slategray">insert_drive_file</mat-icon>
                 <span>view file </span>
               </button>

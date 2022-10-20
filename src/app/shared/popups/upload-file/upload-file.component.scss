@@ -62,13 +62,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         gap: 1rem;
         input[type="file"] {
           display: none;
         }
         .icon {
-          margin-top: 20%;
           width: 8rem;
           cursor: pointer;
         }

@@ -17,7 +17,14 @@ export class MonthwiseCallCountComponent implements OnInit, OnDestroy {
   ]
   yearArr = []
   monthArr = []
-  total: any = {}
+
+  total: any = {
+    incoming_connected_count: 0,
+    incoming_missed_count: 0,
+    outgoing_connected_count: 0,
+    outgoing_missed_count: 0,
+    barge_in_count: 0
+  }
   public subscriptions: Array<Subscription> = [];
 
   constructor(
@@ -60,18 +67,19 @@ export class MonthwiseCallCountComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.commonSandbox.monthwiseCallCount$.subscribe((res) => {
       if (res && res.length > 0) {
         this.dataArr = res
-        this.total.incoming_connected_count = this.dataArr.reduce((a, b) => a + b.incoming_connected_count, 0)
-        this.total.incoming_missed_count = this.dataArr.reduce((a, b) => a + b.incoming_missed_count, 0)
-        this.total.outgoing_connected_count = this.dataArr.reduce((a, b) => a + b.outgoing_connected_count, 0)
-        this.total.outgoing_missed_count = this.dataArr.reduce((a, b) => a + b.outgoing_missed_count, 0)
-        this.total.barge_in_count = this.dataArr.reduce((a, b) => a + b.barge_in_count, 0)
+        this.dataArr.forEach((data) => {
+          this.total['incoming_connected_count'] = this.total['incoming_connected_count'] + data.incoming_connected_count
+          this.total['incoming_missed_count'] = this.total['incoming_missed_count'] + data.incoming_missed_count
+          this.total['outgoing_connected_count'] = this.total['outgoing_connected_count'] + data.outgoing_connected_count
+          this.total['outgoing_missed_count'] = this.total['outgoing_missed_count'] + data.outgoing_missed_count
+          this.total['barge_in_count'] = this.total['barge_in_count'] + data.barge_in_count
+        })
       }
     }))
   }
 
   export() {
-    console.log('this.year: ', this.year);
-    console.log('this.month: ', this.month);
+
     if (!this.year || !this.month) return this.toster.warning('Please select Year and Month and Export !')
     const params = {
       name: 'montwiseCallCount',

@@ -1,8 +1,132 @@
+<div
+  *ngIf="
+    (commonSandbox.followupListLoading$ | async) ||
+    (commonSandbox.todaysCallCountLoading$ | async)
+  "
+>
+  <app-page-loader></app-page-loader>
+</div>
+
 <main class="dashboard">
-  <!-- <mat-tab-group>
+  <section class="header">
+    <p>Dashboard</p>
+    <div class="select-box">
+      <input
+        class="input"
+        type="date"
+        [value]="dateValue"
+        [min]="minDate"
+        [max]="maxDate"
+        #date
+        (change)="onDateChange($event)"
+      />
+    </div>
+  </section>
+  <section class="dashboard-content">
+    <div class="display-card">
+      <div class="_card card-1">
+        <figure class="fig purple">
+          <mat-icon> bar_chart</mat-icon>
+        </figure>
+        <div class="_card-content">
+          <span>
+            Total<br />
+            Connected Calls</span
+          >
+          <span class="count-box box-1">
+            <span class="count">{{ countObj.incoming_calls }}</span></span
+          >
+        </div>
+        <div class="_card-footer">Last 24 Hours</div>
+      </div>
+      <div class="_card card-2">
+        <figure class="fig red">
+          <mat-icon> phone_missed</mat-icon>
+        </figure>
+        <div class="_card-content">
+          <span>
+            Total<br />
+            Missed Calls</span
+          >
+          <span class="count-box box-2">
+            <span class="count" style="color: #fe7883">{{
+              countObj.missed_calls
+            }}</span></span
+          >
+        </div>
+        <div class="_card-footer">Last 24 Hours</div>
+      </div>
+      <div class="_card card-3">
+        <figure class="fig green">
+          <mat-icon> phone_in_talk</mat-icon>
+        </figure>
+        <div class="_card-content">
+          <span>
+            Total<br />
+            Ongoing Calls
+          </span>
+          <span class="count-box box-3">
+            <span class="count" style="color: #18c1a3"
+              >{{ countObj.ongoing_calls }}
+            </span></span
+          >
+        </div>
+        <div class="_card-footer">Last 24 Hours</div>
+      </div>
+    </div>
+
+    <div class="follow-ups-container">
+      <header>Upcomming Followups</header>
+
+      <div class="follow-box-1 customScroll">
+        <div
+          class="_warning"
+          *ngIf="!(commonSandbox.followupList$ | async)?.length"
+        >
+          <span style="margin-right: 0.5rem"> No More Followups</span>
+          <mat-icon>error_outline</mat-icon>
+        </div>
+
+        <ng-container *ngIf="(commonSandbox.followupList$ | async)?.length > 0">
+          <div
+            class="content"
+            *ngFor="let data of commonSandbox.followupList$ | async"
+          >
+            <div class="icon-box"><mat-icon>person</mat-icon></div>
+            <div class="detail">
+              <div class="detail-box">
+                <label>Agent</label> :{{ data.agent_name }}
+              </div>
+              <div class="detail-box">
+                <label>Customer</label> :
+                {{ data.customer_name ? data.customer_name : "N /A" }}
+              </div>
+            </div>
+            <div class="date">
+              {{ data.follow_up_date }} <br />
+              {{ data.follow_up_time }} pm
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <!-- <div class="follow-box-2">
+        <div class="content"><strong>+</strong> Add Follow-ups</div>
+      </div> -->
+    </div>
+    <div class="display-chart">
+      <div class="chart-box">
+        <highcharts-chart
+          [Highcharts]="Highcharts"
+          [options]="chartOptions"
+          [(update)]="updateFlag"
+          style="width: 100%; height: 100%; display: block"
+        ></highcharts-chart>
+      </div>
+    </div>
+  </section>
+</main>
+<!-- <mat-tab-group>
     <mat-tab label=" first ">Content 1</mat-tab>
     <mat-tab label="Second">Content 2</mat-tab>
     <mat-tab label="Third">Content 3</mat-tab>
   </mat-tab-group> -->
-  Dashboard
-</main>

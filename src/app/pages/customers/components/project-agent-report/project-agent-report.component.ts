@@ -138,21 +138,28 @@ export class ProjectAgentReportComponent implements OnInit, OnDestroy {
     this.fetchProjectAgentList()
   }
   export() {
+    let isValid = true
     this.subscriptions.push(this.customerSandbox.projectAgentListCount$.subscribe((res) => {
-      if (res && res > 0) {
-        const params = {
-          name: 'projectAgentReport',
-          file: 'projectAgentReport.xlsx',
-          payload: {
-            from_date: this.datePipe.transform(this.onFromDate, "dd/MM/yyy"),
-            to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy"),
-            agent_id: this.agent,
-            project_id: this.projectDid
-          }
-        }
-        this.commonSandbox.export(params)
-      } else return this.toster.error('No data available !')
+      if (!res) {
+        isValid = false
+        return this.toster.error('No data available !')
+      }
     }))
+    if (isValid) {
+      const params = {
+        name: 'projectAgentReport',
+        file: 'projectAgentReport.xlsx',
+        payload: {
+          from_date: this.datePipe.transform(this.onFromDate, "dd/MM/yyy"),
+          to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy"),
+          agent_id: this.agent,
+          project_id: this.projectDid
+        }
+      }
+      this.commonSandbox.export(params)
+    }
+    this.subscriptions.forEach(each => each.unsubscribe());
+
   }
   ngOnDestroy() {
     this.dataArr = []

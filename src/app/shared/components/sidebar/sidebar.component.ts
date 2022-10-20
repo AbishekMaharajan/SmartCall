@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { faBars, faAngleDown, faBriefcase, faFile, faClapperboard, faGear, faRightToBracket, } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription, zip } from 'rxjs';
@@ -8,7 +8,7 @@ import { filter, map, mergeMap } from 'rxjs/operators';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
   isClicked: boolean = false
   faBars = faBars;
   faAngleDown = faAngleDown;
@@ -152,7 +152,14 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  ngAfterViewInit() {
+    document.querySelector(".active")
+      .scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "nearest"
+      });
+  }
   openMainMenu(nav) {
     this.router.navigate([`${nav.path}`]);
   }

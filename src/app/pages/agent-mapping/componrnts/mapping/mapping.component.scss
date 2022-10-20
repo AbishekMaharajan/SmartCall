@@ -1,5 +1,5 @@
 .container-box {
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 8rem);
   padding-top: 1rem;
   .content {
     width: 100%;
@@ -184,7 +184,7 @@
           .box-2 {
             width: 40%;
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             align-items: center;
           }
           .days {

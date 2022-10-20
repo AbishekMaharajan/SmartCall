@@ -133,6 +133,65 @@ export class ProjectsEffect {
         );
 
 
+    // UPLOAD FILE
+    @Effect()
+    uploadFile$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.UPLOAD_FILE),
+            map((action: actions.UploadFile) => action.payload),
+            switchMap((state) => {
+                return this.api.uploadFile(state)
+                    .pipe(
+
+                        map((project) =>
+                            new actions.UploadFileSuccess(project),
+                        ),
+
+                        catchError(error => of(new actions.UploadFileFail(error.error)))
+                    );
+            }
+            )
+        );
+
+    //  FILE LIST
+    @Effect()
+    fileLsit$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.FILE_LIST),
+            map((action: actions.FileList) => action.payload),
+            switchMap((state) => {
+                return this.api.fileList(state)
+                    .pipe(
+                        map((project) =>
+                            new actions.FileListSuccess(project),
+                        ),
+
+                        catchError(error => of(new actions.FileListFail(error.error)))
+                    );
+            }
+            )
+        );
+
+    //  DELETE DOCUMENT
+    @Effect()
+    deleteDocument$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.DELETE_DOCUMENT),
+            map((action: actions.DeleteDocument) => action.payload),
+            switchMap((state) => {
+                return this.api.deleteDocument(state)
+                    .pipe(
+                        map((project) =>
+                            new actions.DeleteDocumentSuccess(project),
+                        ),
+
+                        catchError(error => of(new actions.DeleteDocumentFail(error.error)))
+                    );
+            }
+            )
+        );
+
+
 
 
 

@@ -5,6 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { UsersSandbox } from 'src/app/pages/users/users.sandbox';
 
@@ -172,16 +173,23 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     this.fetchStatusTrackerList()
   }
   export() {
+    let isValid = true
     this.subscriptions.push(this.usersSandbox.statusTrackerListCount$.subscribe((res) => {
-      if (res && res > 0) {
-        const params = {
-          name: 'statusTracker',
-          file: 'Statustracker.xlsx'
-        }
-        this.commonSandbox.export(params)
+      if (!res) {
+        isValid = false
+        return this.toster.error('No data available ! Please apply filters and export')
       }
-      else return this.toster.error('No data available ! Please apply filters and export')
     }))
+
+    if (isValid) {
+      const params = {
+        name: 'statusTracker',
+        file: 'Statustracker.xlsx'
+      }
+      this.commonSandbox.export(params)
+
+    }
+    this.subscriptions.forEach(each => each.unsubscribe());
   }
   ngOnDestroy() {
     this.subscriptions.forEach(each => each.unsubscribe());

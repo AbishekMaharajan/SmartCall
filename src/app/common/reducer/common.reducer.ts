@@ -78,6 +78,63 @@ export function reducer(
 
             });
 
+        // FOLLOWUP LIST
+        case actions.ActionTypes.FOLLOWUP_LIST:
+
+            return Object.assign({}, state, {
+                followupListLoading: true,
+                followupListLoaded: false,
+                followupListFailed: false,
+            });
+
+        case actions.ActionTypes.FOLLOWUP_LIST_SUCCESS:
+
+            return Object.assign({}, state, {
+                followupList: payload.data,
+                followupListLoading: false,
+                followupListLoaded: true,
+                followupListFailed: false,
+            });
+
+        case actions.ActionTypes.FOLLOWUP_LIST_FAIL:
+
+            return Object.assign({}, state, {
+                followupList: [],
+                followupListLoading: false,
+                followupListLoaded: true,
+                followupListFailed: true,
+
+            });
+
+        // TODAYS CALL COUNT
+        case actions.ActionTypes.TODAYS_CALL_COUNT:
+
+            return Object.assign({}, state, {
+                todaysCallCountLoading: true,
+                todaysCallCountLoaded: false,
+                todaysCallCountFailed: false,
+            });
+
+        case actions.ActionTypes.TODAYS_CALL_COUNT_SUCCESS:
+
+            return Object.assign({}, state, {
+                todaysCallCount: payload.data,
+                todaysCallCountLoading: false,
+                todaysCallCountLoaded: true,
+                todaysCallCountFailed: false,
+            });
+
+        case actions.ActionTypes.TODAYS_CALL_COUNT_FAIL:
+
+            return Object.assign({}, state, {
+                todaysCallCount: [],
+                todaysCallCountLoading: false,
+                todaysCallCountLoaded: true,
+                todaysCallCountFailed: true,
+
+            });
+
+
         default: {
             return state;
         }
@@ -93,5 +150,15 @@ export const monthwiseCallCount = (state: CommonState) => state.monthwiseCallCou
 export const monthwiseCallCountLoading = (state: CommonState) => state.monthwiseCallCountLoading;
 export const monthwiseCallCountLoaded = (state: CommonState) => state.monthwiseCallCountLoaded;
 export const monthwiseCallCountFailed = (state: CommonState) => state.monthwiseCallCountFailed;
+
+export const followupList = (state: CommonState) => state.followupList;
+export const followupListLoading = (state: CommonState) => state.followupListLoading;
+export const followupListLoaded = (state: CommonState) => state.followupListLoaded;
+export const followupListFailed = (state: CommonState) => state.followupListFailed;
+
+export const todaysCallCount = (state: CommonState) => state.todaysCallCount;
+export const todaysCallCountLoading = (state: CommonState) => state.todaysCallCountLoading;
+export const todaysCallCountLoaded = (state: CommonState) => state.todaysCallCountLoaded;
+export const todaysCallCountFailed = (state: CommonState) => state.todaysCallCountFailed;
 
 

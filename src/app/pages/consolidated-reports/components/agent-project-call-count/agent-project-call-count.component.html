@@ -31,7 +31,13 @@
       </button>
     </div>
   </section>
-  <section class="container-box">
+  <section
+    class="container-box"
+    [ngClass]="
+      (customerSandbox.projectAgentListCount$ | async) <= pageSize &&
+      'fullheight'
+    "
+  >
     <div class="filter-box">
       <span class="select-box">
         <label>Agent Name <sup>*</sup></label>
@@ -153,20 +159,24 @@
             <td>{{ data.called_date }}</td>
             <td>{{ data.agent_name }}</td>
             <td>{{ data.project_name }}</td>
-            <td>{{ data.did_number }}</td>
+            <td>{{ data.did_number ? data.did_number : "N / A" }}</td>
             <td>{{ data.incoming_connected_count }}</td>
             <td>{{ data.incoming_missed_count }}</td>
             <td>{{ data.outgoing_connected_count }}</td>
             <td>{{ data.outgoing_missed_count }}</td>
             <td>{{ data.barge_in_count }}</td>
           </tr>
-          <tr style="color: crimson; font-size: 1.5rem; font-weight: 500">
+          <tr>
             <td colspan="5">Total</td>
-            <td>100</td>
-            <td>50</td>
-            <td>60</td>
-            <td>50</td>
-            <td>260</td>
+            <td>
+              {{ total.incoming_connected_count }}
+            </td>
+            <td>{{ total.incoming_missed_count }}</td>
+            <td>
+              {{ total.outgoing_connected_count }}
+            </td>
+            <td>{{ total.outgoing_missed_count }}</td>
+            <td>{{ total.barge_in_count }}</td>
           </tr>
         </tbody>
       </table>

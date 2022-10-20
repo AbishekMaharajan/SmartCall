@@ -47,7 +47,13 @@
       </button>
     </div>
   </section>
-  <section class="container-box">
+  <section
+    class="container-box"
+    [ngClass]="
+      (customerSandbox.projectAgentListCount$ | async) <= pageSize &&
+      'fullheight'
+    "
+  >
     <div class="filter-box">
       <span class="select-box">
         <label>Agent Name <sup>*</sup></label>

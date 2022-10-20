@@ -36,8 +36,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CommonEffect } from '../common/effects/common.efects';
 import { ViewFileComponent } from './popups/view-file/view-file.component';
 import { UploadFileComponent } from './popups/upload-file/upload-file.component';
-
-
+import { HighchartsChartModule } from 'highcharts-angular'
 export const COMPONENTS = [
   SidebarComponent,
   ConfirmationPopupComponent,
@@ -77,6 +76,7 @@ export const COMPONENTS = [
     MatSlideToggleModule,
     MatFormFieldModule,
     MatInputModule,
+    HighchartsChartModule,
     EffectsModule.forFeature([CommonEffect])
 
   ],
@@ -103,7 +103,7 @@ export const COMPONENTS = [
     MatSlideToggleModule,
     MatFormFieldModule,
     MatInputModule,
-
+    HighchartsChartModule,
   ],
   providers: [
     ProjectsSandbox,

@@ -33,6 +33,7 @@ export class CommonEffect {
                 );
         })
     );
+
     @Effect()
     monthwiseCall: Observable<Action> = this.action$.pipe(
         ofType(actions.ActionTypes.MONTHWISE_CALL),
@@ -44,6 +45,36 @@ export class CommonEffect {
                     map(user => new actions.MonthWiseCallSuccess(user)),
 
                     catchError(error => of(new actions.MonthWiseCallFail(error.error)))
+                );
+        })
+    );
+
+    @Effect()
+    followupList: Observable<Action> = this.action$.pipe(
+        ofType(actions.ActionTypes.FOLLOWUP_LIST),
+        map((action: actions.FollowupList) => action.payload),
+        switchMap(state => {
+
+            return this.api.followupList(state)
+                .pipe(
+                    map(user => new actions.FollowupListSuccess(user)),
+
+                    catchError(error => of(new actions.FollowupListFail(error.error)))
+                );
+        })
+    );
+
+    @Effect()
+    todaysCallCount: Observable<Action> = this.action$.pipe(
+        ofType(actions.ActionTypes.TODAYS_CALL_COUNT),
+        map((action: actions.TodaysCallCount) => action.payload),
+        switchMap(state => {
+
+            return this.api.todaysCallCount(state)
+                .pipe(
+                    map(user => new actions.TodaysCallCountSuccess(user)),
+
+                    catchError(error => of(new actions.TodaysCallCountFail(error.error)))
                 );
         })
     );

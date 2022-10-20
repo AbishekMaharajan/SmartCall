@@ -32,8 +32,20 @@ export interface ProjectsState extends Map<string, any> {
     deleteProjectLoaded: boolean;
     deleteProjectFailed: boolean;
 
+    uploadFile: any;
+    uploadFileLoading: boolean;
+    uploadFileLoaded: boolean;
+    uploadFileFailed: boolean;
 
+    fileList: any;
+    fileListLoading: boolean;
+    fileListLoaded: boolean;
+    fileListFailed: boolean;
 
+    deleteDocument: any;
+    deleteDocumentLoading: boolean;
+    deleteDocumentLoaded: boolean;
+    deleteDocumentFailed: boolean;
 
 }
 
@@ -68,6 +80,21 @@ export const projectsStateRecord = Record({
     deleteProjectLoading: false,
     deleteProjectLoaded: false,
     deleteProjectFailed: false,
+
+    uploadFile: {},
+    uploadFileLoading: false,
+    uploadFileLoaded: false,
+    uploadFileFailed: false,
+
+    fileList: [],
+    fileListLoading: false,
+    fileListLoaded: false,
+    fileListFailed: false,
+
+    deleteDocument: {},
+    deleteDocumentLoading: false,
+    deleteDocumentLoaded: false,
+    deleteDocumentFailed: false,
 
 
 });

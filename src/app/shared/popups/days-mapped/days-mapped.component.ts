@@ -16,6 +16,7 @@ export class DaysMappedComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log('USER', this.user);
     const params: any = {
       agent_id: this.user.member_id,
       project_id: this.project.project_id
@@ -25,7 +26,7 @@ export class DaysMappedComponent implements OnInit, OnDestroy {
       if (res && res.length > 0) {
         this.days = res.reduce((sum, { duration }) => sum + duration, 0)
       }
-      else this.days = 0
+      else this.days = this.user.days
     })
   }
   onConfirm() {

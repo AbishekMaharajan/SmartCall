@@ -9,6 +9,9 @@ import {
     fetchUpdateData, fetchUpdateDataLoading, fetchUpdateDataLoaded, fetchUpdateDataFailed,
     updateProject, updateProjectLoading, updateProjectLoaded, updateProjectFailed,
     deleteProject, deleteProjectLoading, deleteProjectLoaded, deleteProjectFailed,
+    uploadFile, uploadFileLoading, uploadFileLoaded, uploadFileFailed,
+    fileList, fileListLoading, fileListLoaded, fileListFailed,
+    deleteDocument, deleteDocumentLoading, deleteDocumentLoaded, deleteDocumentFailed,
 } from './reducer/projects.selector';
 
 
@@ -45,6 +48,21 @@ export class ProjectsSandbox {
     public deleteProjectLoaded$ = this.appState.select(deleteProjectLoaded);
     public deleteProjectFailed$ = this.appState.select(deleteProjectFailed);
 
+    public uploadFile$ = this.appState.select(uploadFile);
+    public uploadFileLoading$ = this.appState.select(uploadFileLoading);
+    public uploadFileLoaded$ = this.appState.select(uploadFileLoaded);
+    public uploadFileFailed$ = this.appState.select(uploadFileFailed);
+
+    public fileList$ = this.appState.select(fileList);
+    public fileListLoading$ = this.appState.select(fileListLoading);
+    public fileListLoaded$ = this.appState.select(fileListLoaded);
+    public fileListFailed$ = this.appState.select(fileListFailed);
+
+    public deleteDocument$ = this.appState.select(deleteDocument);
+    public deleteDocumentLoading$ = this.appState.select(deleteDocumentLoading);
+    public deleteDocumentLoaded$ = this.appState.select(deleteDocumentLoaded);
+    public deleteDocumentFailed$ = this.appState.select(deleteDocumentFailed);
+
 
     constructor(protected appState: Store<store.AppState>) {
     }
@@ -69,6 +87,15 @@ export class ProjectsSandbox {
     }
     public deleteProject(params) {
         this.appState.dispatch(new ProjectsActions.DeleteProject(params));
+    }
+    public uploadFile(params) {
+        this.appState.dispatch(new ProjectsActions.UploadFile(params));
+    }
+    public fileList(params) {
+        this.appState.dispatch(new ProjectsActions.FileList(params));
+    }
+    public deleteDocument(params) {
+        this.appState.dispatch(new ProjectsActions.DeleteDocument(params));
     }
 
 }

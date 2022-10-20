@@ -50,11 +50,20 @@ export class CommonService extends Api {
         if (params.name === 'montwiseCallCount') {
             return this.http.get<ResponseInterface>(this.URL + '/reports/export-monthwise-call-count', reqOpts);
         }
+        if (params.name === 'projectAgentCallount') {
+            return this.http.get<ResponseInterface>(this.URL + '/reports/export-project-agent-call-count', reqOpts);
+        }
 
     }
 
     monthWiseCall(params: any): Observable<ResponseInterface> {
         return this.http.get<ResponseInterface>(this.URL + '/reports/monthwise-call-count', { params: params });
+    }
+    followupList(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/dashboard/get-follow-up-report', { params: params });
+    }
+    todaysCallCount(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/dashboard/get-todays-call-count', { params: params });
     }
 
 }

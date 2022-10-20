@@ -33,7 +33,10 @@
     </div>
   </section>
 
-  <section class="container-box customScroll">
+  <section
+    class="container-box customScroll"
+    [ngClass]="(didSandbox.didListCount$ | async) <= pageSize && 'fullheight'"
+  >
     <table class="table">
       <thead>
         <tr>
@@ -41,7 +44,7 @@
           <th>DID</th>
           <th>Projects</th>
           <th>Status</th>
-          <th style="text-align: center">Action</th>
+          <th style="text-align: center; min-width: 32rem">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -92,6 +95,7 @@
                   bindLabel="project_name"
                   bindValue="project_name"
                   [searchable]="true"
+                  [clearable]="false"
                   [(ngModel)]="did.selectedProject"
                   (change)="onSelectProject($event.id)"
                 >

@@ -12,6 +12,14 @@ export const ActionTypes = {
     MONTHWISE_CALL_SUCCESS: type('[EXPORT] monthwise call Success'),
     MONTHWISE_CALL_FAIL: type('[EXPORT] monthwise call Fail'),
 
+    FOLLOWUP_LIST: type('[EXPORT] followup list '),
+    FOLLOWUP_LIST_SUCCESS: type('[EXPORT] followup list Success'),
+    FOLLOWUP_LIST_FAIL: type('[EXPORT] followup list Fail'),
+
+    TODAYS_CALL_COUNT: type('[EXPORT] todays call count '),
+    TODAYS_CALL_COUNT_SUCCESS: type('[EXPORT] todays call count Success'),
+    TODAYS_CALL_COUNT_FAIL: type('[EXPORT] todays call count Fail'),
+
     CLEAR_FUNC: type('[CLEAR_FUNC] clear monthwise call '),
 
 };
@@ -67,6 +75,51 @@ export class ClearFunc implements Action {
     }
 }
 
+// followup list
+export class FollowupList implements Action {
+    type = ActionTypes.FOLLOWUP_LIST;
+
+    constructor(public payload: any) {
+    }
+}
+
+
+export class FollowupListSuccess implements Action {
+    type = ActionTypes.FOLLOWUP_LIST_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class FollowupListFail implements Action {
+    type = ActionTypes.FOLLOWUP_LIST_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+// todays call count
+export class TodaysCallCount implements Action {
+    type = ActionTypes.TODAYS_CALL_COUNT;
+
+    constructor(public payload: any) {
+    }
+}
+
+
+export class TodaysCallCountSuccess implements Action {
+    type = ActionTypes.TODAYS_CALL_COUNT_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class TodaysCallCountFail implements Action {
+    type = ActionTypes.TODAYS_CALL_COUNT_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
 export type Actions =
     | ExportList
     | ExportListSuccess
@@ -77,4 +130,13 @@ export type Actions =
     | MonthWiseCallFail
 
     | ClearFunc
+
+    | FollowupList
+    | FollowupListSuccess
+    | FollowupListFail
+
+    | TodaysCallCount
+    | TodaysCallCountSuccess
+    | TodaysCallCountFail
+
 

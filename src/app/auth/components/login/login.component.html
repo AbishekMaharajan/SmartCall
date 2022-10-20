@@ -24,6 +24,7 @@
             placeholder="Enter Username"
             formControlName="userName"
             #username
+            id="username"
             (keypress)="onEnterKeyPress($event)"
           />
           <div
@@ -59,6 +60,8 @@
             placeholder="Enter Password"
             formControlName="password"
             #password
+            id="password"
+            (keypress)="onEnterKeyPress($event)"
           />
           <div
             *ngIf="

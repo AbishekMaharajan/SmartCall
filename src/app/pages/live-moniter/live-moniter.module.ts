@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { LiveMoniterRoutingModule } from './live-moniter-routing.module';
 import { LayoutLiveMoniterComponent } from './layout-live-moniter/layout-live-moniter.component';
@@ -19,6 +19,7 @@ import { CustomersEffect } from '../customers/effects/customers.effects';
 import { UsersSandbox } from '../users/users.sandbox';
 import { UsersService } from '../users/users.service';
 import { UsersEffect } from '../users/effects/users.effects';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   declarations: [LayoutLiveMoniterComponent, LatestResponceComponent, OngoingCallsComponent,],
@@ -37,7 +38,9 @@ import { UsersEffect } from '../users/effects/users.effects';
     CustomersSandbox,
     CustomersService,
     UsersSandbox,
-    UsersService
+    UsersService,
+    DatePipe,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
 })
 export class LiveMoniterModule { }

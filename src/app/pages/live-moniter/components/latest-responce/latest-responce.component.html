@@ -48,7 +48,13 @@
     </div>
   </section>
 
-  <section class="container-box customScroll">
+  <section
+    class="container-box customScroll"
+    [ngClass]="
+      (liveMoniterSandbox.responseListCount$ | async) <= pageSize &&
+      'fullheight'
+    "
+  >
     <div class="filter-box">
       <span class="select-box">
         <label>Agent Name <Sup>*</Sup></label>
@@ -57,7 +63,7 @@
           bindLabel="member_name"
           bindValue="id"
           [searchable]="true"
-          placeholder="Select"
+          placeholder="ALL Agents"
           [(ngModel)]="agent"
         >
         </ng-select>
@@ -69,7 +75,7 @@
           bindLabel="project_name"
           bindValue="id"
           [searchable]="true"
-          placeholder="Select"
+          placeholder="All Projects"
           [(ngModel)]="projectDid"
         >
         </ng-select>

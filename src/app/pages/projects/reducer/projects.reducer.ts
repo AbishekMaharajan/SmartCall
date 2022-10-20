@@ -145,7 +145,7 @@ export function reducer(state = initialState, { type, payload }: any): ProjectsS
 
             });
 
-        // DELETE EMPLOYEE
+        // DELETE PROJECT
         case actions.ActionTypes.DELETE_PROJECT:
 
             return Object.assign({}, state, {
@@ -171,6 +171,89 @@ export function reducer(state = initialState, { type, payload }: any): ProjectsS
                 deleteProjectFailed: true,
 
             });
+
+        // UPLOAD FILE
+        case actions.ActionTypes.UPLOAD_FILE:
+
+            return Object.assign({}, state, {
+                uploadFileLoading: true,
+                uploadFileLoaded: false,
+                uploadFileFailed: false,
+            });
+
+        case actions.ActionTypes.UPLOAD_FILE_SUCCESS:
+
+            return Object.assign({}, state, {
+                uploadFile: payload,
+                uploadFileLoading: false,
+                uploadFileLoaded: true,
+                uploadFileFailed: false,
+            });
+
+        case actions.ActionTypes.UPLOAD_FILE_FAIL:
+
+            return Object.assign({}, state, {
+                uploadFileLoading: false,
+                uploadFileLoaded: true,
+                uploadFileFailed: true,
+
+            });
+
+        // FILE LIST
+        case actions.ActionTypes.FILE_LIST:
+
+            return Object.assign({}, state, {
+                fileListLoading: true,
+                fileListLoaded: false,
+                fileListFailed: false,
+            });
+
+        case actions.ActionTypes.FILE_LIST_SUCCESS:
+
+            return Object.assign({}, state, {
+                fileList: payload.data,
+                fileListLoading: false,
+                fileListLoaded: true,
+                fileListFailed: false,
+            });
+
+        case actions.ActionTypes.FILE_LIST_FAIL:
+
+            return Object.assign({}, state, {
+                fileListLoading: false,
+                fileListLoaded: true,
+                fileListFailed: true,
+
+            });
+
+
+        // DELETE DOCUMENT
+        case actions.ActionTypes.DELETE_DOCUMENT:
+
+            return Object.assign({}, state, {
+                deleteDocumentLoading: true,
+                deleteDocumentLoaded: false,
+                deleteDocumentFailed: false,
+            });
+
+        case actions.ActionTypes.DELETE_DOCUMENT_SUCCESS:
+
+            return Object.assign({}, state, {
+                deleteDocument: payload,
+                deleteDocumentLoading: false,
+                deleteDocumentLoaded: true,
+                deleteDocumentFailed: false,
+            });
+
+        case actions.ActionTypes.DELETE_DOCUMENT_FAIL:
+
+            return Object.assign({}, state, {
+                deleteDocumentLoading: false,
+                deleteDocumentLoaded: true,
+                deleteDocumentFailed: true,
+
+            });
+
 
 
         default: {
@@ -213,4 +296,19 @@ export const deleteProject = (state: ProjectsState) => state.deleteProject;
 export const deleteProjectLoading = (state: ProjectsState) => state.deleteProjectLoading;
 export const deleteProjectLoaded = (state: ProjectsState) => state.deleteProjectLoaded;
 export const deleteProjectFailed = (state: ProjectsState) => state.deleteProjectFailed;
+
+export const uploadFile = (state: ProjectsState) => state.uploadFile;
+export const uploadFileLoading = (state: ProjectsState) => state.uploadFileLoading;
+export const uploadFileLoaded = (state: ProjectsState) => state.uploadFileLoaded;
+export const uploadFileFailed = (state: ProjectsState) => state.uploadFileFailed;
+
+export const fileList = (state: ProjectsState) => state.fileList;
+export const fileListLoading = (state: ProjectsState) => state.fileListLoading;
+export const fileListLoaded = (state: ProjectsState) => state.fileListLoaded;
+export const fileListFailed = (state: ProjectsState) => state.fileListFailed;
+
+export const deleteDocument = (state: ProjectsState) => state.deleteDocument;
+export const deleteDocumentLoading = (state: ProjectsState) => state.deleteDocumentLoading;
+export const deleteDocumentLoaded = (state: ProjectsState) => state.deleteDocumentLoaded;
+export const deleteDocumentFailed = (state: ProjectsState) => state.deleteDocumentFailed;
 

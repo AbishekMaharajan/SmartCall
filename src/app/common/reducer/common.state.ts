@@ -10,6 +10,16 @@ export interface CommonState extends Map<string, any> {
     monthwiseCallCountLoading: boolean;
     monthwiseCallCountLoaded: boolean;
     monthwiseCallCountFailed: boolean;
+
+    followupList: any;
+    followupListLoading: boolean;
+    followupListLoaded: boolean;
+    followupListFailed: boolean;
+
+    todaysCallCount: any;
+    todaysCallCountLoading: boolean;
+    todaysCallCountLoaded: boolean;
+    todaysCallCountFailed: boolean;
 }
 
 export const commonStateRecord = Record({
@@ -22,6 +32,16 @@ export const commonStateRecord = Record({
     monthwiseCallCountLoading: false,
     monthwiseCallCountLoaded: false,
     monthwiseCallCountFailed: false,
+
+    followupList: [],
+    followupListLoading: false,
+    followupListLoaded: false,
+    followupListFailed: false,
+
+    todaysCallCount: [],
+    todaysCallCountLoading: false,
+    todaysCallCountLoaded: false,
+    todaysCallCountFailed: false,
 
 
 });

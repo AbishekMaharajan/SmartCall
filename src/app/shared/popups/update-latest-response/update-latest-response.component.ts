@@ -78,7 +78,7 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
       customer_alternate_mobile: this.form.value.alterMobile,
       customer_pincode: this.form.value.pinCode,
       customer_area: this.form.value.area,
-      follow_up_date: this.datePipe.transform(this.form.value.followupDate, "dd/MM/yyy").toString(),// this.form.value.followupDate,
+      follow_up_date: this.datePipe.transform(this.form.value.followupDate, "dd/MM/yyy"),// this.form.value.followupDate,
       follow_up_time: this.form.value.followupTime,
       action_taken: this.form.value.actionTaken
     }

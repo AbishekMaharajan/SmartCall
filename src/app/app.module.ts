@@ -27,12 +27,13 @@ import { DaysMappedComponent } from './shared/popups/days-mapped/days-mapped.com
 import { PlayRecordingComponent } from './shared/popups/play-recording/play-recording.component';
 import { ViewFileComponent } from './shared/popups/view-file/view-file.component';
 import { UploadFileComponent } from './shared/popups/upload-file/upload-file.component';
-
+import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
   ],
+
   entryComponents: [
     ConfirmationPopupComponent,
     UpdateLatestResponseComponent,
@@ -56,6 +57,7 @@ import { UploadFileComponent } from './shared/popups/upload-file/upload-file.com
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
     NgxSpinnerModule,
+    HighchartsChartModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       easing: 'ease-in',

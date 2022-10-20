@@ -142,12 +142,13 @@ export class LatestResponceComponent implements OnInit {
     });
   }
   onCliclToCall(user) {
-    const { agent_id, agent_number, cusomer_mobile, customer_id, project_id, conference_id } = user
+    const { agent_id, agent_number, customer_mobile, customer_id, project_id, conference_id } = user
+    if (!agent_number) return this.toster.error('This customer is blocked for this Agent')
     const params = {
       agent_id: agent_id,
       agent_number: agent_number,
       customer_id: customer_id,
-      customer_number: cusomer_mobile,
+      customer_number: customer_mobile,
       old_conference_id: conference_id.toString(),
       organisation_id: this.orgId,
       project_id: project_id

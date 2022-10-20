@@ -8,22 +8,28 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Project</th>
           <th>Document Name</th>
           <th>Document Description</th>
-          <th>Filename</th>
+          <th style="width: 30%">Filename</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Vgn Demo</td>
-          <td>Did Data</td>
-          <td>List of all dids</td>
-          <td>did.xlxs</td>
+        <tr
+          *ngFor="let data of projectsSandbox.fileList$ | async; let i = index"
+        >
+          <td>{{ i + 1 }}</td>
+
+          <td>{{ data.document_name }}</td>
+          <td>{{ data.document_description }}</td>
+          <td>{{ data.file_name }}</td>
           <td>
-            <mat-icon class="delete">delete</mat-icon>
+            <mat-icon class="view" (click)="viewFile(data)"
+              >visibility</mat-icon
+            >
+            <mat-icon class="delete" (click)="deleteFile(data)"
+              >delete</mat-icon
+            >
           </td>
         </tr>
       </tbody>

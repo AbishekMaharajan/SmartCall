@@ -7,7 +7,12 @@
     <p>Reassign Agents</p>
     <div class="bttn-box"></div>
   </section>
-  <section class="container-box">
+  <section
+    class="container-box"
+    [ngClass]="
+      (customerSandbox.reassignListCount$ | async) <= pageSize && 'fullheight'
+    "
+  >
     <div class="filter-box">
       <div class="box">
         <label for="">Reassign From <sup>*</sup></label>

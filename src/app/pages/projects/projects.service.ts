@@ -32,6 +32,21 @@ export class ProjectsService extends Api {
     deleteProject(params): Observable<ResponseInterface> {
         return this.http.delete<ResponseInterface>(this.URL + '/project/delete-project/' + params);
     }
+    uploadFile(params): Observable<ResponseInterface> {
+        const formData: FormData = new FormData();
+        formData.append('document', params.file, params.file.name);
+        // delete params.file
+        formData.append('Info', JSON.stringify(params));
+        return this.http.post<ResponseInterface>(this.URL + '/project/upload-documents', formData);
+    }
+
+    fileList(params): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/project/list-project-documents', { params: params });
+    }
+
+    deleteDocument(params): Observable<ResponseInterface> {
+        return this.http.delete<ResponseInterface>(this.URL + '/project/delete-document/' + params);
+    }
 
 
 }

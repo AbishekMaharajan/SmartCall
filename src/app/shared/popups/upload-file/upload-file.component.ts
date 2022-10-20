@@ -1,50 +1,74 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { ProjectsSandbox } from 'src/app/pages/projects/projects.sandbox';
 
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.scss']
 })
-export class UploadFileComponent implements OnInit {
+export class UploadFileComponent implements OnInit, OnDestroy {
   @ViewChild('file') file: ElementRef;
 
   fileName: string = ''
   docName: string = ''
   docDescription: string = ''
-  fileDate
-  constructor(public activeModal: NgbActiveModal,) { }
+  fileDate: any = ''
+  project
+  public subscriptions: Array<Subscription> = [];
+  constructor(
+    public activeModal: NgbActiveModal,
+    public toster: ToastrService,
+    public projectsSandbox: ProjectsSandbox,
+  ) { }
 
   ngOnInit() {
-    this.file.nativeElement
+    this.project
   }
+
   chooseFile() {
     this.file.nativeElement.click()
   }
   selectFile(event) {
     const file = event.target.files[0]
+    console.log('event.target.files: ', event.target.files);
     this.fileName = file.name
-    console.log('  this.fileName: ', this.fileName);
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (events: any) => {
-        this.fileDate = events.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
+    this.fileDate = file
   }
   onUpload() {
+    const obj = {
+      ['Document Name']: this.docName,
+      ['Document Description']: this.docDescription,
+      ['File Name']: this.fileName,
+      ['File']: this.fileDate
+    }
+    for (const param in obj) {
+      if (obj[param] === '') {
+        return this.toster.error(`${param} cannot be`)
+      }
+    }
     const params = {
-      docName: this.docName,
-      docDescription: this.docDescription,
-      fileName: this.fileName,
+      document_name: this.docName,
+      description: this.docDescription,
+      project_id: this.project.id ? this.project.id : '',
       file: this.fileDate
     }
-    console.log('params: ', params);
-    // this.activeModal.close('success')
+
+    this.projectsSandbox.uploadFile(params)
+    this.subscriptions.push(this.projectsSandbox.uploadFile$.subscribe((res) => {
+      if (res) {
+        console.log('res: ', res);
+        this.activeModal.close('success')
+      }
+    }))
   }
 
   close() {
     this.activeModal.close();
+  }
+  ngOnDestroy() {
+    this.subscriptions.forEach(each => each.unsubscribe());
   }
 }

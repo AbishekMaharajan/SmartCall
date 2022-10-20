@@ -18,3 +18,13 @@ export const monthwiseCallCount = createSelector(getSubState, commonreducer.mont
 export const monthwiseCallCountLoading = createSelector(getSubState, commonreducer.monthwiseCallCountLoading);
 export const monthwiseCallCountLoaded = createSelector(getSubState, commonreducer.monthwiseCallCountLoaded);
 export const monthwiseCallCountFailed = createSelector(getSubState, commonreducer.monthwiseCallCountFailed);
+
+export const followupList = createSelector(getSubState, commonreducer.followupList);
+export const followupListLoading = createSelector(getSubState, commonreducer.followupListLoading);
+export const followupListLoaded = createSelector(getSubState, commonreducer.followupListLoaded);
+export const followupListFailed = createSelector(getSubState, commonreducer.followupListFailed);
+
+export const todaysCallCount = createSelector(getSubState, commonreducer.todaysCallCount);
+export const todaysCallCountLoading = createSelector(getSubState, commonreducer.todaysCallCountLoading);
+export const todaysCallCountLoaded = createSelector(getSubState, commonreducer.todaysCallCountLoaded);
+export const todaysCallCountFailed = createSelector(getSubState, commonreducer.todaysCallCountFailed);

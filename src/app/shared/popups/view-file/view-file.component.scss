@@ -32,8 +32,13 @@
     width: 100%;
     height: 80%;
     overflow-y: auto;
+    .view {
+      color: var(--purple);
+      cursor: pointer;
+      margin-right: 1.5rem;
+    }
     .delete {
-      color: var(--primary);
+      color: var(--tomato-red);
       cursor: pointer;
     }
   }

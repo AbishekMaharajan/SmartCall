@@ -46,7 +46,12 @@
       </button>
     </div>
   </section>
-  <section class="container-box">
+  <section
+    class="container-box"
+    [ngClass]="
+      (usersSandbox.statusTrackerListCount$ | async) <= pageSize && 'fullheight'
+    "
+  >
     <form [formGroup]="form" (ngSubmit)="doSubmit()">
       <div class="filter-box">
         <div class="input-container">
