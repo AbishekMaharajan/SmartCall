@@ -57,7 +57,7 @@
   >
     <div class="filter-box">
       <span class="select-box">
-        <label>Agent Name <Sup>*</Sup></label>
+        <label>Agent Name </label>
         <ng-select
           [items]="userSandbox.agentList$ | async"
           bindLabel="member_name"
@@ -69,7 +69,7 @@
         </ng-select>
       </span>
       <span class="select-box">
-        <label>Project Name <Sup>*</Sup></label>
+        <label>Project Name </label>
         <ng-select
           [items]="customerSandbox.projectList$ | async"
           bindLabel="project_name"

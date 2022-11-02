@@ -20,6 +20,10 @@ export const ActionTypes = {
     TODAYS_CALL_COUNT_SUCCESS: type('[EXPORT] todays call count Success'),
     TODAYS_CALL_COUNT_FAIL: type('[EXPORT] todays call count Fail'),
 
+    GET_CHART_DATA: type('[EXPORT] get chart data '),
+    GET_CHART_DATA_SUCCESS: type('[EXPORT] get chart data Success'),
+    GET_CHART_DATA_FAIL: type('[EXPORT] get chart data Fail'),
+
     CLEAR_FUNC: type('[CLEAR_FUNC] clear monthwise call '),
 
 };
@@ -119,6 +123,28 @@ export class TodaysCallCountFail implements Action {
     constructor(public payload: any) {
     }
 }
+// get chart data
+export class GetChartData implements Action {
+    type = ActionTypes.GET_CHART_DATA;
+
+    constructor(public payload: any) {
+    }
+}
+
+
+export class GetChartDataSuccess implements Action {
+    type = ActionTypes.GET_CHART_DATA_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class GetChartDataFail implements Action {
+    type = ActionTypes.GET_CHART_DATA_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
 
 export type Actions =
     | ExportList
@@ -138,5 +164,9 @@ export type Actions =
     | TodaysCallCount
     | TodaysCallCountSuccess
     | TodaysCallCountFail
+
+    | GetChartData
+    | GetChartDataSuccess
+    | GetChartDataFail
 
 

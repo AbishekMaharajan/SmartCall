@@ -174,8 +174,8 @@ export class LatestResponceComponent implements OnInit {
     }
   }
   onSubmit() {
-    if (!this.agent) return this.toster.error('Please select Agent and proceed')
-    if (!this.projectDid) return this.toster.error('Please select Project and proceed')
+    // if (!this.agent) return this.toster.error('Please select Agent and proceed')
+    // if (!this.projectDid) return this.toster.error('Please select Project and proceed')
     if (!this.onFromDate) return this.toster.error('Please select From date and proceed')
     if (!this.onToDate) return this.toster.error('Please select To date and proceed')
 

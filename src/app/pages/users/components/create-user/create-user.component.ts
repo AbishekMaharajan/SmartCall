@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { UsersSandbox } from '../../users.sandbox';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit, OnDestroy {
   @ViewChild('filePath') filePath: ElementRef;
   form: FormGroup;
   files: any;
@@ -22,6 +22,7 @@ export class CreateUserComponent implements OnInit {
   imagePost = '';
   userId = 0
   sipActiveStatus = false
+  count = 2
   orgId = JSON.parse(localStorage.getItem('userDetails')).organisation_id
   emailPattern = '^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@' + '[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$';
 
@@ -41,28 +42,14 @@ export class CreateUserComponent implements OnInit {
     this.usersSandbox.phoneType({})
     this.usersSandbox.reporting({})
     this.usersSandbox.callAvailability({})
-    this.usersSandbox.callAvailability$.subscribe((res) => {
-      if (res && res.length > 0) {
-        this.availability = res.map((data) => {
-          data.active = false
-          if (data.unnest === 'Available') {
-            data.active = true
-            data.class = 'success'
-          }
-          else if (data.unnest === 'Not Available' || data.unnest === 'On Leave') {
-            data.class = 'warning'
-          }
-          else if (data.unnest === 'On Break') {
-            data.class = '_alert'
-          }
-          else if (data.unnest === 'On Duty') {
-            data.class = 'success'
-          }
-          else data.class = '_alert'
-          return data
-        })
-      }
-    })
+    if (!this.userId) {
+      this.subscriptions.push(this.usersSandbox.callAvailability$.subscribe((res) => {
+        if (res && res.length > 0) {
+          this.availability = res
+        }
+      }))
+    }
+
     this.route.params.subscribe(param => {
       if (param.id) {
         this.userId = param.id
@@ -110,6 +97,7 @@ export class CreateUserComponent implements OnInit {
     this.usersSandbox.fetchUpdateData(id);
     this.subscriptions.push(this.usersSandbox.fetchUpdateData$.subscribe((res) => {
       if (res) {
+
         this.form.controls['member_name'].setValue(res[0].member_name);
         this.form.controls['email_id'].setValue(res[0].email_id);
         this.form.controls['mobile_number'].setValue(res[0].mobile_number);
@@ -122,14 +110,12 @@ export class CreateUserComponent implements OnInit {
         this.form.controls['remarks'].setValue(res[0].remarks ? res[0].remarks : '');
         this.postUrl = res[0].image
         this.availability = this.availability.map((data) => {
-          // data.active = false
           if (data.unnest === res[0].call_availability) {
             data.active = true
           }
-          else data.active = false
           return data
         });
-        // this.availability.find((data) => data.unnest == res[0].call_availability).active = true
+        console.log(' this.availability: ', this.availability);
         if (res[0].phone_type === 'sip') {
           this.sipActiveStatus = true
         } else this.sipActiveStatus = false
@@ -149,6 +135,8 @@ export class CreateUserComponent implements OnInit {
     this.form.reset();
     this.postUrl = ''
     this.imagePost = ''
+    this.availability = []
+    this.subscriptions.forEach(each => each.unsubscribe());
     this.router.navigate(['users/list'])
   }
 
@@ -206,6 +194,7 @@ export class CreateUserComponent implements OnInit {
     this.imagePost = '';
     this.userId = 0
     this.sipActiveStatus = false
+    this.availability = []
     this.subscriptions.forEach(each => each.unsubscribe());
   }
 }

@@ -262,9 +262,27 @@ export function reducer(state = initialState, { type, payload }: any): UsersStat
             });
 
         case actions.ActionTypes.CALL_AVAILABILITY_SUCCESS:
-
+            const updatedData = payload.data.map((data) => {
+                data.active = false
+                if (data.unnest === 'Available') {
+                    data.class = 'success'
+                }
+                else if (data.unnest === 'Not Available' || data.unnest === 'On Leave') {
+                    data.class = 'warning'
+                }
+                else if (data.unnest === 'On Break') {
+                    data.class = '_alert'
+                }
+                else if (data.unnest === 'On Duty') {
+                    data.class = 'success'
+                }
+                else data.class = '_alert'
+                return data
+            })
             return Object.assign({}, state, {
-                callAvailability: payload.data,
+
+
+                callAvailability: updatedData,
                 callAvailabilityLoading: false,
                 callAvailabilityLoaded: true,
                 callAvailabilityFailed: false,

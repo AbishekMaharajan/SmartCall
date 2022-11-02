@@ -20,6 +20,11 @@ export interface CommonState extends Map<string, any> {
     todaysCallCountLoading: boolean;
     todaysCallCountLoaded: boolean;
     todaysCallCountFailed: boolean;
+
+    chartData: any;
+    chartDataLoading: boolean;
+    chartDataLoaded: boolean;
+    chartDataFailed: boolean;
 }
 
 export const commonStateRecord = Record({
@@ -42,6 +47,11 @@ export const commonStateRecord = Record({
     todaysCallCountLoading: false,
     todaysCallCountLoaded: false,
     todaysCallCountFailed: false,
+
+    chartData: [],
+    chartDataLoading: false,
+    chartDataLoaded: false,
+    chartDataFailed: false,
 
 
 });

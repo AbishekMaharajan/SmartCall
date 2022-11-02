@@ -7,6 +7,7 @@ import {
     monthwiseCallCount, monthwiseCallCountLoading, monthwiseCallCountLoaded, monthwiseCallCountFailed,
     followupList, followupListLoading, followupListLoaded, followupListFailed,
     todaysCallCount, todaysCallCountLoading, todaysCallCountLoaded, todaysCallCountFailed,
+    chartData, chartDataLoading, chartDataLoaded, chartDataFailed,
 } from './reducer/common.selector';
 
 
@@ -33,6 +34,11 @@ export class CommonSandbox {
     public todaysCallCountLoaded$ = this.appState.select(todaysCallCountLoaded);
     public todaysCallCountFailed$ = this.appState.select(todaysCallCountFailed);
 
+    public chartData$ = this.appState.select(chartData);
+    public chartDataLoading$ = this.appState.select(chartDataLoading);
+    public chartDataLoaded$ = this.appState.select(chartDataLoaded);
+    public chartDataFailed$ = this.appState.select(chartDataFailed);
+
     constructor(protected appState: Store<store.AppState>) {
     }
     public export(params) {
@@ -49,6 +55,9 @@ export class CommonSandbox {
     }
     public todaysCallCount(params) {
         this.appState.dispatch(new CommonActions.TodaysCallCount(params));
+    }
+    public getChartData(params) {
+        this.appState.dispatch(new CommonActions.GetChartData(params));
     }
 
 

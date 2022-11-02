@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { CustomersSandbox } from 'src/app/pages/customers/customers.sandbox';
 import { UsersSandbox } from 'src/app/pages/users/users.sandbox';
@@ -20,7 +21,7 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
   pageSize: number = 10;
   offset: number = 0;
   keyword: string = '';
-  count: number = 0;
+  count: number = 1;
   config = {
     itemsPerPage: this.pageSize, currentPage: this.page, totalItems: ''
   }
@@ -38,16 +39,8 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
   toMaxDate: any = ''
   onFromDate = null;
   onToDate = null
-  total: any = {
-    incoming_connected_count: 0,
-    incoming_missed_count: 0,
-    outgoing_connected_count: 0,
-    outgoing_missed_count: 0,
-    barge_in_count: 0
-  }
+  total: any = {}
   public subscriptions: Array<Subscription> = [];
-
-
 
   constructor(
     public userSandbox: UsersSandbox,
@@ -73,6 +66,7 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
   }
 
   fetchProjectAgentList() {
+    this.count = this.count++
     const fromDate = this.datePipe.transform(this.onFromDate, "dd/MM/yyy")
     const toDate = this.datePipe.transform(this.onToDate, "dd/MM/yyy")
     const params = {
@@ -87,8 +81,21 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
       value: 1
     }
     this.customerSandbox.projectAgentList(params)
+    if (this.count = 1) {
+
+    }
+
     this.subscriptions.push(this.customerSandbox.projectAgentList$.subscribe((res) => {
-      if (res && res.length > 0) {
+
+      if (res && res.length > 0 && this.count === 1) {
+        this.total = {
+          incoming_connected_count: 0,
+          incoming_missed_count: 0,
+          outgoing_connected_count: 0,
+          outgoing_missed_count: 0,
+          barge_in_count: 0
+        }
+        this.count = 0
         res.forEach((data) => {
           this.total['incoming_connected_count'] = this.total['incoming_connected_count'] + data.incoming_connected_count
           this.total['incoming_missed_count'] = this.total['incoming_missed_count'] + data.incoming_missed_count
@@ -128,12 +135,19 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
     let todaysDate = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     maxDate >= todaysDate ? (this.toMaxDate = moment().format("YYYY-MM-DD")) : (this.toMaxDate = maxDate);
   }
-
+  agentNameChaneFunc(event) {
+    if (!event) {
+      this.agent = null
+    }
+  }
+  projectNameChaneFunc(event) {
+    if (!event) {
+      this.projectDid = null
+    }
+  }
   onSubmit() {
-    // if (!this.agent) return this.toster.error('Please select Agent and proceed')
-    // if (!this.projectDid) return this.toster.error('Please select Project and proceed')
-    // if (!this.onFromDate) return this.toster.error('Please select From date and proceed')
-    // if (!this.onToDate) return this.toster.error('Please select To date and proceed')
+
+    if (this.onFromDate && !this.onToDate) return this.toster.error('Please select To date to proceed')
 
     this.fetchProjectAgentList()
     this.fetchProjectAgentListCount()

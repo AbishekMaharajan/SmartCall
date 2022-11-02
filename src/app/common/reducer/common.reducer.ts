@@ -134,6 +134,34 @@ export function reducer(
 
             });
 
+        // CHART DATA
+        case actions.ActionTypes.GET_CHART_DATA:
+
+            return Object.assign({}, state, {
+                chartDataLoading: true,
+                chartDataLoaded: false,
+                chartDataFailed: false,
+            });
+
+        case actions.ActionTypes.GET_CHART_DATA_SUCCESS:
+
+            return Object.assign({}, state, {
+                chartData: payload.data,
+                chartDataLoading: false,
+                chartDataLoaded: true,
+                chartDataFailed: false,
+            });
+
+        case actions.ActionTypes.GET_CHART_DATA_FAIL:
+
+            return Object.assign({}, state, {
+                chartData: [],
+                chartDataLoading: false,
+                chartDataLoaded: true,
+                chartDataFailed: true,
+
+            });
+
 
         default: {
             return state;
@@ -160,5 +188,11 @@ export const todaysCallCount = (state: CommonState) => state.todaysCallCount;
 export const todaysCallCountLoading = (state: CommonState) => state.todaysCallCountLoading;
 export const todaysCallCountLoaded = (state: CommonState) => state.todaysCallCountLoaded;
 export const todaysCallCountFailed = (state: CommonState) => state.todaysCallCountFailed;
+
+
+export const chartData = (state: CommonState) => state.chartData;
+export const chartDataLoading = (state: CommonState) => state.chartDataLoading;
+export const chartDataLoaded = (state: CommonState) => state.chartDataLoaded;
+export const chartDataFailed = (state: CommonState) => state.chartDataFailed;
 
 

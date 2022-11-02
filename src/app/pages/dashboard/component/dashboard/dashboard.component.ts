@@ -11,13 +11,39 @@ export class DashboardComponent implements OnInit {
   @ViewChild('date') date: ElementRef;
 
   Highcharts: typeof Highcharts = Highcharts;
-  updateFlag = false;
+  updateFlag = false
   countObj: any = {}
   maxDate = moment().format("YYYY-MM-DD");
   dateValue = moment().format("YYYY-MM-DD")
-  minDate = '1990-01-01'
+  callType: string = 'total'
+  color = 'blue'
+  chartData: any = [
+    // [0.01, 10],
+    // [1.01, 5],
+    // [2.01, 5],
+    // [3.01, 2],
+    // [4.01, 30],
+    // [5.01, 40],
+    // [6.01, 30],
+    // [7.01, 20],
+    // [8.01, 50],
+    // [9.01, 70],
+    // [10.01, 90],
+    // [11.01, 101],
+    // [12.01, 10],
+    // [13.01, 30],
+    // [14.01, 20],
+    // [15.01, 50],
+    // [16.01, 80],
+    // [17.01, 0],
+    // [18.01, 10],
+    // [19.01, 20],
+    // [20.01, 20],
+    // [21.01, 30],
+    // [22.01, 50],
+    // [23.01, 50],
+  ];
   chartOptions: any = {
-
     title: {
       text: '',
       style: {
@@ -26,9 +52,10 @@ export class DashboardComponent implements OnInit {
       }
     },
     xAxis: {
-      type: 'datetime',
+      type: 'time',
+
       title: {
-        text: 'Date',
+        text: 'Hours of the Day',
         style: {
           color: '#777777',
           fontWeight: 600
@@ -44,13 +71,16 @@ export class DashboardComponent implements OnInit {
           fontWeight: 600
         }
       },
+
     },
     credits: {
-      enabled: false
+      enabled: true
     }, chart: {
       events: {
         load: function () {
-          this.series.forEach((data, i) => (i === 0) ? data.show() : data.hide())
+          this.series.forEach((data, i) => {
+            (i === 0) ? data.show() : data.hide()
+          })
         },
       }
     },
@@ -59,85 +89,58 @@ export class DashboardComponent implements OnInit {
         events: {
           legendItemClick(e) {
             e.preventDefault();
-            this.chart.series.forEach(s => (s === this) ? s.show() : s.hide())
-          }
+            this.chart.series.forEach(s => {
+              (s === this) ? s.show() : s.hide()
+            })
+          },
         }
       }
     },
     series: [
 
       {
-        data: [
-          [Date.UTC(2010, 0, 1), 10],
-          [Date.UTC(2010, 2, 1), 20],
-          [Date.UTC(2010, 3, 1), 5],
-          [Date.UTC(2010, 5, 5), 30],
-          [Date.UTC(2010, 7, 7), 10],
-          [Date.UTC(2010, 10, 8), 30],
-        ],
+        data: this.chartData,
         type: 'line',
-        name: 'Total calls'
+        name: this.callType,
+        showInLegend: false,
       },
-      {
-        data: [
-          [Date.UTC(2010, 0, 1), 30],
-          [Date.UTC(2010, 2, 1), 10],
-          [Date.UTC(2010, 3, 1), 50],
-          [Date.UTC(2010, 5, 5), 20],
-          [Date.UTC(2010, 7, 7), 100],
-          [Date.UTC(2010, 10, 8), 30],
-        ],
-        type: 'line',
-        color: "#717ee3",
-        name: 'Connected calls'
-      },
-      {
-        data: [
-          [Date.UTC(2010, 0, 1), 50],
-          [Date.UTC(2010, 2, 1), 100],
-          [Date.UTC(2010, 3, 1), 10],
-          [Date.UTC(2010, 5, 5), 30],
-          [Date.UTC(2010, 7, 7), 40],
-          [Date.UTC(2010, 10, 8), 60],
-        ],
-        type: 'line',
-        color: "#fe7883",
-        name: 'Missed calls'
-      },
-      {
-        data: [
-          [Date.UTC(2010, 0, 1), 20],
-          [Date.UTC(2010, 2, 1), 50],
-          [Date.UTC(2010, 3, 1), 20],
-          [Date.UTC(2010, 5, 5), 70],
-          [Date.UTC(2010, 7, 7), 80],
-          [Date.UTC(2010, 10, 8), 10],
-        ],
-        type: 'line',
-        color: "#57cc99",
-        name: 'Ongoing calls'
-      },
-      {
-        data: [
-          [Date.UTC(2010, 0, 1), 100],
-          [Date.UTC(2010, 2, 1), 50],
-          [Date.UTC(2010, 3, 1), 70],
-          [Date.UTC(2010, 5, 5), 30],
-          [Date.UTC(2010, 7, 7), 50],
-          [Date.UTC(2010, 10, 8), 80],
-        ],
-        type: 'line',
-        name: 'Bargin calls'
-      },
-
+      // {
+      //   data: this.chartData,
+      //   type: 'line',
+      //   color: "#717ee3",
+      //   name: 'Connected calls',
+      //   showInLegend: false,
+      // },
+      // {
+      //   data: this.chartData,
+      //   type: 'line',
+      //   color: "#fe7883",
+      //   name: 'Missed calls',
+      //   showInLegend: false,
+      // },
+      // {
+      //   data: this.chartData,
+      //   type: 'line',
+      //   color: "#57cc99",
+      //   name: 'Ongoing calls',
+      //   showInLegend: false,
+      // },
     ],
 
   };
-  constructor(public commonSandbox: CommonSandbox) { }
+
+
+  minDate = '1990-01-01'
+
+  constructor(public commonSandbox: CommonSandbox) {
+
+  }
 
   ngOnInit() {
-    this.fetchCallCount()
-    this.fetchFollowupList()
+    this.fetchCallCount();
+    this.fetchFollowupList();
+    this.getChartData()
+
   }
   fetchFollowupList() {
     const params = {
@@ -157,10 +160,36 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
+  getChartData() {
+    const params = {
+      followupdate: moment(this.dateValue).format("DD/MM/YYYY"),
+      calltype: this.callType
+    }
+    this.commonSandbox.getChartData(params)
+    this.commonSandbox.chartData$.subscribe((data) => {
+      if (data && data.length > 0) {
+        this.updateFlag = true
+        this.chartData = data.map((item => {
+          return [+item.called_hour, item.call_count]
+        }));
+        this.chartOptions.series.forEach((chart) => {
+          chart.data = this.chartData
+        })
+      }
+    })
+  }
   onDateChange(event) {
     this.dateValue = moment(event.target.valueAsDate).format("YYYY-MM-DD")
     this.fetchCallCount()
     this.fetchFollowupList()
+    this.getChartData()
   }
-
+  onSelectChartTypeFunc(event) {
+    this.updateFlag = true
+    const element = event.target
+    this.callType = event.target.value
+    this.color = element.getAttribute('data-color');
+    this.getChartData()
+  }
 }

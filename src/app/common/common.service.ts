@@ -65,5 +65,7 @@ export class CommonService extends Api {
     todaysCallCount(params: any): Observable<ResponseInterface> {
         return this.http.get<ResponseInterface>(this.URL + '/dashboard/get-todays-call-count', { params: params });
     }
-
+    getChartData(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/dashboard/get-data-for-dashboard-chart', { params: params });
+    }
 }

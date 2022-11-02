@@ -79,6 +79,21 @@ export class CommonEffect {
         })
     );
 
+    @Effect()
+    getChartData: Observable<Action> = this.action$.pipe(
+        ofType(actions.ActionTypes.GET_CHART_DATA),
+        map((action: actions.GetChartData) => action.payload),
+        switchMap(state => {
+
+            return this.api.getChartData(state)
+                .pipe(
+                    map(user => new actions.GetChartDataSuccess(user)),
+
+                    catchError(error => of(new actions.GetChartDataFail(error.error)))
+                );
+        })
+    );
+
     constructor(
         private action$: Actions,
         protected api: CommonService,

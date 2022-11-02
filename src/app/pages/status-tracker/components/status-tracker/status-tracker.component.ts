@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+// import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ import { UsersSandbox } from 'src/app/pages/users/users.sandbox';
 export class StatusTrackerComponent implements OnInit, OnDestroy {
   orgId = JSON.parse(localStorage.getItem('userDetails')).organisation_id
   form: FormGroup;
-  faSearch = faSearch
+  // faSearch = faSearch
   page: number = 1;
   pageSize: number = 10;
   offset: number = 0;
@@ -132,6 +132,9 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     }))
   }
   OnChangeAvailability(state) {
+    if (this.form.value.fromDate && !this.form.value.toDate) {
+      return this.toster.error('Please select To Date')
+    }
     this.keyword = state.unnest
     if (state.unnest == 'All') this.keyword = ''
     this.fetchStatusTrackerList()
@@ -152,13 +155,17 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     this.doSubmit()
   }
   doSubmit() {
+    console.log(this.form.value.fromDate);
+    if (this.form.value.fromDate && !this.form.value.toDate) {
+      return this.toster.error('Please select To Date and search')
+    }
     this.fetchStatusTrackerList()
     this.fetchStatusListCount()
   }
-  onSearch() {
-    this.fetchStatusTrackerList()
-    this.fetchStatusListCount()
-  }
+  // onSearch() {
+  //   this.fetchStatusTrackerList()
+  //   this.fetchStatusListCount()
+  // }
 
   keyFunc(event) {
     if (event.key === "Backspace" && this.keyword === '') {

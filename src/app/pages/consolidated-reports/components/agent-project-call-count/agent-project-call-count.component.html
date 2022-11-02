@@ -48,7 +48,8 @@
           [searchable]="true"
           placeholder="All Agents"
           [(ngModel)]="agent"
-          [clearable]="false"
+          [clearable]="true"
+          (change)="agentNameChaneFunc($event)"
         >
         </ng-select>
       </span>
@@ -61,7 +62,8 @@
           [searchable]="true"
           placeholder="All Project"
           [(ngModel)]="projectDid"
-          [clearable]="false"
+          [clearable]="true"
+          (change)="projectNameChaneFunc($event)"
         >
         </ng-select>
       </span>

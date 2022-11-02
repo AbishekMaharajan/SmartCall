@@ -28,3 +28,8 @@ export const todaysCallCount = createSelector(getSubState, commonreducer.todaysC
 export const todaysCallCountLoading = createSelector(getSubState, commonreducer.todaysCallCountLoading);
 export const todaysCallCountLoaded = createSelector(getSubState, commonreducer.todaysCallCountLoaded);
 export const todaysCallCountFailed = createSelector(getSubState, commonreducer.todaysCallCountFailed);
+
+export const chartData = createSelector(getSubState, commonreducer.chartData);
+export const chartDataLoading = createSelector(getSubState, commonreducer.chartDataLoading);
+export const chartDataLoaded = createSelector(getSubState, commonreducer.chartDataLoaded);
+export const chartDataFailed = createSelector(getSubState, commonreducer.chartDataFailed);

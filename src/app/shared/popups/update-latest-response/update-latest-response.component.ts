@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { LiveMoniterSandbox } from 'src/app/pages/live-moniter/liveMoniter.sandbox';
 
@@ -25,9 +26,11 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log('user', this.user);
     this.initForm()
     this.fetchCustomerData()
   }
+
   initForm() {
 
     this.form = this.fb.group({
@@ -52,16 +55,16 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
     this.liveMoniterSandbox.customerInfo(params)
     this.subscriptions.push(this.liveMoniterSandbox.customerInfo$.subscribe((res) => {
       if (res && res.length > 0) {
-
         const { customer_name, customer_email, customer_mobile, customer_alternate_mobile, action_taken, customer_area, follow_up_date, follow_up_time, customer_pincode } = res[0]
-        const followUpDate = this.datePipe.transform(follow_up_date, "yyyy-MM-dd")
+        const fromDate = moment(follow_up_date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        console.log('fromDate: ', fromDate);
         this.form.controls['name'].setValue(customer_name);
         this.form.controls['mail'].setValue(customer_email);
         this.form.controls['mobile'].setValue(customer_mobile);
         this.form.controls['alterMobile'].setValue(customer_alternate_mobile);
         this.form.controls['area'].setValue(customer_area);
         this.form.controls['pinCode'].setValue(customer_pincode);
-        this.form.controls['followupDate'].setValue(followUpDate);
+        this.form.controls['followupDate'].setValue(fromDate);
         this.form.controls['followupTime'].setValue(follow_up_time);
         this.form.controls['actionTaken'].setValue(action_taken);
 
@@ -78,18 +81,15 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
       customer_alternate_mobile: this.form.value.alterMobile,
       customer_pincode: this.form.value.pinCode,
       customer_area: this.form.value.area,
-      follow_up_date: this.datePipe.transform(this.form.value.followupDate, "dd/MM/yyy"),// this.form.value.followupDate,
+
+      follow_up_date: moment(this.form.value.followupDate, 'YYYY-MM-DD').format('DD/MM/YYYY'),
       follow_up_time: this.form.value.followupTime,
       action_taken: this.form.value.actionTaken
     }
-
-
     this.liveMoniterSandbox.updateCustomer(params)
     this.subscriptions.push(this.liveMoniterSandbox.updateCustomerInfo$.subscribe((res) => {
       if (res && res.status === 1) {
-
         this.activeModal.close('success')
-
       }
     }))
   }
@@ -101,15 +101,15 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
   updateCustomer() {
     this.onConfirm()
   }
-  async pincodeFunc() {
+  // async pincodeFunc() {
 
-    if (this.form.value.pinCode.length === 6) {
-      let response = await fetch(`https://api.postalpincode.in/pincode/${this.form.value.pinCode}`);
-      let data = await response.json();
-      this.areaArr = data[0].PostOffice.map((data) => ({ name: `${data.Name} / ${data.Block}` }))
-    }
+  //   if (this.form.value.pinCode.length === 6) {
+  //     let response = await fetch(`https://api.postalpincode.in/pincode/${this.form.value.pinCode}`);
+  //     let data = await response.json();
+  //     this.areaArr = data[0].PostOffice.map((data) => ({ name: `${data.Name} / ${data.Block}` }))
+  //   }
 
-  }
+  // }
   ngOnDestroy() {
     this.areaArr = []
     this.subscriptions.forEach(each => each.unsubscribe());

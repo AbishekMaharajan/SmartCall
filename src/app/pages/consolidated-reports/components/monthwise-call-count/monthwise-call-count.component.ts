@@ -13,18 +13,11 @@ export class MonthwiseCallCountComponent implements OnInit, OnDestroy {
   faSearch = faSearch
   year: number
   month: number
-  dataArr = [
-  ]
+  dataArr = []
   yearArr = []
   monthArr = []
-
-  total: any = {
-    incoming_connected_count: 0,
-    incoming_missed_count: 0,
-    outgoing_connected_count: 0,
-    outgoing_missed_count: 0,
-    barge_in_count: 0
-  }
+  count = 1
+  total: any = {}
   public subscriptions: Array<Subscription> = [];
 
   constructor(
@@ -65,7 +58,15 @@ export class MonthwiseCallCountComponent implements OnInit, OnDestroy {
     }
     this.commonSandbox.monthWiseCall(params)
     this.subscriptions.push(this.commonSandbox.monthwiseCallCount$.subscribe((res) => {
-      if (res && res.length > 0) {
+      if (res && res.length > 0 && this.count === 1) {
+        this.count = 0
+        this.total = {
+          incoming_connected_count: 0,
+          incoming_missed_count: 0,
+          outgoing_connected_count: 0,
+          outgoing_missed_count: 0,
+          barge_in_count: 0
+        }
         this.dataArr = res
         this.dataArr.forEach((data) => {
           this.total['incoming_connected_count'] = this.total['incoming_connected_count'] + data.incoming_connected_count
