@@ -87,6 +87,7 @@ export class DashboardComponent implements OnInit {
     plotOptions: {
       series: {
         events: {
+
           legendItemClick(e) {
             e.preventDefault();
             this.chart.series.forEach(s => {
