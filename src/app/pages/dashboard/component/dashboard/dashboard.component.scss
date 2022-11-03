@@ -211,9 +211,19 @@
     cursor: pointer;
     background-color: #fff;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    strong {
-      font-size: 2rem;
-      margin-right: 0.5rem;
+    .content {
+      height: 100%;
+      width: 100%;
+      padding: 2rem;
+    }
+    .marquee-content {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--font-primary);
+      mat-icon {
+        color: #717ee3;
+      }
     }
   }
 }
@@ -232,14 +242,12 @@
   .chart-box {
     width: 100%;
     height: 100%;
-    // .highcharts-credits {
-    //   display: none;
-    // }
+
     .chart-select {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 2rem;
+      gap: 2.5rem;
       .input-box {
         display: flex;
         align-items: center;

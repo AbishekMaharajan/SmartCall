@@ -52,12 +52,12 @@
           >
         </span>
         <div class="bttn-box">
-          <button class="bttn" (click)="onAdd()">
+          <button class="bttn warning-outline" (click)="onAdd()">
             <mat-icon>add</mat-icon>
             <!-- <span> Add </span> -->
           </button>
           <button
-            class="bttn warning-outline"
+            class="bttn"
             (click)="onRemove()"
             *ngIf="i > 0 && i === didArr.length - 1"
           >

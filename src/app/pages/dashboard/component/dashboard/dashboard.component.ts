@@ -16,7 +16,8 @@ export class DashboardComponent implements OnInit {
   maxDate = moment().format("YYYY-MM-DD");
   dateValue = moment().format("YYYY-MM-DD")
   callType: string = 'total'
-  color = 'blue'
+  color = '#6633A6'
+  title = 'Total Calls'
   chartData: any = [
     // [0.01, 10],
     // [1.01, 5],
@@ -45,10 +46,11 @@ export class DashboardComponent implements OnInit {
   ];
   chartOptions: any = {
     title: {
-      text: '',
+      text: this.title,
       style: {
         color: '#555555',
-        fontWeight: 600
+        fontWeight: 600,
+        fontSize: '1.6rem'
       }
     },
     xAxis: {
@@ -104,28 +106,8 @@ export class DashboardComponent implements OnInit {
         type: 'line',
         name: this.callType,
         showInLegend: false,
+        color: this.color
       },
-      // {
-      //   data: this.chartData,
-      //   type: 'line',
-      //   color: "#717ee3",
-      //   name: 'Connected calls',
-      //   showInLegend: false,
-      // },
-      // {
-      //   data: this.chartData,
-      //   type: 'line',
-      //   color: "#fe7883",
-      //   name: 'Missed calls',
-      //   showInLegend: false,
-      // },
-      // {
-      //   data: this.chartData,
-      //   type: 'line',
-      //   color: "#57cc99",
-      //   name: 'Ongoing calls',
-      //   showInLegend: false,
-      // },
     ],
 
   };
@@ -191,6 +173,9 @@ export class DashboardComponent implements OnInit {
     const element = event.target
     this.callType = event.target.value
     this.color = element.getAttribute('data-color');
+    this.title = element.getAttribute('data-title');
+    this.chartOptions.title.text = this.title
+    this.chartOptions.series[0].color = this.color
     this.getChartData()
   }
 }

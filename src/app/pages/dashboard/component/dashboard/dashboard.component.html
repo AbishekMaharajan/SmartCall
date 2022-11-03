@@ -112,7 +112,24 @@
         </ng-container>
       </div>
       <div class="follow-box-2">
-        <div class="content"></div>
+        <div class="content">
+          <marquee
+            width="100%"
+            direction="up"
+            height="100%"
+            scrollamount="2"
+            class="marquee"
+          >
+            <div class="marquee-content">
+              <mat-icon>label_important</mat-icon>
+              <div>Welcome to the all new Smart Call - VGN Interface</div>
+            </div>
+            <div class="marquee-content">
+              <mat-icon>label_important</mat-icon>
+              <div>Explore our new application architecture and features</div>
+            </div>
+          </marquee>
+        </div>
       </div>
     </div>
     <div class="display-chart">
@@ -129,7 +146,8 @@
               type="radio"
               name="group"
               value="total"
-              data-color="blue"
+              data-color="#6633A6"
+              data-title="Total Calls"
               checked
               (change)="onSelectChartTypeFunc($event)"
             />
@@ -140,7 +158,8 @@
               type="radio"
               name="group"
               value="connected_calls"
-              data-color="green"
+              data-color="#717EE3"
+              data-title="Connected Calls"
               (change)="onSelectChartTypeFunc($event)"
             />
             <label for="ConnectedCalls">ConnectedCalls</label>
@@ -150,7 +169,8 @@
               type="radio"
               name="group"
               value="missed_calls"
-              data-color="pink"
+              data-color="#FE7883"
+              data-title="Missed Calls"
               (change)="onSelectChartTypeFunc($event)"
             />
             <label for="MissedCalls">MissedCalls</label>
@@ -160,7 +180,8 @@
               type="radio"
               name="group"
               value="ongoing_calls"
-              data-color="gray"
+              data-color="#18C1A3"
+              data-title="Ongoing Calls"
               (change)="onSelectChartTypeFunc($event)"
             />
             <label for="OnGoingCalls">OnGoingCalls</label>
