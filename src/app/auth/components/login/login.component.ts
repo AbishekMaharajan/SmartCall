@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
 
   }
   onEnterKeyPress(event) {
-    console.log('event: ', event.target.id);
 
     if (event.key === 'Enter') {
 

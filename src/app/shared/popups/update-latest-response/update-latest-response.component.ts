@@ -26,7 +26,6 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log('user', this.user);
     this.initForm()
     this.fetchCustomerData()
   }
@@ -57,7 +56,6 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
       if (res && res.length > 0) {
         const { customer_name, customer_email, customer_mobile, customer_alternate_mobile, action_taken, customer_area, follow_up_date, follow_up_time, customer_pincode } = res[0]
         const fromDate = moment(follow_up_date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-        console.log('fromDate: ', fromDate);
         this.form.controls['name'].setValue(customer_name);
         this.form.controls['mail'].setValue(customer_email);
         this.form.controls['mobile'].setValue(customer_mobile);

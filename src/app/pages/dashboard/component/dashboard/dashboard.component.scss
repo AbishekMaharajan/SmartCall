@@ -133,7 +133,7 @@
 
   .follow-box-1 {
     width: 100%;
-    flex: 1;
+    flex: 0 0 60%;
     overflow-y: auto;
     padding-inline: 0.5rem;
     ._warning {
@@ -143,6 +143,9 @@
       justify-content: center;
       align-items: center;
       color: #bcc2c5;
+      background-color: #fff;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      border-radius: 2rem;
     }
     .content {
       width: 100%;

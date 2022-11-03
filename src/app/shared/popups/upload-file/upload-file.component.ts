@@ -33,7 +33,6 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   }
   selectFile(event) {
     const file = event.target.files[0]
-    console.log('event.target.files: ', event.target.files);
     this.fileName = file.name
     this.fileDate = file
   }
@@ -59,7 +58,6 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     this.projectsSandbox.uploadFile(params)
     this.subscriptions.push(this.projectsSandbox.uploadFile$.subscribe((res) => {
       if (res) {
-        console.log('res: ', res);
         this.activeModal.close('success')
       }
     }))

@@ -18,8 +18,7 @@ export class CallReportsComponent implements OnInit {
 
   ngOnInit() {
     this.fetchTotalCallList()
-    console.log('user: ', this.user);
-    console.log('this.user.customer_id: ', this.user.customer_id);
+
   }
   fetchTotalCallList() {
     const params = {

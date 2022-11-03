@@ -53,10 +53,9 @@ export class LatestResponceComponent implements OnInit {
     private datePipe: DatePipe,
     private toster: ToastrService,
   ) {
-    this.fromMinDate = moment().subtract(30, "days").format("YYYY-MM-DD");
     this.fromMaxDate = moment().format("YYYY-MM-DD");
     this.toMaxDate = moment().format("YYYY-MM-DD");
-    this.onFromDate = this.fromMinDate
+    this.onFromDate = moment().format("YYYY-MM-DD");
     this.onToDate = moment().format("YYYY-MM-DD")
   }
 

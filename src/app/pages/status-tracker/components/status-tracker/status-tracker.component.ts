@@ -155,7 +155,6 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     this.doSubmit()
   }
   doSubmit() {
-    console.log(this.form.value.fromDate);
     if (this.form.value.fromDate && !this.form.value.toDate) {
       return this.toster.error('Please select To Date and search')
     }

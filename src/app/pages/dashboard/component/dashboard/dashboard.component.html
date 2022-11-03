@@ -86,7 +86,7 @@
           *ngIf="!(commonSandbox.followupList$ | async)?.length"
         >
           <span style="margin-right: 0.5rem"> No More Followups</span>
-          <mat-icon>error_outline</mat-icon>
+          <mat-icon style="color: #fe7883">error_outline</mat-icon>
         </div>
 
         <ng-container *ngIf="(commonSandbox.followupList$ | async)?.length > 0">

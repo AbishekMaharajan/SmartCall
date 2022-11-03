@@ -28,11 +28,9 @@ export class ViewFileComponent implements OnInit, OnDestroy {
 
   }
   viewFile(data) {
-    console.log('data: ', data);
     window.open(data.file_url);
   }
   deleteFile(data) {
-    console.log('data: ', data.document_id);
     this.projectsSandbox.deleteDocument(data.document_id)
     this.subscriptions.push(this.projectsSandbox.deleteDocument$.subscribe((res) => {
       if (res && res.status === 1) {

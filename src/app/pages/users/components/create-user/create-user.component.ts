@@ -115,7 +115,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
           }
           return data
         });
-        console.log(' this.availability: ', this.availability);
         if (res[0].phone_type === 'sip') {
           this.sipActiveStatus = true
         } else this.sipActiveStatus = false

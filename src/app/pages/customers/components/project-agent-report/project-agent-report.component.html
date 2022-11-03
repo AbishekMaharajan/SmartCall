@@ -56,28 +56,28 @@
   >
     <div class="filter-box">
       <span class="select-box">
-        <label>Agent Name <sup>*</sup></label>
+        <label>Agent Name </label>
         <ng-select
           [items]="userSandbox.agentList$ | async"
           bindLabel="member_name"
           bindValue="id"
           [searchable]="true"
-          placeholder="Select"
+          placeholder="All Agents"
           [(ngModel)]="agent"
-          [clearable]="false"
+          [clearable]="true"
         >
         </ng-select>
       </span>
       <span class="select-box">
-        <label>Project Name <sup>*</sup></label>
+        <label>Project Name </label>
         <ng-select
           [items]="customerSandbox.projectList$ | async"
           bindLabel="project_name"
           bindValue="id"
           [searchable]="true"
-          placeholder="Select"
+          placeholder="All Projects"
           [(ngModel)]="projectDid"
-          [clearable]="false"
+          [clearable]="true"
         >
         </ng-select>
       </span>
