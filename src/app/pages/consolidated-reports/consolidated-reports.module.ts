@@ -20,6 +20,9 @@ import { MAT_DATE_LOCALE } from '@angular/material';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { CommonService } from 'src/app/common/common.service';
 import { LiveMoniterService } from '../live-moniter/liveMoniter.service';
+import { DidEffect } from '../did/effects/did.effects';
+import { DidService } from '../did/did.service';
+import { DidSandbox } from '../did/did.sandbox';
 
 @NgModule({
   declarations: [LayoutConsolidatedComponent, MonthwiseCallCountComponent, AgentProjectCallCountComponent],
@@ -27,7 +30,7 @@ import { LiveMoniterService } from '../live-moniter/liveMoniter.service';
     CommonModule,
     ConsolidatedReportsRoutingModule,
     SharedModule,
-    EffectsModule.forFeature([CustomersEffect, UsersEffect, LiveMoniterEffect, CommonEffect])
+    EffectsModule.forFeature([CustomersEffect, UsersEffect, LiveMoniterEffect, CommonEffect, DidEffect])
   ],
   providers: [
     CustomersSandbox,
@@ -38,6 +41,8 @@ import { LiveMoniterService } from '../live-moniter/liveMoniter.service';
     LiveMoniterService,
     CommonSandbox,
     CommonService,
+    DidService,
+    DidSandbox,
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],

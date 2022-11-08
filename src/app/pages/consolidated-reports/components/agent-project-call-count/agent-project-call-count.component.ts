@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { CustomersSandbox } from 'src/app/pages/customers/customers.sandbox';
+import { DidSandbox } from 'src/app/pages/did/did.sandbox';
 import { UsersSandbox } from 'src/app/pages/users/users.sandbox';
 
 @Component({
@@ -49,6 +50,7 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     public modalService: NgbModal,
     public commonSandbox: CommonSandbox,
+    public didSandbox: DidSandbox,
   ) {
     this.fromMinDate = moment().subtract(10, "years").format("YYYY-MM-DD");
     this.fromMaxDate = moment().format("YYYY-MM-DD");
@@ -62,7 +64,11 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
   }
   fetchDropdownList() {
     this.userSandbox.agentList(this.orgId)
-    this.customerSandbox.projectList({})
+    const params = {
+      organisation_id: this.orgId,
+      type: 0
+    }
+    this.didSandbox.getProjectList(params)
   }
 
   fetchProjectAgentList() {
@@ -146,7 +152,7 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
     }
   }
   onSubmit() {
-
+    if (!this.onFromDate) return this.toster.error('Please select From date and proceed')
     if (this.onFromDate && !this.onToDate) return this.toster.error('Please select To date to proceed')
 
     this.fetchProjectAgentList()

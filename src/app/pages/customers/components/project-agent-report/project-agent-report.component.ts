@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
+import { DidSandbox } from 'src/app/pages/did/did.sandbox';
 import { UsersSandbox } from 'src/app/pages/users/users.sandbox';
 import { PlayRecordingComponent } from 'src/app/shared/popups/play-recording/play-recording.component';
 import { CustomersSandbox } from '../../customers.sandbox';
@@ -48,6 +49,7 @@ export class ProjectAgentReportComponent implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     public modalService: NgbModal,
     public commonSandbox: CommonSandbox,
+    public didSandbox: DidSandbox,
 
   ) {
     this.fromMinDate = moment().subtract(10, "years").format("YYYY-MM-DD");
@@ -61,7 +63,11 @@ export class ProjectAgentReportComponent implements OnInit, OnDestroy {
 
   fetchDropdownList() {
     this.userSandbox.agentList(this.orgId)
-    this.customerSandbox.projectList({})
+    const params = {
+      organisation_id: this.orgId,
+      type: 0
+    }
+    this.didSandbox.getProjectList(params)
   }
 
   fetchProjectAgentList() {

@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
     // [23.01, 50],
   ];
   chartOptions: any = {
+
     title: {
       text: this.title,
       style: {
@@ -76,7 +77,7 @@ export class DashboardComponent implements OnInit {
 
     },
     credits: {
-      enabled: true
+      enabled: false
     }, chart: {
       events: {
         load: function () {

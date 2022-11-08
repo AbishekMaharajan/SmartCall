@@ -21,6 +21,9 @@ import { MAT_DATE_LOCALE } from '@angular/material';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { CommonService } from 'src/app/common/common.service';
 import { CommonEffect } from 'src/app/common/effects/common.efects';
+import { DidEffect } from '../did/effects/did.effects';
+import { DidSandbox } from '../did/did.sandbox';
+import { DidService } from '../did/did.service';
 
 @NgModule({
   declarations: [LayoutCustomerComponent, CustomerListComponent, ProjectAgentReportComponent, ReassignAgentComponent],
@@ -28,7 +31,7 @@ import { CommonEffect } from 'src/app/common/effects/common.efects';
     CommonModule,
     CustomersRoutingModule,
     SharedModule,
-    EffectsModule.forFeature([CustomersEffect, UsersEffect, LiveMoniterEffect, CommonEffect])
+    EffectsModule.forFeature([CustomersEffect, UsersEffect, LiveMoniterEffect, CommonEffect, DidEffect])
   ],
   providers: [
     CustomersSandbox,
@@ -39,6 +42,8 @@ import { CommonEffect } from 'src/app/common/effects/common.efects';
     LiveMoniterService,
     CommonSandbox,
     CommonService,
+    DidSandbox,
+    DidService,
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],

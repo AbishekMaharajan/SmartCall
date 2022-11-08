@@ -71,9 +71,9 @@
       <span class="select-box">
         <label>Project Name </label>
         <ng-select
-          [items]="customerSandbox.projectList$ | async"
+          [items]="didSandbox.projectList$ | async"
           bindLabel="project_name"
-          bindValue="id"
+          bindValue="project_name"
           [searchable]="true"
           placeholder="All Projects"
           [(ngModel)]="projectDid"
@@ -183,7 +183,7 @@
                 [ngClass]="data.status === 'Connected' ? 'success' : 'warning'" -->
               <span>{{ data.call_status }} </span>
             </td>
-            <td>{{ data.duration }}</td>
+            <td>{{ data.duration ? data.duration : "N/A" }}</td>
             <td>{{ data.follow_up_date }} {{ data.follow_up_time }}</td>
             <td>
               <button
