@@ -13,10 +13,15 @@
         class="main-container-box"
         (click)="openMainMenu(main)"
         *ngFor="let main of nav.main"
+        [ngClass]="{ disable: main.isDisable === true }"
       >
-        <div class="main_title" [ngClass]="{ active: main.path == activeMenu }">
+        <div
+          class="main_title"
+          [ngClass]="{
+            active: main.path == activeMenu
+          }"
+        >
           <figure class="span-1">
-            <!-- <fa-icon [icon]="main.icon"></fa-icon> -->
             <mat-icon class="icon">{{ main.icon }}</mat-icon>
           </figure>
           <span class="text">{{ main.title }}</span>
@@ -25,7 +30,7 @@
     </div>
   </nav>
   <section class="profile-container-box">
-    <span class="user-name">Welcome, {{ userName }} !</span>
+    <span class="user-name">Welcome, {{ userData.member_name }} !</span>
     <div class="icon-box">
       <figure>
         <img src="../../../../assets/imgs/userlogo.png" alt="user" />

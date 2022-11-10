@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -14,7 +13,6 @@ import { CustomersSandbox } from '../../customers.sandbox';
   styleUrls: ['./reassign-agent.component.scss']
 })
 export class ReassignAgentComponent implements OnInit, OnDestroy {
-  faSearch = faSearch
   orgId = JSON.parse(localStorage.getItem('userDetails')).organisation_id
   users = []
   from = null
@@ -31,20 +29,7 @@ export class ReassignAgentComponent implements OnInit, OnDestroy {
   }
 
   public subscriptions: Array<Subscription> = [];
-  dataArr = [
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-    // { name: 'Abishek Kasi', mobile: '7598456241', calledOn: '09-09-2022', checked: false },
-  ]
+  dataArr = []
   constructor(
     public userSandbox: UsersSandbox,
     public customerSandbox: CustomersSandbox,

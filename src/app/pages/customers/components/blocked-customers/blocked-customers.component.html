@@ -1,0 +1,85 @@
+<div *ngIf="userSandbox.blockedCustomersLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+
+<main>
+  <section class="header">
+    <p>Blocked Customers</p>
+    <div class="bttn-box"></div>
+  </section>
+  <section
+    class="container-box"
+    [ngClass]="
+      (userSandbox.blockedCustomersCount$ | async) <= pageSize && 'fullheight'
+    "
+  >
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Customer</th>
+          <th>Mobile</th>
+          <th>Agent</th>
+          <th style="width: 30%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let customer of userSandbox.blockedCustomers$
+              | async
+              | paginate: config;
+            let i = index
+          "
+        >
+          <td>
+            {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+          </td>
+          <td>{{ customer.customer_name }}</td>
+          <td>{{ customer.customer_mobile }}</td>
+          <td>{{ customer.blocked_by_agent }}</td>
+          <td>
+            <button
+              class="bttn"
+              (click)="reassignFunc(customer)"
+              *ngIf="!customer.isClicked"
+            >
+              <span> Reassign </span>
+            </button>
+            <div class="box" *ngIf="customer.isClicked">
+              <div class="select-box">
+                <ng-select
+                  [items]="userSandbox.agentList$ | async"
+                  bindLabel="member_name"
+                  bindValue="id"
+                  [searchable]="true"
+                  placeholder="Select Agent"
+                  [(ngModel)]="agentId"
+                >
+                </ng-select>
+              </div>
+              <div class="bttn-box">
+                <button class="bttn-save" (click)="onSave(customer)">
+                  <span class="flex-center"> <mat-icon>check</mat-icon></span>
+                </button>
+
+                <button class="bttn-save cancel" (click)="onCancel(customer)">
+                  <span class="flex-center"> <mat-icon>close</mat-icon></span>
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(userSandbox.blockedCustomersCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

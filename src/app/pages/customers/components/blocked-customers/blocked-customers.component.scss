@@ -1,0 +1,29 @@
+.bttn {
+  background-color: var(--purple);
+}
+.box {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.select-box {
+  width: 80%;
+}
+.bttn-box {
+  gap: 1rem;
+}
+.bttn-save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--green);
+  color: var(--light);
+  padding-inline: 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  &.cancel {
+    background-color: var(--primary);
+    color: var(--light);
+  }
+}

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { CustomersSandbox } from 'src/app/pages/customers/customers.sandbox';
+import { DidSandbox } from 'src/app/pages/did/did.sandbox';
 import { UsersSandbox } from 'src/app/pages/users/users.sandbox';
 import { CallReportsComponent } from 'src/app/shared/popups/call-reports/call-reports.component';
 import { PlayRecordingComponent } from 'src/app/shared/popups/play-recording/play-recording.component';
@@ -52,6 +53,7 @@ export class LatestResponceComponent implements OnInit {
     public customerSandbox: CustomersSandbox,
     private datePipe: DatePipe,
     private toster: ToastrService,
+    public didSandbox: DidSandbox,
   ) {
     this.fromMaxDate = moment().format("YYYY-MM-DD");
     this.toMaxDate = moment().format("YYYY-MM-DD");
@@ -192,7 +194,9 @@ export class LatestResponceComponent implements OnInit {
       file: 'Latest-response-list.xlsx',
       payload: {
         from_date: this.datePipe.transform(this.onFromDate, "dd/MM/yyy").toString(),
-        to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy")
+        to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy"),
+        agent_id: this.agent,
+        project_id: this.projectDid
       }
     }
     this.commonSandbox.export(params)

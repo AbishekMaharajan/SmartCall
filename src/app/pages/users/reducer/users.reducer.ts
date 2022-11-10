@@ -486,6 +486,93 @@ export function reducer(state = initialState, { type, payload }: any): UsersStat
 
             });
 
+        //BLOCKED CUSTOMER  
+        case actions.ActionTypes.BLOCKED_CUSTOMER:
+            let data
+            if (payload.data) {
+                data = payload.data.map((value) => {
+                    value.isClicked = false
+                    return value
+                })
+            }
+
+            return Object.assign({}, state, {
+                blockedCustomersLoading: true,
+                blockedCustomersLoaded: false,
+                blockedCustomersFailed: false,
+            });
+
+        case actions.ActionTypes.BLOCKED_CUSTOMER_SUCCESS:
+            return Object.assign({}, state, {
+                blockedCustomers: data ? data : payload.data,
+                blockedCustomersLoading: false,
+                blockedCustomersLoaded: true,
+                blockedCustomersFailed: false,
+            });
+
+        case actions.ActionTypes.BLOCKED_CUSTOMER_FAIL:
+
+            return Object.assign({}, state, {
+                blockedCustomersLoading: false,
+                blockedCustomersLoaded: true,
+                blockedCustomersFailed: true,
+
+            });
+
+        //BLOCKED CUSTOMER COUNT
+        case actions.ActionTypes.BLOCKED_CUSTOMER_COUNT:
+
+            return Object.assign({}, state, {
+                blockedCustomersCountLoading: true,
+                blockedCustomersCountLoaded: false,
+                blockedCustomersCountFailed: false,
+            });
+
+        case actions.ActionTypes.BLOCKED_CUSTOMER_COUNT_SUCCESS:
+
+            return Object.assign({}, state, {
+                blockedCustomersCount: payload.data,
+                blockedCustomersCountLoading: false,
+                blockedCustomersCountLoaded: true,
+                blockedCustomersCountFailed: false,
+            });
+
+        case actions.ActionTypes.BLOCKED_CUSTOMER_COUNT_FAIL:
+
+            return Object.assign({}, state, {
+                blockedCustomersCountLoading: false,
+                blockedCustomersCountLoaded: true,
+                blockedCustomersCountFailed: true,
+
+            });
+
+        //REASSIGN BLOCKED CUSTOMER  
+        case actions.ActionTypes.REASSIGN_BLOCKED_CUSTOMER:
+
+            return Object.assign({}, state, {
+                reassignBlockedLoading: true,
+                reassignBlockedLoaded: false,
+                reassignBlockedFailed: false,
+            });
+
+        case actions.ActionTypes.REASSIGN_BLOCKED_CUSTOMER_SUCCESS:
+
+            return Object.assign({}, state, {
+                reassignBlocked: payload,
+                reassignBlockedLoading: false,
+                reassignBlockedLoaded: true,
+                reassignBlockedFailed: false,
+            });
+
+        case actions.ActionTypes.REASSIGN_BLOCKED_CUSTOMER_FAIL:
+
+            return Object.assign({}, state, {
+                reassignBlockedLoading: false,
+                reassignBlockedLoaded: true,
+                reassignBlockedFailed: true,
+
+            });
+
         default: {
             return state;
         }
@@ -581,5 +668,20 @@ export const mappingHistory = (state: UsersState) => state.mappingHistory;
 export const mappingHistoryLoading = (state: UsersState) => state.mappingHistoryLoading;
 export const mappingHistoryLoaded = (state: UsersState) => state.mappingHistoryLoaded;
 export const mappingHistoryFailed = (state: UsersState) => state.mappingHistoryFailed;
+
+export const blockedCustomers = (state: UsersState) => state.blockedCustomers;
+export const blockedCustomersLoading = (state: UsersState) => state.blockedCustomersLoading;
+export const blockedCustomersLoaded = (state: UsersState) => state.blockedCustomersLoaded;
+export const blockedCustomersFailed = (state: UsersState) => state.blockedCustomersFailed;
+
+export const blockedCustomersCount = (state: UsersState) => state.blockedCustomersCount;
+export const blockedCustomersCountLoading = (state: UsersState) => state.blockedCustomersCountLoading;
+export const blockedCustomersCountLoaded = (state: UsersState) => state.blockedCustomersCountLoaded;
+export const blockedCustomersCountFailed = (state: UsersState) => state.blockedCustomersCountFailed;
+
+export const reassignBlocked = (state: UsersState) => state.reassignBlocked;
+export const reassignBlockedLoading = (state: UsersState) => state.reassignBlockedLoading;
+export const reassignBlockedLoaded = (state: UsersState) => state.reassignBlockedLoaded;
+export const reassignBlockedFailed = (state: UsersState) => state.reassignBlockedFailed;
 
 

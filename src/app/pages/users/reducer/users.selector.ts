@@ -92,3 +92,18 @@ export const mappingHistory = createSelector(getUsersState, usersReducer.mapping
 export const mappingHistoryLoading = createSelector(getUsersState, usersReducer.mappingHistoryLoading);
 export const mappingHistoryLoaded = createSelector(getUsersState, usersReducer.mappingHistoryLoaded);
 export const mappingHistoryFailed = createSelector(getUsersState, usersReducer.mappingHistoryFailed);
+
+export const blockedCustomers = createSelector(getUsersState, usersReducer.blockedCustomers);
+export const blockedCustomersLoading = createSelector(getUsersState, usersReducer.blockedCustomersLoading);
+export const blockedCustomersLoaded = createSelector(getUsersState, usersReducer.blockedCustomersLoaded);
+export const blockedCustomersFailed = createSelector(getUsersState, usersReducer.blockedCustomersFailed);
+
+export const blockedCustomersCount = createSelector(getUsersState, usersReducer.blockedCustomersCount);
+export const blockedCustomersCountLoading = createSelector(getUsersState, usersReducer.blockedCustomersCountLoading);
+export const blockedCustomersCountLoaded = createSelector(getUsersState, usersReducer.blockedCustomersCountLoaded);
+export const blockedCustomersCountFailed = createSelector(getUsersState, usersReducer.blockedCustomersCountFailed);
+
+export const reassignBlocked = createSelector(getUsersState, usersReducer.reassignBlocked);
+export const reassignBlockedLoading = createSelector(getUsersState, usersReducer.reassignBlockedLoading);
+export const reassignBlockedLoaded = createSelector(getUsersState, usersReducer.reassignBlockedLoaded);
+export const reassignBlockedFailed = createSelector(getUsersState, usersReducer.reassignBlockedFailed);

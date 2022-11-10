@@ -75,6 +75,18 @@ export const ActionTypes = {
     MAPPING_HISTORY_SUCCESS: type('[user] MAPPING_HISTORY Success'),
     MAPPING_HISTORY_FAIL: type('[user] MAPPING_HISTORY Fail'),
 
+    BLOCKED_CUSTOMER: type('[user] BLOCKED_CUSTOMER '),
+    BLOCKED_CUSTOMER_SUCCESS: type('[user] BLOCKED_CUSTOMER Success'),
+    BLOCKED_CUSTOMER_FAIL: type('[user] BLOCKED_CUSTOMER Fail'),
+
+    BLOCKED_CUSTOMER_COUNT: type('[user] BLOCKED_CUSTOMER_COUNT '),
+    BLOCKED_CUSTOMER_COUNT_SUCCESS: type('[user] BLOCKED_CUSTOMER_COUNT Success'),
+    BLOCKED_CUSTOMER_COUNT_FAIL: type('[user] BLOCKED_CUSTOMER_COUNT Fail'),
+
+    REASSIGN_BLOCKED_CUSTOMER: type('[user] REASSIGN_BLOCKED_CUSTOMER '),
+    REASSIGN_BLOCKED_CUSTOMER_SUCCESS: type('[user] REASSIGN_BLOCKED_CUSTOMER Success'),
+    REASSIGN_BLOCKED_CUSTOMER_FAIL: type('[user] REASSIGN_BLOCKED_CUSTOMER Fail'),
+
 };
 
 // USER LIST
@@ -448,6 +460,71 @@ export class MappingHistoryFail implements Action {
     }
 }
 
+//  BLOCKED CUSTOMER LIST
+export class GetBlockedCustomer implements Action {
+    type = ActionTypes.BLOCKED_CUSTOMER;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class GetBlockedCustomerSuccess implements Action {
+    type = ActionTypes.BLOCKED_CUSTOMER_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class GetBlockedCustomerFail implements Action {
+    type = ActionTypes.BLOCKED_CUSTOMER_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+//  BLOCKED CUSTOMER COUNT
+export class GetBlockedCustomerCount implements Action {
+    type = ActionTypes.BLOCKED_CUSTOMER_COUNT;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class GetBlockedCustomerCountSuccess implements Action {
+    type = ActionTypes.BLOCKED_CUSTOMER_COUNT_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class GetBlockedCustomerCountFail implements Action {
+    type = ActionTypes.BLOCKED_CUSTOMER_COUNT_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+// REASSIGN BLOCKED CUSTOMER 
+export class ReassignBlocked implements Action {
+    type = ActionTypes.REASSIGN_BLOCKED_CUSTOMER;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class ReassignBlockedSuccess implements Action {
+    type = ActionTypes.REASSIGN_BLOCKED_CUSTOMER_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class ReassignBlockedFail implements Action {
+    type = ActionTypes.REASSIGN_BLOCKED_CUSTOMER_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
 
 export type Actions =
     | UserList
@@ -517,6 +594,18 @@ export type Actions =
     | MappingHistory
     | MappingHistorySuccess
     | MappingHistoryFail
+
+    | GetBlockedCustomer
+    | GetBlockedCustomerSuccess
+    | GetBlockedCustomerFail
+
+    | GetBlockedCustomerCount
+    | GetBlockedCustomerCountSuccess
+    | GetBlockedCustomerCountFail
+
+    | ReassignBlocked
+    | ReassignBlockedSuccess
+    | ReassignBlockedFail
 
 
 

@@ -87,6 +87,21 @@ export interface UsersState extends Map<string, any> {
     mappingHistoryLoaded: boolean;
     mappingHistoryFailed: boolean;
 
+    blockedCustomers: any;
+    blockedCustomersLoading: boolean;
+    blockedCustomersLoaded: boolean;
+    blockedCustomersFailed: boolean;
+
+    blockedCustomersCount: any;
+    blockedCustomersCountLoading: boolean;
+    blockedCustomersCountLoaded: boolean;
+    blockedCustomersCountFailed: boolean;
+
+    reassignBlocked: any;
+    reassignBlockedLoading: boolean;
+    reassignBlockedLoaded: boolean;
+    reassignBlockedFailed: boolean;
+
 }
 
 export const UsersStateRecord = Record({
@@ -175,6 +190,21 @@ export const UsersStateRecord = Record({
     mappingHistoryLoading: false,
     mappingHistoryLoaded: false,
     mappingHistoryFailed: false,
+
+    blockedCustomers: [],
+    blockedCustomersLoading: false,
+    blockedCustomersLoaded: false,
+    blockedCustomersFailed: false,
+
+    blockedCustomersCount: 0,
+    blockedCustomersCountLoading: false,
+    blockedCustomersCountLoaded: false,
+    blockedCustomersCountFailed: false,
+
+    reassignBlocked: {},
+    reassignBlockedLoading: false,
+    reassignBlockedLoaded: false,
+    reassignBlockedFailed: false,
 
 });
 

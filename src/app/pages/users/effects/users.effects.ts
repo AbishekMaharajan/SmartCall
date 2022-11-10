@@ -337,6 +337,60 @@ export class UsersEffect {
             )
         );
 
+    // BLOCKED CUSTOMER
+    @Effect()
+    blockedCustomer$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.BLOCKED_CUSTOMER),
+            map((action: actions.GetBlockedCustomer) => action.payload),
+            switchMap((state) => {
+                return this.api.getBlockedCustomer(state)
+                    .pipe(
+                        map((user) =>
+                            new actions.GetBlockedCustomerSuccess(user),
+                        ),
+                        catchError(error => of(new actions.GetBlockedCustomerFail(error.error)))
+                    );
+            }
+            )
+        );
+
+    // BLOCKED CUSTOMER COUNT
+    @Effect()
+    blockedCustomerCount$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.BLOCKED_CUSTOMER_COUNT),
+            map((action: actions.GetBlockedCustomerCount) => action.payload),
+            switchMap((state) => {
+                return this.api.getBlockedCustomerCount(state)
+                    .pipe(
+                        map((user) =>
+                            new actions.GetBlockedCustomerCountSuccess(user),
+                        ),
+                        catchError(error => of(new actions.GetBlockedCustomerCountFail(error.error)))
+                    );
+            }
+            )
+        );
+
+    //REASSIGN BLOCKED CUSTOMER
+    @Effect()
+    reassignBlockedCustomer$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.REASSIGN_BLOCKED_CUSTOMER),
+            map((action: actions.ReassignBlocked) => action.payload),
+            switchMap((state) => {
+                return this.api.reassignBlocked(state)
+                    .pipe(
+                        map((user) =>
+                            new actions.ReassignBlockedSuccess(user),
+                        ),
+                        catchError(error => of(new actions.ReassignBlockedFail(error.error)))
+                    );
+            }
+            )
+        );
+
 
     constructor(private action$: Actions,
         protected api: UsersService,

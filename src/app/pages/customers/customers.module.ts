@@ -24,9 +24,10 @@ import { CommonEffect } from 'src/app/common/effects/common.efects';
 import { DidEffect } from '../did/effects/did.effects';
 import { DidSandbox } from '../did/did.sandbox';
 import { DidService } from '../did/did.service';
+import { BlockedCustomersComponent } from './components/blocked-customers/blocked-customers.component';
 
 @NgModule({
-  declarations: [LayoutCustomerComponent, CustomerListComponent, ProjectAgentReportComponent, ReassignAgentComponent],
+  declarations: [LayoutCustomerComponent, CustomerListComponent, ProjectAgentReportComponent, ReassignAgentComponent, BlockedCustomersComponent],
   imports: [
     CommonModule,
     CustomersRoutingModule,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BlockedCustomersComponent } from './components/blocked-customers/blocked-customers.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { ProjectAgentReportComponent } from './components/project-agent-report/project-agent-report.component';
 import { ReassignAgentComponent } from './components/reassign-agent/reassign-agent.component';
@@ -29,6 +30,13 @@ const routes: Routes = [
         component: ReassignAgentComponent,
         data: {
           moduleUrl: 'customers/reassign'
+        }
+      },
+      {
+        path: 'blocked-customers',
+        component: BlockedCustomersComponent,
+        data: {
+          moduleUrl: 'customers/blocked-customers'
         }
       },
       {

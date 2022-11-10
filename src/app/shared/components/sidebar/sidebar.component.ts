@@ -17,9 +17,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   faClapperboard = faClapperboard
   faGear = faGear
   faRightToBracket = faRightToBracket
-  userName = JSON.parse(localStorage.getItem('userDetails')).member_name
+  userData = JSON.parse(localStorage.getItem('userDetails'))
   activeMenu = '';
-  menu = [
+  disableMenu = ["Projects", "Manage DID", "Add New DID", "Users", "Project-Agent Mapping", "Reassign Agent"]
+  menu: any = [
     {
       title: 'Dashboard',
       main: [
@@ -99,14 +100,16 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           isClicked: false,
           path: 'customers/project-agent-report'
         },
-        // {
-        //   icon: this.faFileArrowDown, title: 'Sticky Customers',
-        //   isClicked: false
-        // },
+
         {
           icon: 'group', title: 'Reassign Agent',
           isClicked: false,
           path: 'customers/reassign'
+        },
+        {
+          icon: 'block', title: 'Blocked Customers',
+          isClicked: false,
+          path: 'customers/blocked-customers'
         },
 
       ]
@@ -150,7 +153,14 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
+    if (this.userData.user_type !== 1) {
+      this.menu.forEach((data) => {
+        data.main.forEach((item) => {
+          const isFound = this.disableMenu.includes(item.title)
+          item.isDisable = isFound
+        })
+      })
+    }
   }
   ngAfterViewInit() {
     document.querySelector(".active")

@@ -166,6 +166,8 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
           name: 'projectAgentCallount',
           file: 'projectAgentCallount.xlsx',
           payload: {
+            keyword: this.keyword,
+            count: this.count,
             from_date: this.datePipe.transform(this.onFromDate, "dd/MM/yyy"),
             to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy"),
             agent_id: this.agent ? this.agent : 0,
@@ -175,6 +177,11 @@ export class AgentProjectCallCountComponent implements OnInit, OnDestroy {
         this.commonSandbox.export(params)
       } else return this.toster.error('No data available !')
     }))
+  }
+  pageChanged(event) {
+    this.config.currentPage = event
+    this.offset = (event - 1) * this.pageSize
+    this.fetchProjectAgentList()
   }
 
   ngOnDestroy() {

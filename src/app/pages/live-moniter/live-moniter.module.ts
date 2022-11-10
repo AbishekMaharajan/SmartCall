@@ -20,6 +20,9 @@ import { UsersSandbox } from '../users/users.sandbox';
 import { UsersService } from '../users/users.service';
 import { UsersEffect } from '../users/effects/users.effects';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { DidEffect } from '../did/effects/did.effects';
+import { DidSandbox } from '../did/did.sandbox';
+import { DidService } from '../did/did.service';
 
 @NgModule({
   declarations: [LayoutLiveMoniterComponent, LatestResponceComponent, OngoingCallsComponent,],
@@ -28,7 +31,7 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     LiveMoniterRoutingModule,
     SharedModule,
     EffectsModule.forFeature([LiveMoniterEffect,
-      CommonEffect, CustomersEffect, UsersEffect])
+      CommonEffect, CustomersEffect, UsersEffect, DidEffect])
   ],
   providers: [
     LiveMoniterSandbox,
@@ -40,6 +43,8 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     UsersSandbox,
     UsersService,
     DatePipe,
+    DidSandbox,
+    DidService,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
 })

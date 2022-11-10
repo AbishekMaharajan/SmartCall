@@ -20,6 +20,9 @@ import {
     statusTrackerList, statusTrackerListLoading, statusTrackerListLoaded, statusTrackerListFailed,
     statusTrackerListCount, statusTrackerListCountLoading, statusTrackerListCountLoaded, statusTrackerListCountFailed,
     mappingHistory, mappingHistoryLoading, mappingHistoryLoaded, mappingHistoryFailed,
+    blockedCustomers, blockedCustomersLoading, blockedCustomersLoaded, blockedCustomersFailed,
+    blockedCustomersCount, blockedCustomersCountLoading, blockedCustomersCountLoaded, blockedCustomersCountFailed,
+    reassignBlocked, reassignBlockedLoading, reassignBlockedLoaded, reassignBlockedFailed,
 } from './reducer/users.selector';
 
 
@@ -111,6 +114,21 @@ export class UsersSandbox {
     public mappingHistoryLoaded$ = this.appState.select(mappingHistoryLoaded);
     public mappingHistoryFailed$ = this.appState.select(mappingHistoryFailed);
 
+    public blockedCustomers$ = this.appState.select(blockedCustomers);
+    public blockedCustomersLoading$ = this.appState.select(blockedCustomersLoading);
+    public blockedCustomersLoaded$ = this.appState.select(blockedCustomersLoaded);
+    public blockedCustomersFailed$ = this.appState.select(blockedCustomersFailed);
+
+    public blockedCustomersCount$ = this.appState.select(blockedCustomersCount);
+    public blockedCustomersCountLoading$ = this.appState.select(blockedCustomersCountLoading);
+    public blockedCustomersCountLoaded$ = this.appState.select(blockedCustomersCountLoaded);
+    public blockedCustomersCountFailed$ = this.appState.select(blockedCustomersCountFailed);
+
+    public reassignBlocked$ = this.appState.select(reassignBlocked);
+    public reassignBlockedLoading$ = this.appState.select(reassignBlockedLoading);
+    public reassignBlockedLoaded$ = this.appState.select(reassignBlockedLoaded);
+    public reassignBlockedFailed$ = this.appState.select(reassignBlockedFailed);
+
     constructor(protected appState: Store<store.AppState>) {
     }
 
@@ -167,6 +185,15 @@ export class UsersSandbox {
     }
     public mappingHistory(params) {
         this.appState.dispatch(new UsersActions.MappingHistory(params));
+    }
+    public getBlockedCustomerList(params) {
+        this.appState.dispatch(new UsersActions.GetBlockedCustomer(params));
+    }
+    public getBlockedCustomerListCount(params) {
+        this.appState.dispatch(new UsersActions.GetBlockedCustomerCount(params));
+    }
+    public reassignBlocked(params) {
+        this.appState.dispatch(new UsersActions.ReassignBlocked(params));
     }
 
 }

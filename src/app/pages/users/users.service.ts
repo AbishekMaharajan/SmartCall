@@ -71,5 +71,14 @@ export class UsersService extends Api {
     mappingHistory(params: any): Observable<ResponseInterface> {
         return this.http.get<ResponseInterface>(this.URL + '/map/list-project-agent-mapping-history', { params: params });
     }
+    getBlockedCustomer(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/customer/get-blocked-customer-list', { params: params });
+    }
+    getBlockedCustomerCount(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/customer/get-blocked-customer-list', { params: params });
+    }
+    reassignBlocked(params: any): Observable<ResponseInterface> {
+        return this.http.post<ResponseInterface>(this.URL + '/customer/reassign-blocked-customer', params);
+    }
 
 }
