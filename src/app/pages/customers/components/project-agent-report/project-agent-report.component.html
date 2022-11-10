@@ -7,7 +7,10 @@
     <p>Project / Agent Report</p>
 
     <div class="bttn-box">
-      <div class="search">
+      <div
+        class="search"
+        *ngIf="(customerSandbox.projectAgentListCount$ | async) > 0"
+      >
         <input
           class="input-search"
           type="text"
