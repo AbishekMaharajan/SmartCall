@@ -17,11 +17,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonService } from 'src/app/common/common.service';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { CommonEffect } from 'src/app/common/effects/common.efects';
+import { WhatsappTemplatesComponent } from './components/whatsapp-templates/whatsapp-templates.component';
 @NgModule({
   declarations: [
     LayoutComponent,
     ProjectListComponent,
     CreateProjectComponent,
+    WhatsappTemplatesComponent,
 
   ],
   imports: [

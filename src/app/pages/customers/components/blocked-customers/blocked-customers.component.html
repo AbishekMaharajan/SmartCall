@@ -4,7 +4,7 @@
 
 <main>
   <section class="header">
-    <p>Blocked Customers</p>
+    <p>Blocked / Unassigned Customers</p>
     <div class="bttn-box"></div>
   </section>
   <section
@@ -24,14 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="
-            let customer of userSandbox.blockedCustomers$
-              | async
-              | paginate: config;
-            let i = index
-          "
-        >
+        <tr *ngFor="let customer of dataArr | paginate: config; let i = index">
           <td>
             {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
           </td>

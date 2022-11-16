@@ -20,7 +20,8 @@ export class BlockedCustomersComponent implements OnInit, OnDestroy {
   }
   orgId = JSON.parse(localStorage.getItem('userDetails')).organisation_id
   loginId = JSON.parse(localStorage.getItem('userDetails')).member_id
-  agentId: number
+  agentId: number = null
+  dataArr = []
   public subscriptions: Array<Subscription> = [];
 
   constructor(
@@ -45,7 +46,11 @@ export class BlockedCustomersComponent implements OnInit, OnDestroy {
       count: this.count
     }
     this.userSandbox.getBlockedCustomerList(params)
-
+    this.userSandbox.blockedCustomers$.subscribe((res) => {
+      if (res && res.length) {
+        this.dataArr = res
+      }
+    })
   }
   fetchBlockedCustomerListCount() {
     const params = {
@@ -59,11 +64,14 @@ export class BlockedCustomersComponent implements OnInit, OnDestroy {
   }
 
   reassignFunc(data) {
+    this.dataArr.forEach((value) => value.isClicked = false)
     data.isClicked = true
+    this.agentId = null
   }
 
   onSave({ customer_id }) {
     if (!this.agentId) return this.toster.error('No Agent Selected')
+
     const params = {
       login_id: this.loginId,
       to_agent_id: this.agentId,
@@ -77,6 +85,7 @@ export class BlockedCustomersComponent implements OnInit, OnDestroy {
         this.fetchBlockedCustomerListCount()
       }
     }))
+    this.agentId = null
   }
 
   onCancel(data) {

@@ -158,6 +158,10 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     if (this.form.value.fromDate && !this.form.value.toDate) {
       return this.toster.error('Please select To Date and search')
     }
+    if (!this.form.value.fromDate && this.form.value.toDate) {
+      return this.toster.error('Please select From Date and search')
+    }
+
     this.fetchStatusTrackerList()
     this.fetchStatusListCount()
   }
@@ -179,6 +183,14 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     this.fetchStatusTrackerList()
   }
   export() {
+
+    if (this.form.value.fromDate && !this.form.value.toDate) {
+      return this.toster.error('Please select To Date and search')
+    }
+    if (!this.form.value.fromDate && this.form.value.toDate) {
+      return this.toster.error('Please select From Date and search')
+    }
+
     let isValid = true
     this.subscriptions.push(this.usersSandbox.statusTrackerListCount$.subscribe((res) => {
       if (!res) {
@@ -188,10 +200,17 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     }))
 
     if (isValid) {
+      this.form.value
       const params = {
         name: 'statusTracker',
-        file: 'Statustracker.xlsx'
+        file: 'Statustracker.xlsx',
+        payload: {
+          from_date: this.datePipe.transform(this.form.value.fromDate, "dd/MM/yyy") || '',
+          to_date: this.datePipe.transform(this.form.value.fromDate, "dd/MM/yyy") || '',
+          agent_id: this.form.value.agent,
+        }
       }
+      // console.log('params: ', params);
       this.commonSandbox.export(params)
 
     }

@@ -157,7 +157,7 @@ export function reducer(state = initialState, { type, payload }: any): LiveMonit
         case actions.ActionTypes.BLOCK_CUSTOMER_SUCCESS:
 
             return Object.assign({}, state, {
-                blockCustomer: payload.data,
+                blockCustomer: payload,
                 blockCustomerLoading: false,
                 blockCustomerLoaded: true,
                 blockCustomerFailed: false,

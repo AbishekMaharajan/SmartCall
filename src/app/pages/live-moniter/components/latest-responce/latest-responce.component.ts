@@ -57,8 +57,8 @@ export class LatestResponceComponent implements OnInit {
   ) {
     this.fromMaxDate = moment().format("YYYY-MM-DD");
     this.toMaxDate = moment().format("YYYY-MM-DD");
-    this.onFromDate = moment().format("YYYY-MM-DD");
-    this.onToDate = moment().format("YYYY-MM-DD")
+    // this.onFromDate = moment().format("YYYY-MM-DD");
+    // this.onToDate = moment().format("YYYY-MM-DD")
   }
 
   ngOnInit() {

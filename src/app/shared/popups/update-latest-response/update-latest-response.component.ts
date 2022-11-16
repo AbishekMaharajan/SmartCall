@@ -26,7 +26,6 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log('this.user: ', this.user);
     this.initForm()
     this.fetchCustomerData()
   }
@@ -56,7 +55,7 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.liveMoniterSandbox.customerInfo$.subscribe((res) => {
       if (res && res.length > 0) {
         const { customer_name, customer_email, customer_mobile, customer_alternate_mobile, action_taken, customer_area, follow_up_date, follow_up_time, customer_pincode } = res[0]
-        const fromDate = moment(follow_up_date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        const fromDate = follow_up_date ? moment(follow_up_date, 'DD/MM/YYYY').format('YYYY-MM-DD') : '';
         this.form.controls['name'].setValue(customer_name);
         this.form.controls['mail'].setValue(customer_email);
         this.form.controls['mobile'].setValue(customer_mobile);
@@ -80,7 +79,7 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
       customer_alternate_mobile: this.form.value.alterMobile,
       customer_pincode: this.form.value.pinCode,
       customer_area: this.form.value.area,
-      follow_up_date: moment(this.form.value.followupDate, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+      follow_up_date: this.form.value.followupDate ? moment(this.form.value.followupDate, 'YYYY-MM-DD').format('DD/MM/YYYY') : '',
       follow_up_time: this.form.value.followupTime,
       action_taken: this.form.value.actionTaken
     }

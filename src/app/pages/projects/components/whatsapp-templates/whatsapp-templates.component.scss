@@ -1,0 +1,47 @@
+.main-box {
+  width: 100%;
+  height: calc(100% - 6rem);
+  padding: 1rem;
+  overflow-y: auto;
+  .template-box {
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 0 auto;
+  }
+  .template {
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: var(--light);
+    box-shadow: var(--box-shadow-primary);
+
+    header {
+      font-weight: 700;
+      color: var(--purple);
+    }
+    article {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: #fafafa;
+      border-radius: 1rem;
+      padding: 0.5rem;
+      p {
+        font-weight: 600;
+      }
+      .content {
+        width: 100%;
+        height: 18rem;
+        background-color: #fafafa;
+        overflow-y: auto;
+      }
+    }
+  }
+}

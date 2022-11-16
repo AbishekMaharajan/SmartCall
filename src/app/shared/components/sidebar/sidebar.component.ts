@@ -48,6 +48,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           isClicked: false,
           path: 'did/add'
         },
+        // {
+        //   icon: 'mail_outline', title: 'Whatsapp Templates',
+        //   isClicked: false,
+        //   path: 'projects/templates'
+        // },
       ]
     },
     {
