@@ -19,7 +19,8 @@
           <th>#</th>
           <th>Customer</th>
           <th>Mobile</th>
-          <th>Agent</th>
+          <th>Blocked by Agent</th>
+          <th>Status</th>
           <th style="width: 30%">Action</th>
         </tr>
       </thead>
@@ -28,9 +29,23 @@
           <td>
             {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
           </td>
-          <td>{{ customer.customer_name }}</td>
-          <td>{{ customer.customer_mobile }}</td>
-          <td>{{ customer.blocked_by_agent }}</td>
+          <td>{{ customer.customer_name ? customer.customer_name : "--" }}</td>
+          <td>
+            {{ customer.customer_mobile ? customer.customer_mobile : "--" }}
+          </td>
+          <td>
+            {{ customer.blocked_by_agent ? customer.blocked_by_agent : "--" }}
+          </td>
+          <td>
+            <span class="status success" *ngIf="customer.status == 'Blocked'">
+              Blocked</span
+            >
+            <span
+              class="status warning"
+              *ngIf="customer.status == 'No agent assigned'"
+              >Unassigned</span
+            >
+          </td>
           <td>
             <button
               class="bttn"

@@ -69,7 +69,12 @@ export class LatestResponceComponent implements OnInit {
 
   fetchDropdownList() {
     this.userSandbox.agentList(this.orgId)
-    this.customerSandbox.projectList({})
+    // this.customerSandbox.projectList({})
+    const params = {
+      organisation_id: this.orgId,
+      type: 0
+    }
+    this.didSandbox.getProjectList(params)
 
   }
 
@@ -177,9 +182,14 @@ export class LatestResponceComponent implements OnInit {
   onSubmit() {
     // if (!this.agent) return this.toster.error('Please select Agent and proceed')
     // if (!this.projectDid) return this.toster.error('Please select Project and proceed')
-    if (!this.onFromDate) return this.toster.error('Please select From date and proceed')
-    if (!this.onToDate) return this.toster.error('Please select To date and proceed')
-
+    // if (!this.onFromDate) return this.toster.error('Please select From date and proceed')
+    // if (!this.onToDate) return this.toster.error('Please select To date and proceed')
+    if (this.onFromDate && !this.onToDate) {
+      return this.toster.error('Please select To Date and search')
+    }
+    if (!this.onFromDate && this.onToDate) {
+      return this.toster.error('Please select From Date and search')
+    }
     this.fetchLatestResponseList();
     this.fetchLatestResponseListCount();
   }

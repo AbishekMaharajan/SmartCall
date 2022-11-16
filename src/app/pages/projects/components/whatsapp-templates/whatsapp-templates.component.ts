@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectsSandbox } from '../../projects.sandbox';
 
 @Component({
   selector: 'app-whatsapp-templates',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WhatsappTemplatesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public projectSandbox: ProjectsSandbox,
+  ) { }
 
   ngOnInit() {
+    this.fetchTemplateList()
   }
 
+  fetchTemplateList() {
+    this.projectSandbox.getTemplateList({})
+  }
 }

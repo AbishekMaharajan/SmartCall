@@ -8,13 +8,13 @@
       <div>
         Call Report For :
         <span class="user">{{
-          user.customer_name ? user.customer_name : "N / A"
+          user.customer_name ? user.customer_name : "--"
         }}</span>
       </div>
       <div>
         Mob:
         <span class="user">{{
-          user.customer_mobile ? user.customer_mobile : "N / A"
+          user.customer_mobile ? user.customer_mobile : "--"
         }}</span>
       </div>
       <button
@@ -60,7 +60,7 @@
             </div>
           </td>
           <td>
-            <span>{{ data.call_status ? data.call_status : "N / A" }}</span>
+            <span>{{ data.call_status ? data.call_status : "--" }}</span>
           </td>
           <td>
             <audio controls class="audio" *ngIf="data.voice_file !== ''">

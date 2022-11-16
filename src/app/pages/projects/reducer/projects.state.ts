@@ -47,6 +47,16 @@ export interface ProjectsState extends Map<string, any> {
     deleteDocumentLoaded: boolean;
     deleteDocumentFailed: boolean;
 
+    templateList: any;
+    templateListLoading: boolean;
+    templateListLoaded: boolean;
+    templateListFailed: boolean;
+
+    createTemplate: any;
+    createTemplateLoading: boolean;
+    createTemplateLoaded: boolean;
+    createTemplateFailed: boolean;
+
 }
 
 export const projectsStateRecord = Record({
@@ -95,6 +105,16 @@ export const projectsStateRecord = Record({
     deleteDocumentLoading: false,
     deleteDocumentLoaded: false,
     deleteDocumentFailed: false,
+
+    templateList: [],
+    templateListLoading: false,
+    templateListLoaded: false,
+    templateListFailed: false,
+
+    createTemplate: {},
+    createTemplateLoading: false,
+    createTemplateLoaded: false,
+    createTemplateFailed: false,
 
 
 });

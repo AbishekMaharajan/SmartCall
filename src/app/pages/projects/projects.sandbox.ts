@@ -12,6 +12,8 @@ import {
     uploadFile, uploadFileLoading, uploadFileLoaded, uploadFileFailed,
     fileList, fileListLoading, fileListLoaded, fileListFailed,
     deleteDocument, deleteDocumentLoading, deleteDocumentLoaded, deleteDocumentFailed,
+    templateList, templateListLoading, templateListLoaded, templateListFailed,
+    createTemplate, createTemplateLoading, createTemplateLoaded, createTemplateFailed,
 } from './reducer/projects.selector';
 
 
@@ -63,6 +65,16 @@ export class ProjectsSandbox {
     public deleteDocumentLoaded$ = this.appState.select(deleteDocumentLoaded);
     public deleteDocumentFailed$ = this.appState.select(deleteDocumentFailed);
 
+    public templateList$ = this.appState.select(templateList);
+    public templateListLoading$ = this.appState.select(templateListLoading);
+    public templateListLoaded$ = this.appState.select(templateListLoaded);
+    public templateListFailed$ = this.appState.select(templateListFailed);
+
+    public createTemplate$ = this.appState.select(createTemplate);
+    public createTemplateLoading$ = this.appState.select(createTemplateLoading);
+    public createTemplateLoaded$ = this.appState.select(createTemplateLoaded);
+    public createTemplateFailed$ = this.appState.select(createTemplateFailed);
+
 
     constructor(protected appState: Store<store.AppState>) {
     }
@@ -97,6 +109,13 @@ export class ProjectsSandbox {
     public deleteDocument(params) {
         this.appState.dispatch(new ProjectsActions.DeleteDocument(params));
     }
+    public getTemplateList(params) {
+        this.appState.dispatch(new ProjectsActions.GetTemplateList(params));
+    }
+    public createTemplate(params) {
+        this.appState.dispatch(new ProjectsActions.CreateTemplate(params));
+    }
+
 
 }
 

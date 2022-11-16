@@ -48,5 +48,13 @@ export class ProjectsService extends Api {
         return this.http.delete<ResponseInterface>(this.URL + '/project/delete-document/' + params);
     }
 
+    getTemplateList(params): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/project/list-templates');
+    }
+
+    createTemplate(params): Observable<ResponseInterface> {
+        return this.http.post<ResponseInterface>(this.URL + '/project/add-templates', params);
+    }
+
 
 }

@@ -1,0 +1,37 @@
+<main>
+  <section class="header">
+    <p>Add Templates</p>
+    <div class="bttn-box">
+      <button
+        style="width: 12rem"
+        class="bttn warning-outline"
+        [routerLink]="['/projects/templates']"
+      >
+        <span> Cancel </span>
+      </button>
+      <button style="width: 12rem" class="bttn" (click)="onSave()">
+        <span> Save</span>
+      </button>
+    </div>
+  </section>
+  <hr />
+  <section class="form-data">
+    <div class="input-box">
+      <label for="templateId"> Template Id <sup>*</sup></label>
+      <input
+        type="text"
+        name="templateId"
+        placeholder="Enter template id..."
+        [(ngModel)]="tempId"
+      />
+    </div>
+    <div class="input-box">
+      <label for="templateId">Template Content <sup>*</sup></label>
+      <textarea
+        rows="10"
+        placeholder="Type your content here..."
+        [(ngModel)]="tempContent"
+      ></textarea>
+    </div>
+  </section>
+</main>

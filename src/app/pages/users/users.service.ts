@@ -78,7 +78,12 @@ export class UsersService extends Api {
         return this.http.get<ResponseInterface>(this.URL + '/customer/get-blocked-customer-list', { params: params });
     }
     reassignBlocked(params: any): Observable<ResponseInterface> {
-        return this.http.post<ResponseInterface>(this.URL + '/customer/reassign-blocked-customer', params);
+        let value = 'blocked'
+        if (params && params.status && params.status !== 'Blocked') {
+            value = 'unassigned'
+        }
+        delete params.status
+        return this.http.post<ResponseInterface>(this.URL + `/customer/reassign-${value}-customer`, params);
     }
 
 }

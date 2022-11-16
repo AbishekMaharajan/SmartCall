@@ -89,8 +89,8 @@
             />
             {{ user.member_name }}
           </td>
-          <td>{{ user.email_id ? user.email_id : "N / A" }}</td>
-          <td>{{ user.mobile_number ? user.mobile_number : "N / A" }}</td>
+          <td>{{ user.email_id ? user.email_id : "--" }}</td>
+          <td>{{ user.mobile_number ? user.mobile_number : "--" }}</td>
           <td>
             <span
               class="status"
@@ -101,10 +101,10 @@
                   ? 'success'
                   : 'warning'
               "
-              >{{ user.user_type ? user.user_type : "N / A" }}
+              >{{ user.user_type ? user.user_type : "--" }}
             </span>
           </td>
-          <td>{{ user.phone_type ? user.phone_type : "N / A" }}</td>
+          <td>{{ user.phone_type ? user.phone_type : "--" }}</td>
           <td>
             {{
               user.reporting_to == 1
@@ -114,7 +114,7 @@
                 : user.reporting_to == 3
                 ? "Sales Head"
                 : user.reporting_to == ""
-                ? "N / A"
+                ? "--"
                 : user.reporting_to
             }}
           </td>

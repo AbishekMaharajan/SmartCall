@@ -91,9 +91,9 @@
         <tbody>
           <tr *ngFor="let data of dataArr | paginate: config; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ data.customer_name ? data.customer_name : "N / A" }}</td>
+            <td>{{ data.customer_name ? data.customer_name : "--" }}</td>
             <td>
-              {{ data.customer_mobile ? data.customer_mobile : "N  / A" }}
+              {{ data.customer_mobile ? data.customer_mobile : "--" }}
             </td>
             <td>
               <div style="display: flex; flex-direction: column">

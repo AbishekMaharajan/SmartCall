@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddTemplateComponent } from './components/add-template/add-template.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { WhatsappTemplatesComponent } from './components/whatsapp-templates/whatsapp-templates.component';
@@ -34,6 +35,13 @@ const routes: Routes = [
       {
         path: 'templates',
         component: WhatsappTemplatesComponent,
+        data: {
+          moduleUrl: 'projects'
+        }
+      },
+      {
+        path: 'add-template',
+        component: AddTemplateComponent,
         data: {
           moduleUrl: 'projects'
         }

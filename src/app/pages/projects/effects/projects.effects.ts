@@ -191,6 +191,44 @@ export class ProjectsEffect {
             )
         );
 
+    //  TEMPLATE LIST
+    @Effect()
+    templateList$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.TEMPLATE_LIST),
+            map((action: actions.GetTemplateList) => action.payload),
+            switchMap((state) => {
+                return this.api.getTemplateList(state)
+                    .pipe(
+                        map((project) =>
+                            new actions.GetTemplateListSuccess(project),
+                        ),
+
+                        catchError(error => of(new actions.GetTemplateListFail(error.error)))
+                    );
+            }
+            )
+        );
+
+    //  CREATE TEMPLATE 
+    @Effect()
+    createTemplate$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.CREATE_TEMPLATE),
+            map((action: actions.CreateTemplate) => action.payload),
+            switchMap((state) => {
+                return this.api.createTemplate(state)
+                    .pipe(
+                        map((project) =>
+                            new actions.CreateTemplateSuccess(project),
+                        ),
+
+                        catchError(error => of(new actions.CreateTemplateFail(error.error)))
+                    );
+            }
+            )
+        );
+
 
 
 

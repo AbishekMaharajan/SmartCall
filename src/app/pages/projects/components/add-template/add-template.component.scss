@@ -1,0 +1,28 @@
+.form-data {
+  margin-top: 5rem;
+  .input-box {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 2rem;
+  }
+  input,
+  textarea {
+    padding: 0.8rem;
+    border: var(--border);
+    width: 100%;
+    border-radius: 0.5rem;
+    letter-spacing: 1px;
+    background-color: var(--light);
+    box-shadow: var(--box-shadow-primary);
+  }
+  textarea {
+    height: 50%;
+    width: 100%;
+  }
+  ::placeholder {
+    color: #c2c2c2;
+    opacity: 1; /* Firefox */
+  }
+}

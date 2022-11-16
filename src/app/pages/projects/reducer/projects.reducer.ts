@@ -254,6 +254,60 @@ export function reducer(state = initialState, { type, payload }: any): ProjectsS
 
             });
 
+        // TEMPLATE LIST
+        case actions.ActionTypes.TEMPLATE_LIST:
+
+            return Object.assign({}, state, {
+                templateListLoading: true,
+                templateListLoaded: false,
+                templateListFailed: false,
+            });
+
+        case actions.ActionTypes.TEMPLATE_LIST_SUCCESS:
+
+            return Object.assign({}, state, {
+                templateList: payload.data,
+                templateListLoading: false,
+                templateListLoaded: true,
+                templateListFailed: false,
+            });
+
+        case actions.ActionTypes.TEMPLATE_LIST_FAIL:
+
+            return Object.assign({}, state, {
+                templateListLoading: false,
+                templateListLoaded: true,
+                templateListFailed: true,
+
+            });
+
+        // CREATE TEMPLATE
+        case actions.ActionTypes.CREATE_TEMPLATE:
+
+            return Object.assign({}, state, {
+                createTemplateLoading: true,
+                createTemplateLoaded: false,
+                createTemplateFailed: false,
+            });
+
+        case actions.ActionTypes.CREATE_TEMPLATE_SUCCESS:
+
+            return Object.assign({}, state, {
+                createTemplate: payload,
+                createTemplateLoading: false,
+                createTemplateLoaded: true,
+                createTemplateFailed: false,
+            });
+
+        case actions.ActionTypes.CREATE_TEMPLATE_FAIL:
+
+            return Object.assign({}, state, {
+                createTemplateLoading: false,
+                createTemplateLoaded: true,
+                createTemplateFailed: true,
+
+            });
+
 
 
         default: {
@@ -311,4 +365,14 @@ export const deleteDocument = (state: ProjectsState) => state.deleteDocument;
 export const deleteDocumentLoading = (state: ProjectsState) => state.deleteDocumentLoading;
 export const deleteDocumentLoaded = (state: ProjectsState) => state.deleteDocumentLoaded;
 export const deleteDocumentFailed = (state: ProjectsState) => state.deleteDocumentFailed;
+
+export const templateList = (state: ProjectsState) => state.templateList;
+export const templateListLoading = (state: ProjectsState) => state.templateListLoading;
+export const templateListLoaded = (state: ProjectsState) => state.templateListLoaded;
+export const templateListFailed = (state: ProjectsState) => state.templateListFailed;
+
+export const createTemplate = (state: ProjectsState) => state.createTemplate;
+export const createTemplateLoading = (state: ProjectsState) => state.createTemplateLoading;
+export const createTemplateLoaded = (state: ProjectsState) => state.createTemplateLoaded;
+export const createTemplateFailed = (state: ProjectsState) => state.createTemplateFailed;
 

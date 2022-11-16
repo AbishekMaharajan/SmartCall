@@ -47,7 +47,7 @@
       *ngIf="(projectsSandbox.projectListCount$ | async) === 0"
     >
       <div class="figg">
-        <img src="../../../../../assets/imgs/nodata.png" alt="" />
+        <img src="../../../../../assets/imgs/nodata.png" alt="img" />
       </div>
       <div>No records found !</div>
     </div>
@@ -101,7 +101,7 @@
 
             {{ item.project_name }}
           </td>
-          <td>{{ item.description ? item.description : N / A }}</td>
+          <td>{{ item.description ? item.description : "--" }}</td>
           <td>{{ item.created_on }}</td>
           <td>{{ item.created_by }}</td>
           <td [style.color]="item.status === '' ? '#058c42' : 'red'">

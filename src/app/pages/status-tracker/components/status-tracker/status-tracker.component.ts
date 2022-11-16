@@ -206,7 +206,7 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
         file: 'Statustracker.xlsx',
         payload: {
           from_date: this.datePipe.transform(this.form.value.fromDate, "dd/MM/yyy") || '',
-          to_date: this.datePipe.transform(this.form.value.fromDate, "dd/MM/yyy") || '',
+          to_date: this.datePipe.transform(this.form.value.toDate, "dd/MM/yyy") || '',
           agent_id: this.form.value.agent,
         }
       }

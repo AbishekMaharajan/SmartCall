@@ -53,3 +53,13 @@ export const deleteDocumentLoading = createSelector(getProjectState, projectRedu
 export const deleteDocumentLoaded = createSelector(getProjectState, projectReducer.deleteDocumentLoaded);
 export const deleteDocumentFailed = createSelector(getProjectState, projectReducer.deleteDocumentFailed);
 
+export const templateList = createSelector(getProjectState, projectReducer.templateList);
+export const templateListLoading = createSelector(getProjectState, projectReducer.templateListLoading);
+export const templateListLoaded = createSelector(getProjectState, projectReducer.templateListLoaded);
+export const templateListFailed = createSelector(getProjectState, projectReducer.templateListFailed);
+
+export const createTemplate = createSelector(getProjectState, projectReducer.createTemplate);
+export const createTemplateLoading = createSelector(getProjectState, projectReducer.createTemplateLoading);
+export const createTemplateLoaded = createSelector(getProjectState, projectReducer.createTemplateLoaded);
+export const createTemplateFailed = createSelector(getProjectState, projectReducer.createTemplateFailed);
+

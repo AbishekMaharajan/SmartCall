@@ -168,13 +168,13 @@
             <td>{{ user.project_name }}</td>
             <td>
               <span class="name">{{
-                user.customer_name ? user.customer_name : "N / A"
+                user.customer_name ? user.customer_name : "--"
               }}</span>
             </td>
             <td>{{ user.customer_mobile }}</td>
-            <td>{{ user.email_id ? user.email_id : "N / A" }}</td>
+            <td>{{ user.email_id ? user.email_id : "--" }}</td>
             <td>
-              {{ user.recent_call_time ? user.recent_call_time : "N / A" }}
+              {{ user.recent_call_time ? user.recent_call_time : "--" }}
             </td>
             <td>{{ user.agent_name }}</td>
             <td>

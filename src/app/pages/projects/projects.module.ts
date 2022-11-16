@@ -18,12 +18,14 @@ import { CommonService } from 'src/app/common/common.service';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { CommonEffect } from 'src/app/common/effects/common.efects';
 import { WhatsappTemplatesComponent } from './components/whatsapp-templates/whatsapp-templates.component';
+import { AddTemplateComponent } from './components/add-template/add-template.component';
 @NgModule({
   declarations: [
     LayoutComponent,
     ProjectListComponent,
     CreateProjectComponent,
     WhatsappTemplatesComponent,
+    AddTemplateComponent,
 
   ],
   imports: [

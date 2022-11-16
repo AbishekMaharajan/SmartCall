@@ -43,7 +43,13 @@ export const ActionTypes = {
     DELETE_DOCUMENT_SUCCESS: type('[project] delete document Success'),
     DELETE_DOCUMENT_FAIL: type('[project] delete document Fail'),
 
+    TEMPLATE_LIST: type('[project] template List'),
+    TEMPLATE_LIST_SUCCESS: type('[project] template List Success'),
+    TEMPLATE_LIST_FAIL: type('[project] template List Fail'),
 
+    CREATE_TEMPLATE: type('[project] create template'),
+    CREATE_TEMPLATE_SUCCESS: type('[project] create template Success'),
+    CREATE_TEMPLATE_FAIL: type('[project] create template Fail'),
 
 };
 
@@ -244,6 +250,49 @@ export class DeleteDocumentFail implements Action {
     }
 }
 
+//  TEMPLATE LIST
+export class GetTemplateList implements Action {
+    type = ActionTypes.TEMPLATE_LIST;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class GetTemplateListSuccess implements Action {
+    type = ActionTypes.TEMPLATE_LIST_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class GetTemplateListFail implements Action {
+    type = ActionTypes.TEMPLATE_LIST_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+//  CREATE TEMPLATE
+export class CreateTemplate implements Action {
+    type = ActionTypes.CREATE_TEMPLATE;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class CreateTemplateSuccess implements Action {
+    type = ActionTypes.CREATE_TEMPLATE_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class CreateTemplateFail implements Action {
+    type = ActionTypes.CREATE_TEMPLATE_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
 
 export type Actions =
     | ProjectList
@@ -281,6 +330,14 @@ export type Actions =
     | DeleteDocument
     | DeleteDocumentSuccess
     | DeleteDocumentFail
+
+    | GetTemplateList
+    | GetTemplateListSuccess
+    | GetTemplateListFail
+
+    | CreateTemplate
+    | CreateTemplateSuccess
+    | CreateTemplateFail
 
 
 

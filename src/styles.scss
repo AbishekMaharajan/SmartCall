@@ -99,8 +99,11 @@ textarea:focus {
   outline: none;
   transition: background-color ease 0.3s;
 }
-input::placeholder {
-  color: var(--font-muted);
+
+input::placeholder,
+textarea::placeholder {
+  color: #c2c2c2 !important;
+  opacity: 1;
   font-size: 1.5rem;
 }
 a {
@@ -347,8 +350,7 @@ main {
 }
 sup {
   top: 0;
-  margin-left: 0.2rem;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--tomato-red);
 }
 .block {

@@ -69,13 +69,14 @@ export class BlockedCustomersComponent implements OnInit, OnDestroy {
     this.agentId = null
   }
 
-  onSave({ customer_id }) {
+  onSave({ customer_id, status }) {
     if (!this.agentId) return this.toster.error('No Agent Selected')
 
     const params = {
       login_id: this.loginId,
       to_agent_id: this.agentId,
-      customer_id: customer_id
+      customer_id: customer_id,
+      status: status
     }
 
     this.userSandbox.reassignBlocked(params)

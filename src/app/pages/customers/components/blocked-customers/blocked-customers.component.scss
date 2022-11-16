@@ -27,3 +27,22 @@
     color: var(--light);
   }
 }
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  width: 8rem;
+  padding-block: 0.25rem;
+  &.success {
+    background-color: var(--warning-light);
+    color: var(--warning);
+  }
+  &.warning {
+    background-color: var(--light-purple);
+    color: var(--purple);
+  }
+}

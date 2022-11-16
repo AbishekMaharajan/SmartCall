@@ -67,28 +67,26 @@
             {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
           </td>
           <td>
-            {{ customer.customer_name ? customer.customer_name : "N / A" }}
+            {{ customer.customer_name ? customer.customer_name : "--" }}
           </td>
           <td>
-            {{ customer.customer_mobile ? customer.customer_mobile : "N / A" }}
+            {{ customer.customer_mobile ? customer.customer_mobile : "--" }}
           </td>
           <td>
-            {{
-              customer.alternate_number1 ? customer.alternate_number1 : "N / A"
-            }}
+            {{ customer.alternate_number1 ? customer.alternate_number1 : "--" }}
           </td>
           <td>
-            {{ customer.customer_email ? customer.customer_email : "N / A" }}
+            {{ customer.customer_email ? customer.customer_email : "--" }}
           </td>
           <td>
-            {{ customer.address ? customer.address : "N / A" }}
+            {{ customer.address ? customer.address : "--" }}
           </td>
-          <td>{{ customer.action_taken ? customer.action_taken : "N / A" }}</td>
+          <td>{{ customer.action_taken ? customer.action_taken : "--" }}</td>
           <td>
-            {{ customer.follow_up_date ? customer.follow_up_date : "N / A" }}
+            {{ customer.follow_up_date ? customer.follow_up_date : "--" }}
           </td>
           <td>
-            {{ customer.follow_up_time ? customer.follow_up_time : "N / A" }}
+            {{ customer.follow_up_time ? customer.follow_up_time : "--" }}
           </td>
           <td>
             <button
