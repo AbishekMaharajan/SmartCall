@@ -266,7 +266,7 @@ export function reducer(state = initialState, { type, payload }: any): ProjectsS
         case actions.ActionTypes.TEMPLATE_LIST_SUCCESS:
 
             return Object.assign({}, state, {
-                templateList: payload.data,
+                templateList: payload,
                 templateListLoading: false,
                 templateListLoaded: true,
                 templateListFailed: false,

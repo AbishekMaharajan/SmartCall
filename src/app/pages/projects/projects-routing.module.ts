@@ -36,14 +36,14 @@ const routes: Routes = [
         path: 'templates',
         component: WhatsappTemplatesComponent,
         data: {
-          moduleUrl: 'projects'
+          moduleUrl: 'projects/templates'
         }
       },
       {
         path: 'add-template',
         component: AddTemplateComponent,
         data: {
-          moduleUrl: 'projects'
+          moduleUrl: 'projects/templates'
         }
       },
       {

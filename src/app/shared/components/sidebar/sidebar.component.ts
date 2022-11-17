@@ -175,7 +175,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         inline: "nearest"
       });
   }
-  openMainMenu(nav) {
+  openMainMenu(nav: { path: any; }) {
     this.router.navigate([`${nav.path}`]);
   }
 

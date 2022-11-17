@@ -15,17 +15,34 @@
       </button>
     </div>
   </section>
-  <section class="main-box customScroll">
+  <div
+    class="notification"
+    *ngIf="
+      (projectSandbox.templateList$ | async)?.status == 0 &&
+      !(projectSandbox.templateList$ | async)?.data.length
+    "
+  >
+    No templates created click Add New to create some !
+  </div>
+
+  <section
+    class="main-box customScroll"
+    *ngIf="
+      (projectSandbox.templateList$ | async)?.status == 1 &&
+      (projectSandbox.templateList$ | async)?.data.length
+    "
+  >
     <div class="template-box">
       <div
         class="template"
-        *ngFor="let temp of projectSandbox.templateList$ | async"
+        *ngFor="let temp of (projectSandbox.templateList$ | async)?.data"
       >
         <header>Template Id : {{ temp.template_id }}</header>
         <article>
-          <p>Content</p>
+          <p>Template Content :</p>
           <div class="content customScroll">
-            {{ temp.template_text }}
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp;{{ temp.template_text }}
           </div>
         </article>
       </div>
