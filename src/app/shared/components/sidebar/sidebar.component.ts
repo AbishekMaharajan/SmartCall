@@ -10,16 +10,13 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
   isClicked: boolean = false
-  faBars = faBars;
-  faAngleDown = faAngleDown;
-  faBriefcase = faBriefcase
-  faFileArrowDown = faFile
+
   faClapperboard = faClapperboard
   faGear = faGear
   faRightToBracket = faRightToBracket
   userData = JSON.parse(localStorage.getItem('userDetails'))
   activeMenu = '';
-  disableMenu = ["Projects", "Manage DID", "Add New DID", "Users", "Project-Agent Mapping", "Reassign Agent"]
+  disableMenu = ["Projects", "Manage DID", "Add New DID", "Users", "Project-Agent Mapping", "Reassign Agent", 'Blocked Customers', 'Whatsapp Templates']
   menu: any = [
     {
       title: 'Dashboard',
