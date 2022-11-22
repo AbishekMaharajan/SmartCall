@@ -203,8 +203,8 @@ export class LatestResponceComponent implements OnInit {
       name: 'latestResponse',
       file: 'Latest-response-list.xlsx',
       payload: {
-        from_date: this.datePipe.transform(this.onFromDate, "dd/MM/yyy").toString(),
-        to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy"),
+        from_date: this.onFromDate ? this.datePipe.transform(this.onFromDate, "dd/MM/yyy") : '',
+        to_date: this.onToDate ? this.datePipe.transform(this.onToDate, "dd/MM/yyy") : '',
         agent_id: this.agent,
         project_id: this.projectDid
       }
