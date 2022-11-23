@@ -78,7 +78,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.router.navigate(['users/edit/' + id])
   }
   deleteUser(id) {
-    const modalRef = this.modalService.open(ConfirmationPopupComponent, { centered: true });
+    const modalRef = this.modalService.open(ConfirmationPopupComponent, {
+      centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.moduleName = 'deleteUser';
     modalRef.componentInstance.moduleData = id;
     modalRef.result.then((result) => {

@@ -4,16 +4,34 @@
 
 <main>
   <section class="header">
-    <p>Blocked / Unassigned Customers</p>
+    <p>Blocked / Unassigned</p>
     <div class="bttn-box"></div>
   </section>
+
   <section
     class="container-box"
     [ngClass]="
       (userSandbox.blockedCustomersCount$ | async) <= pageSize && 'fullheight'
     "
   >
-    <table class="table">
+    <div
+      class="notification"
+      *ngIf="
+        !dataArr.length && (userSandbox.blockedCustomersCountLoaded$ | async)
+      "
+    >
+      <div class="figg">
+        <img src="../../../../../assets/imgs/nodata.png" alt="no records" />
+      </div>
+
+      <div>No records found !</div>
+    </div>
+    <table
+      class="table"
+      *ngIf="
+        dataArr.length > 0 && (userSandbox.blockedCustomersCountLoaded$ | async)
+      "
+    >
       <thead>
         <tr>
           <th>#</th>

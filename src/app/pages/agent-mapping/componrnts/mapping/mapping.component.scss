@@ -112,7 +112,7 @@
       height: 100%;
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(auto, 26rem));
       justify-content: center;
       gap: 1.5rem;
       position: relative;

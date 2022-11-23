@@ -21,7 +21,7 @@ export class ConfirmationPopupComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
   onConfirm() {
-    if (this.moduleName == 'manageDID' || this.moduleName == 'reassignAllCustomers' || this.moduleName == 'deleteUser') {
+    if (this.moduleName == 'manageDID' || this.moduleName == 'reassignAllCustomers' || this.moduleName == 'deleteUser' || this.moduleName == "logout") {
       this.activeModal.close('success')
     }
     if (this.moduleName == 'deleteProject') {

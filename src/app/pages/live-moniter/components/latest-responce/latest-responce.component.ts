@@ -116,7 +116,10 @@ export class LatestResponceComponent implements OnInit {
   }
 
   updateUser(user) {
-    const modalRef = this.modalService.open(UpdateLatestResponseComponent, { size: 'lg', centered: true });
+    const modalRef = this.modalService.open(UpdateLatestResponseComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.user = user;
     modalRef.result.then((result) => {
       if (result == 'success') {
@@ -128,7 +131,10 @@ export class LatestResponceComponent implements OnInit {
     });
   }
   callReports(user) {
-    const modalRef = this.modalService.open(CallReportsComponent, { size: 'lg', centered: true });
+    const modalRef = this.modalService.open(CallReportsComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.user = user;
   }
   onChangeFromDate(event) {
@@ -139,7 +145,10 @@ export class LatestResponceComponent implements OnInit {
   }
   playRecording(user) {
 
-    const modalRef = this.modalService.open(PlayRecordingComponent, { size: 'sm', centered: true });
+    const modalRef = this.modalService.open(PlayRecordingComponent, {
+      size: 'sm', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.user = user;
     modalRef.result.then((result) => {
       if (result == 'success') {

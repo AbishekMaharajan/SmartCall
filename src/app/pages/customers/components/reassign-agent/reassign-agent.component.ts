@@ -159,7 +159,10 @@ export class ReassignAgentComponent implements OnInit, OnDestroy {
     if (!this.dataArr.length) return this.toster.error('Selected agent have no customer to reasign !')
 
 
-    const modalRef = this.modalService.open(ConfirmationPopupComponent, { centered: true });
+    const modalRef = this.modalService.open(ConfirmationPopupComponent, {
+      centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.moduleName = 'reassignAllCustomers';
 
     modalRef.result.then((result) => {

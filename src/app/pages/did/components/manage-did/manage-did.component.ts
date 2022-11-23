@@ -149,7 +149,10 @@ export class ManageDidComponent implements OnInit, OnDestroy {
   };
 
   onReleaseBtnClick(did) {
-    const modalRef = this.modalService.open(ConfirmationPopupComponent, { centered: true });
+    const modalRef = this.modalService.open(ConfirmationPopupComponent, {
+      centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.moduleName = 'manageDID';
     modalRef.result.then((result) => {
       if (result === 'success') {

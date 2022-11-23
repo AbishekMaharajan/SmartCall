@@ -3,6 +3,8 @@ import { faBars, faAngleDown, faBriefcase, faFile, faClapperboard, faGear, faRig
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription, zip } from 'rxjs';
 import { filter, map, mergeMap } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationPopupComponent } from '../../popups/confirmation-popup/confirmation-popup.component';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -34,17 +36,17 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           isClicked: false,
           path: 'projects',
         },
-
-        {
-          icon: 'phone_in_talk', title: 'Manage DID',
-          isClicked: false,
-          path: 'did/manage'
-        },
         {
           icon: 'library_add', title: 'Add New DID',
           isClicked: false,
           path: 'did/add'
         },
+        {
+          icon: 'phone_in_talk', title: 'Manage DID',
+          isClicked: false,
+          path: 'did/manage'
+        },
+
         {
           icon: 'mail_outline', title: 'Whatsapp Templates',
           isClicked: false,
@@ -134,7 +136,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   ]
 
   constructor(public router: Router,
-    public activatedRoute: ActivatedRoute,) {
+    public activatedRoute: ActivatedRoute,
+    public modalService: NgbModal,) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .pipe(map(() => this.activatedRoute))
@@ -177,7 +180,19 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/auth']);
+    const modalRef = this.modalService.open(ConfirmationPopupComponent, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false
+    });
+    modalRef.componentInstance.moduleName = 'logout';
+    modalRef.result.then((result) => {
+      if (result == 'success') {
+        localStorage.clear();
+        this.router.navigate(['/auth']);
+
+      }
+    });
+
   }
 }

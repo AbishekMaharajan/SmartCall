@@ -62,7 +62,10 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   }
   editCustomer(customer) {
 
-    const modalRef = this.modalService.open(UpdateLatestResponseComponent, { size: 'lg', centered: true });
+    const modalRef = this.modalService.open(UpdateLatestResponseComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.user = customer;
     modalRef.result.then((result) => {
       if (result == 'success') {

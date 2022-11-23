@@ -114,7 +114,10 @@ export class ProjectAgentReportComponent implements OnInit, OnDestroy {
   }
 
   playRecording(user) {
-    const modalRef = this.modalService.open(PlayRecordingComponent, { size: 'sm', centered: true });
+    const modalRef = this.modalService.open(PlayRecordingComponent, {
+      size: 'sm', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.user = user;
   }
   onSubmit() {

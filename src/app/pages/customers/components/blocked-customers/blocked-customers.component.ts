@@ -47,7 +47,7 @@ export class BlockedCustomersComponent implements OnInit, OnDestroy {
     }
     this.userSandbox.getBlockedCustomerList(params)
     this.userSandbox.blockedCustomers$.subscribe((res) => {
-      if (res && res.length) {
+      if (res) {
         this.dataArr = res
       }
     })
@@ -82,6 +82,8 @@ export class BlockedCustomersComponent implements OnInit, OnDestroy {
     this.userSandbox.reassignBlocked(params)
     this.subscriptions.push(this.userSandbox.reassignBlocked$.subscribe((res) => {
       if (res && res.status == 1) {
+        console.log('res: ', res);
+
         this.fetchBlockedCustomerList()
         this.fetchBlockedCustomerListCount()
       }

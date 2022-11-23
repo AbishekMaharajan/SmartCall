@@ -62,7 +62,10 @@ export class OngoingCallsComponent implements OnInit, OnDestroy {
 
   customerDetails(user) {
 
-    const modalRef = this.modalService.open(UpdateLatestResponseComponent, { size: 'lg', centered: true });
+    const modalRef = this.modalService.open(UpdateLatestResponseComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.user = user;
     modalRef.result.then((result) => {
       if (result) {

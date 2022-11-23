@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopupComponent } from 'src/app/shared/popups/confirmation-popup/confirmation-popup.component';
 import { ProjectsSandbox } from '../../projects.sandbox';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { UploadFileComponent } from 'src/app/shared/popups/upload-file/upload-file.component';
@@ -69,7 +68,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   }
 
   uploadFile(project) {
-    const modalRef = this.modalService.open(UploadFileComponent, { size: 'lg', centered: true });
+    const modalRef = this.modalService.open(UploadFileComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.project = project;
     modalRef.result.then((result) => {
       if (result == 'success') {
@@ -78,7 +80,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     });
   }
   viewFile(project) {
-    const modalRef = this.modalService.open(ViewFileComponent, { size: 'lg', centered: true });
+    const modalRef = this.modalService.open(ViewFileComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.project = project;
 
     modalRef.result.then((result) => {
@@ -92,7 +97,12 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.router.navigate(['projects/edit/' + id])
   }
   deleteProject(id) {
-    const modalRef = this.modalService.open(ConfirmationPopupComponent, { centered: true });
+
+    const modalRef = this.modalService.open(ConfirmationPopupComponent, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.moduleName = 'deleteProject';
     modalRef.componentInstance.moduleData = id;
     modalRef.result.then((result) => {

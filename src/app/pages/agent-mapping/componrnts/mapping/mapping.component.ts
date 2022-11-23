@@ -100,7 +100,10 @@ export class MappingComponent implements OnInit, OnDestroy {
   }
   onClickDays(project, agent) {
 
-    const modalRef = this.modalService.open(DaysMappedComponent, { size: 'lg', centered: true });
+    const modalRef = this.modalService.open(DaysMappedComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
     modalRef.componentInstance.user = agent;
     modalRef.componentInstance.project = project;
   }
