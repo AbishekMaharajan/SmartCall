@@ -41,6 +41,9 @@ export class CommonService extends Api {
         if (params.name === 'latestResponse') {
             return this.http.get<ResponseInterface>(this.URL + '/reports/export-latest-response-report', reqOpts);
         }
+        if (params.name === 'missedCall') {
+            return this.http.get<ResponseInterface>(this.URL + '/reports/export-missed-call-report', reqOpts);
+        }
         if (params.name === 'customerList') {
             return this.http.get<ResponseInterface>(this.URL + '/customer/export-all-customers-details', reqOpts);
         }

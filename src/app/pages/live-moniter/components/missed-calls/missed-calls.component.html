@@ -1,0 +1,200 @@
+<div *ngIf="liveMoniterSandbox.missedCallListLoading$ | async">
+  <app-page-loader></app-page-loader>
+</div>
+
+<main>
+  <section class="header">
+    <p>Missed Calls</p>
+    <div class="bttn-box">
+      <div class="search">
+        <input
+          class="input-search"
+          type="text"
+          placeholder="Search Project..."
+          [(ngModel)]="keyword"
+          (change)="onSearch()"
+          (keyup)="keyFunc($event)"
+          [ngClass]="keyword && keyword !== '' ? 'expand' : null"
+        />
+        <button class="bttn-search">
+          <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+      </div>
+      <button
+        class="bttn warning-outline"
+        (click)="export()"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="commonSandbox.exportListLoading$ | async"
+        ></i>
+        <span> Export </span>
+      </button>
+      <button
+        class="bttn"
+        (click)="onSubmit()"
+        [ngClass]="
+          (liveMoniterSandbox.missedCallListLoading$ | async) && 'block'
+        "
+      >
+        <i
+          class="fa fa-spinner fa-spin"
+          *ngIf="liveMoniterSandbox.missedCallListLoading$ | async"
+        ></i
+        ><span>Search</span>
+      </button>
+    </div>
+  </section>
+  <section
+    class="container-box customScroll"
+    [ngClass]="
+      (liveMoniterSandbox.missedCallListCount$ | async) <= pageSize &&
+      'fullheight'
+    "
+  >
+    <div class="filter-box">
+      <span class="select-box">
+        <label>Agent Name </label>
+        <ng-select
+          [items]="userSandbox.agentList$ | async"
+          bindLabel="member_name"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="ALL Agents"
+          [(ngModel)]="agent"
+        >
+        </ng-select>
+      </span>
+      <span class="select-box">
+        <label>Project Name </label>
+        <ng-select
+          [items]="didSandbox.projectList$ | async"
+          bindLabel="project_name"
+          bindValue="id"
+          [searchable]="true"
+          placeholder="All Projects"
+          [(ngModel)]="projectDid"
+        >
+        </ng-select>
+      </span>
+      <span class="input-container" (click)="fromDate.open()">
+        <mat-form-field (click)="fromDate.open()">
+          <label style="margin-bottom: 1.2rem">From Date</label>
+          <input
+            matInput
+            [matDatepicker]="fromDate"
+            [min]="fromMinDate"
+            [max]="fromMaxDate"
+            readonly
+            id="fromDate"
+            [(ngModel)]="onFromDate"
+            (dateChange)="onChangeFromDate($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="fromDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+      </span>
+
+      <span class="input-container" (click)="toDate.open()">
+        <mat-form-field (click)="toDate.open()">
+          <label style="margin-bottom: 1.2rem">To Date </label>
+
+          <input
+            matInput
+            [matDatepicker]="toDate"
+            [min]="toMinDate"
+            [max]="toMaxDate"
+            readonly
+            placeholder="To Date"
+            [(ngModel)]="onToDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="toDate"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+      </span>
+    </div>
+    <div class="table-box customScroll">
+      <div
+        class="notification"
+        *ngIf="(liveMoniterSandbox.missedCallListCount$ | async) === 0"
+      >
+        <div class="figg">
+          <img src="../../../../../assets/imgs/nodata.png" alt="" />
+        </div>
+        <div>No records found !</div>
+      </div>
+
+      <table
+        class="table"
+        *ngIf="(liveMoniterSandbox.missedCallListCount$ | async) > 0"
+      >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>DID</th>
+            <th>Project</th>
+            <th>Agent</th>
+            <th>Customer</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Last Called</th>
+            <th>Total Calls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let user of liveMoniterSandbox.missedCallList$
+                | async
+                | paginate: config;
+              let i = index
+            "
+          >
+            <td>
+              {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
+            </td>
+            <td>{{ user.did_number }}</td>
+            <td>{{ user.project_name }}</td>
+            <td>{{ user.agent_name }}</td>
+            <td>
+              <span class="name">{{
+                user.customer_name ? user.customer_name : "--"
+              }}</span>
+            </td>
+            <td>{{ user.customer_mobile }}</td>
+            <td>{{ user.email_id ? user.email_id : "--" }}</td>
+            <td>
+              {{ user.recent_call_time ? user.recent_call_time : "--" }}
+            </td>
+            <td>
+              <!-- <button
+                (click)="callReports(user)"
+                class="bttn"
+                style="width: 4rem; height: 2.5rem; vertical-align: middle"
+              >
+                {{ user.total_call }}
+              </button> -->
+              {{ user.total_call }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section
+    class="pagination-box"
+    *ngIf="(liveMoniterSandbox.missedCallListCount$ | async) > pageSize"
+  >
+    <pagination-controls
+      class="pagination"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </section>
+</main>

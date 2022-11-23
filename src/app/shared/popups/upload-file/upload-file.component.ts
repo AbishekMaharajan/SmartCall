@@ -25,7 +25,6 @@ export class UploadFileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.project
   }
 
   chooseFile() {
@@ -45,7 +44,7 @@ export class UploadFileComponent implements OnInit, OnDestroy {
     }
     for (const param in obj) {
       if (obj[param] === '') {
-        return this.toster.error(`${param} cannot be`)
+        return this.toster.error(`${param} cannot be empty`)
       }
     }
     const params = {

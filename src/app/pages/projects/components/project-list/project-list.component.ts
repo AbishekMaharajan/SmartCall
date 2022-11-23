@@ -109,7 +109,6 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       if (result == 'success') {
         this.fetchProjectList();
         this.fetchProjectListCount();
-
       }
     });
   }
@@ -132,7 +131,10 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   export() {
     const params = {
       name: 'projectList',
-      file: 'Projectlist.xlsx'
+      file: 'Projectlist.xlsx',
+      payload: {
+        keyword: this.keyword
+      }
     }
     this.commonSandbox.export(params)
   }

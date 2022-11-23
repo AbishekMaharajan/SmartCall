@@ -209,6 +209,44 @@ export class LiveMoniterEffect {
             )
         );
 
+
+    // MISSED CALL LIST
+    @Effect()
+    missedCallList$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.MISSED_CALL_LIST),
+            map((action: actions.MissedCallList) => action.payload),
+            switchMap((state) => {
+                return this.api.missedCallList(state)
+                    .pipe(
+                        map((call) =>
+                            new actions.MissedCallListSuccess(call),
+                        ),
+
+                        catchError(error => of(new actions.MissedCallListFail(error.error)))
+                    );
+            }
+            )
+        );
+    // MISSED CALL LIST COUNT
+    @Effect()
+    missedCallListCount$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.MISSED_CALL_LIST_COUNT),
+            map((action: actions.MissedCallListCount) => action.payload),
+            switchMap((state) => {
+                return this.api.missedCallListCount(state)
+                    .pipe(
+                        map((call) =>
+                            new actions.MissedCallListCountSuccess(call),
+                        ),
+                        catchError(error => of(new actions.MissedCallListCountFail(error.error)))
+                    );
+            }
+            )
+        );
+
+
     constructor(private action$: Actions,
         protected api: LiveMoniterService,
         public router: Router) {

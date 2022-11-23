@@ -120,7 +120,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   export() {
     const params = {
       name: 'membersList',
-      file: 'Memberlist.xlsx'
+      file: 'Memberlist.xlsx',
+      payload: {
+        keyword: this.keyword
+      }
 
     }
     this.commonSandbox.export(params)

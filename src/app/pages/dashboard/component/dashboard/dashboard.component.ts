@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import * as Highcharts from 'highcharts';
 import * as moment from 'moment';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
@@ -117,7 +118,7 @@ export class DashboardComponent implements OnInit {
 
   minDate = '1990-01-01'
 
-  constructor(public commonSandbox: CommonSandbox) {
+  constructor(public commonSandbox: CommonSandbox, public router: Router,) {
 
   }
 
@@ -179,5 +180,10 @@ export class DashboardComponent implements OnInit {
     this.chartOptions.title.text = this.title
     this.chartOptions.series[0].color = this.color
     this.getChartData()
+  }
+  onClickCardFunc() {
+    this.router.navigate(['/live-moniter/response']);
+    // document.querySelector(".active")
+    // console.log(' document.querySelector(".active"): ', document.querySelector(".active"));
   }
 }

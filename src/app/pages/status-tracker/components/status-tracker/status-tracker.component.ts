@@ -200,21 +200,25 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     }))
 
     if (isValid) {
-      this.form.value
+
+      const status = this.availability.find((data) => data.active === true).unnest;
+      console.log('status: ', status);
       const params = {
         name: 'statusTracker',
         file: 'Statustracker.xlsx',
         payload: {
-          from_date: this.datePipe.transform(this.form.value.fromDate, "dd/MM/yyy") || '',
-          to_date: this.datePipe.transform(this.form.value.toDate, "dd/MM/yyy") || '',
+          from_date: this.form.value.fromDate ? this.datePipe.transform(this.form.value.fromDate, "dd/MM/yyy") : '',
+          to_date: this.form.value.toDate ? this.datePipe.transform(this.form.value.toDate, "dd/MM/yyy") : '',
           agent_id: this.form.value.agent,
+          // availability:status
+
         }
       }
       // console.log('params: ', params);
       this.commonSandbox.export(params)
 
     }
-    this.subscriptions.forEach(each => each.unsubscribe());
+    // this.subscriptions.forEach(each => each.unsubscribe());
   }
   ngOnDestroy() {
     this.subscriptions.forEach(each => each.unsubscribe());

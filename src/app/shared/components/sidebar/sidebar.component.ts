@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   faRightToBracket = faRightToBracket
   userData = JSON.parse(localStorage.getItem('userDetails'))
   activeMenu = '';
-  disableMenu = ["Projects", "Manage DID", "Add New DID", "Users", "Project-Agent Mapping", "Reassign Agent", 'Blocked Customers', 'Whatsapp Templates']
+  disableMenu = ["Projects", "Manage DID", "Add New DID", "Users", "Project-Agent Mapping", "Reassign Agent", 'Blocked / Unassigned', 'Whatsapp Templates']
   menu: any = [
     {
       title: 'Dashboard',
@@ -89,6 +89,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           path: 'live-moniter/response'
 
         },
+        {
+          icon: 'phone_missed', title: 'Missed Calls',
+          isClicked: false,
+          path: 'live-moniter/missed-calls'
+        },
       ]
     },
     {
@@ -111,7 +116,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           path: 'customers/reassign'
         },
         {
-          icon: 'block', title: 'Blocked Customers',
+          icon: 'block', title: 'Blocked / Unassigned',
           isClicked: false,
           path: 'customers/blocked-customers'
         },

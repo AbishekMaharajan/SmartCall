@@ -52,4 +52,11 @@ export class LiveMoniterService extends Api {
         return this.http.get<ResponseInterface>('http://api.postalpincode.in/pincode/' + params);
     }
 
+    missedCallList(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/reports/get-missed-call-list', { params: params });
+    }
+
+    missedCallListCount(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '/reports/get-missed-call-list', { params: params });
+    }
 }

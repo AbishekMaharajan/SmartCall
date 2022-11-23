@@ -63,3 +63,13 @@ export const pincodeAreaListLoading = createSelector(getLiveMoniterState, liveMo
 export const pincodeAreaListLoaded = createSelector(getLiveMoniterState, liveMoniterReducer.pincodeAreaListLoaded);
 export const pincodeAreaListFailed = createSelector(getLiveMoniterState, liveMoniterReducer.pincodeAreaListFailed);
 
+export const missedCallList = createSelector(getLiveMoniterState, liveMoniterReducer.missedCallList);
+export const missedCallListLoading = createSelector(getLiveMoniterState, liveMoniterReducer.missedCallListLoading);
+export const missedCallListLoaded = createSelector(getLiveMoniterState, liveMoniterReducer.missedCallListLoaded);
+export const missedCallListFailed = createSelector(getLiveMoniterState, liveMoniterReducer.pincodeAreaListFailed);
+
+export const missedCallListCount = createSelector(getLiveMoniterState, liveMoniterReducer.missedCallListCount);
+export const missedCallListCountLoading = createSelector(getLiveMoniterState, liveMoniterReducer.missedCallListCountLoading);
+export const missedCallListCountLoaded = createSelector(getLiveMoniterState, liveMoniterReducer.missedCallListCountLoaded);
+export const missedCallListCountFailed = createSelector(getLiveMoniterState, liveMoniterReducer.missedCallListCountFailed);
+

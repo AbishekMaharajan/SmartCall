@@ -307,6 +307,63 @@ export function reducer(state = initialState, { type, payload }: any): LiveMonit
 
             });
 
+        //  MISSED CALL LIST
+        case actions.ActionTypes.MISSED_CALL_LIST:
+
+            return Object.assign({}, state, {
+                missedCallListLoading: true,
+                missedCallListLoaded: false,
+                missedCallListFailed: false,
+            });
+
+        case actions.ActionTypes.MISSED_CALL_LIST_SUCCESS:
+
+            return Object.assign({}, state, {
+                missedCallList: payload.data,
+                missedCallListLoading: false,
+                missedCallListLoaded: true,
+                missedCallListFailed: false,
+            });
+
+        case actions.ActionTypes.MISSED_CALL_LIST_FAIL:
+
+            return Object.assign({}, state, {
+                missedCallListLoading: false,
+                missedCallListLoaded: true,
+                missedCallListFailed: true,
+
+            });
+
+        //  MISSED CALL LIST COUNT
+        case actions.ActionTypes.MISSED_CALL_LIST_COUNT:
+
+            return Object.assign({}, state, {
+                missedCallListCountLoading: true,
+                missedCallListCountLoaded: false,
+                missedCallListCountFailed: false,
+            });
+
+        case actions.ActionTypes.MISSED_CALL_LIST_COUNT_SUCCESS:
+
+            return Object.assign({}, state, {
+                missedCallListCount: payload.data,
+                missedCallListCountLoading: false,
+                missedCallListCountLoaded: true,
+                missedCallListCountFailed: false,
+            });
+
+        case actions.ActionTypes.MISSED_CALL_LIST_COUNT_FAIL:
+
+            return Object.assign({}, state, {
+                missedCallListCountLoading: false,
+                missedCallListCountLoaded: true,
+                missedCallListCountFailed: true,
+
+            });
+
+
+
+
 
         default: {
             return state;
@@ -373,5 +430,15 @@ export const pincodeAreaList = (state: LiveMoniterState) => state.pincodeAreaLis
 export const pincodeAreaListLoading = (state: LiveMoniterState) => state.pincodeAreaListLoading;
 export const pincodeAreaListLoaded = (state: LiveMoniterState) => state.pincodeAreaListLoaded;
 export const pincodeAreaListFailed = (state: LiveMoniterState) => state.pincodeAreaListFailed;
+
+export const missedCallList = (state: LiveMoniterState) => state.missedCallList;
+export const missedCallListLoading = (state: LiveMoniterState) => state.missedCallListLoading;
+export const missedCallListLoaded = (state: LiveMoniterState) => state.missedCallListLoaded;
+export const missedCallListFailed = (state: LiveMoniterState) => state.missedCallListFailed;
+
+export const missedCallListCount = (state: LiveMoniterState) => state.missedCallListCount;
+export const missedCallListCountLoading = (state: LiveMoniterState) => state.missedCallListCountLoading;
+export const missedCallListCountLoaded = (state: LiveMoniterState) => state.missedCallListCountLoaded;
+export const missedCallListCountFailed = (state: LiveMoniterState) => state.missedCallListCountFailed;
 
 

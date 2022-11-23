@@ -164,7 +164,10 @@ export class ManageDidComponent implements OnInit, OnDestroy {
   export() {
     const params = {
       name: 'didList',
-      file: 'Didlist.xlsx'
+      file: 'Didlist.xlsx',
+      payload: {
+        keyword: this.keyword
+      }
     }
     this.commonSandbox.export(params)
   }

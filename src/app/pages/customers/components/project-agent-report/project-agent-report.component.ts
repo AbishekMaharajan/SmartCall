@@ -159,10 +159,11 @@ export class ProjectAgentReportComponent implements OnInit, OnDestroy {
         name: 'projectAgentReport',
         file: 'projectAgentReport.xlsx',
         payload: {
-          from_date: this.datePipe.transform(this.onFromDate, "dd/MM/yyy"),
-          to_date: this.datePipe.transform(this.onToDate, "dd/MM/yyy"),
+          from_date: this.onFromDate ? this.datePipe.transform(this.onFromDate, "dd/MM/yyy") : '',
+          to_date: this.onToDate ? this.datePipe.transform(this.onToDate, "dd/MM/yyy") : '',
           agent_id: this.agent,
-          project_id: this.projectDid
+          project_id: this.projectDid,
+          keyword: this.keyword,
         }
       }
       this.commonSandbox.export(params)

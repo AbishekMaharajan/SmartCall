@@ -16,7 +16,6 @@ export class MonthwiseCallCountComponent implements OnInit, OnDestroy {
   dataArr = []
   yearArr = []
   monthArr = []
-  count = 1
   total: any = {}
   public subscriptions: Array<Subscription> = [];
 
@@ -49,17 +48,18 @@ export class MonthwiseCallCountComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.year = new Date().getFullYear()
+    this.month = new Date().getMonth() + 1
+    this.fetchList()
   }
-  onSubmit() {
-    if (!this.year || !this.month) return this.toster.error('Please select Year and Month and Search !')
+  fetchList() {
     const params = {
       month_id: this.month,
       year_id: this.year
     }
     this.commonSandbox.monthWiseCall(params)
     this.subscriptions.push(this.commonSandbox.monthwiseCallCount$.subscribe((res) => {
-      if (res && res.length > 0 && this.count === 1) {
-        this.count = 0
+      if (res && res.length > 0) {
         this.total = {
           incoming_connected_count: 0,
           incoming_missed_count: 0,
@@ -77,6 +77,10 @@ export class MonthwiseCallCountComponent implements OnInit, OnDestroy {
         })
       }
     }))
+  }
+  onSubmit() {
+    if (!this.year || !this.month) return this.toster.error('Please select Year and Month and Search !')
+    this.fetchList()
   }
 
   export() {

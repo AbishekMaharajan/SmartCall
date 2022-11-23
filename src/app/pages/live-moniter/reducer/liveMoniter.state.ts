@@ -58,6 +58,17 @@ export interface LiveMoniterState extends Map<string, any> {
     pincodeAreaListFailed: boolean;
 
 
+    missedCallList: any;
+    missedCallListLoading: boolean;
+    missedCallListLoaded: boolean;
+    missedCallListFailed: boolean;
+
+    missedCallListCount: any;
+    missedCallListCountLoading: boolean;
+    missedCallListCountLoaded: boolean;
+    missedCallListCountFailed: boolean;
+
+
 
 }
 
@@ -117,6 +128,16 @@ export const LiveMoniterStateRecord = Record({
     pincodeAreaListLoading: false,
     pincodeAreaListLoaded: false,
     pincodeAreaListFailed: false,
+
+    missedCallList: [],
+    missedCallListLoading: false,
+    missedCallListLoaded: false,
+    missedCallListFailed: false,
+
+    missedCallListCount: {},
+    missedCallListCountLoading: false,
+    missedCallListCountLoaded: false,
+    missedCallListCountFailed: false,
 
 });
 

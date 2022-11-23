@@ -23,9 +23,10 @@ import { MAT_DATE_LOCALE } from '@angular/material';
 import { DidEffect } from '../did/effects/did.effects';
 import { DidSandbox } from '../did/did.sandbox';
 import { DidService } from '../did/did.service';
+import { MissedCallsComponent } from './components/missed-calls/missed-calls.component';
 
 @NgModule({
-  declarations: [LayoutLiveMoniterComponent, LatestResponceComponent, OngoingCallsComponent,],
+  declarations: [LayoutLiveMoniterComponent, LatestResponceComponent, OngoingCallsComponent, MissedCallsComponent,],
   imports: [
     CommonModule,
     LiveMoniterRoutingModule,

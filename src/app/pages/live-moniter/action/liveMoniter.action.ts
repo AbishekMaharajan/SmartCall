@@ -51,6 +51,14 @@ export const ActionTypes = {
     AREA_LIST_SUCCESS: type('AREA_LIST Success'),
     AREA_LIST_FAIL: type('AREA_LIST Fail'),
 
+    MISSED_CALL_LIST: type('MISSED_CALL_LIST '),
+    MISSED_CALL_LIST_SUCCESS: type('MISSED_CALL_LIST Success'),
+    MISSED_CALL_LIST_FAIL: type('MISSED_CALL_LIST Fail'),
+
+    MISSED_CALL_LIST_COUNT: type('MISSED_CALL_LIST_COUNT '),
+    MISSED_CALL_LIST_COUNT_SUCCESS: type('MISSED_CALL_LIST_COUNT Success'),
+    MISSED_CALL_LIST_COUNT_FAIL: type('MISSED_CALL_LIST_COUNT Fail'),
+
 };
 
 // ONGOING CALL  LIST
@@ -98,6 +106,8 @@ export class ResponseListFail implements Action {
     constructor(public payload: any) {
     }
 }
+
+
 //  RESPONSE LIST COUNT
 
 export class ResponseListCount implements Action {
@@ -305,7 +315,50 @@ export class PincodeAreaFail implements Action {
     }
 }
 
+//  MISSED CALL LIST
 
+export class MissedCallList implements Action {
+    type = ActionTypes.MISSED_CALL_LIST;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class MissedCallListSuccess implements Action {
+    type = ActionTypes.MISSED_CALL_LIST_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class MissedCallListFail implements Action {
+    type = ActionTypes.MISSED_CALL_LIST_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+//  MISSED CALL LIST COUNT
+export class MissedCallListCount implements Action {
+    type = ActionTypes.MISSED_CALL_LIST_COUNT;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class MissedCallListCountSuccess implements Action {
+    type = ActionTypes.MISSED_CALL_LIST_COUNT_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class MissedCallListCountFail implements Action {
+    type = ActionTypes.MISSED_CALL_LIST_COUNT_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
 
 export type Actions =
     | OngoingCallList
@@ -351,6 +404,14 @@ export type Actions =
     | PincodeArea
     | PincodeAreaSuccess
     | PincodeAreaFail
+
+    | MissedCallList
+    | MissedCallListSuccess
+    | MissedCallListFail
+
+    | MissedCallListCount
+    | MissedCallListCountSuccess
+    | MissedCallListCountFail
 
 
 

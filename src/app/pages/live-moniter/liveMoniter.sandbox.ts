@@ -14,6 +14,8 @@ import {
     updateCustomerInfo, updateCustomerInfoLoading, updateCustomerInfoLoaded, updateCustomerInfoFailed,
     totalCallList, totalCallListLoading, totalCallListLoaded, totalCallListFailed,
     pincodeAreaList, pincodeAreaListLoading, pincodeAreaListLoaded, pincodeAreaListFailed,
+    missedCallList, missedCallListLoading, missedCallListLoaded, missedCallListFailed,
+    missedCallListCount, missedCallListCountLoading, missedCallListCountLoaded, missedCallListCountFailed,
 
 } from './reducer/liveMoniter.selector';
 
@@ -76,6 +78,16 @@ export class LiveMoniterSandbox {
     public pincodeAreaListLoaded$ = this.appState.select(pincodeAreaListLoaded);
     public pincodeAreaListFailed$ = this.appState.select(pincodeAreaListFailed);
 
+    public missedCallList$ = this.appState.select(missedCallList);
+    public missedCallListLoading$ = this.appState.select(missedCallListLoading);
+    public missedCallListLoaded$ = this.appState.select(missedCallListLoaded);
+    public missedCallListFailed$ = this.appState.select(missedCallListFailed);
+
+    public missedCallListCount$ = this.appState.select(missedCallListCount);
+    public missedCallListCountLoading$ = this.appState.select(missedCallListCountLoading);
+    public missedCallListCountLoaded$ = this.appState.select(missedCallListCountLoaded);
+    public missedCallListCountFailed$ = this.appState.select(missedCallListCountFailed);
+
 
 
     constructor(protected appState: Store<store.AppState>) {
@@ -120,6 +132,13 @@ export class LiveMoniterSandbox {
 
     public pincodeArea(params) {
         this.appState.dispatch(new LiveMoniterActions.PincodeArea(params));
+    }
+    public missedCallList(params) {
+        this.appState.dispatch(new LiveMoniterActions.MissedCallList(params));
+    }
+
+    public missedCallListCount(params) {
+        this.appState.dispatch(new LiveMoniterActions.MissedCallListCount(params));
     }
 
 }

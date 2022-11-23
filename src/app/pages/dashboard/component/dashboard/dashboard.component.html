@@ -26,7 +26,7 @@
   </section>
   <section class="dashboard-content">
     <div class="display-card">
-      <div class="_card card-1">
+      <div class="_card card-1" (click)="onClickCardFunc()">
         <figure class="fig purple">
           <mat-icon> bar_chart</mat-icon>
         </figure>
@@ -41,7 +41,7 @@
         </div>
         <div class="_card-footer">{{ dateValue | date }}</div>
       </div>
-      <div class="_card card-2">
+      <div class="_card card-2" (click)="onClickCardFunc()">
         <figure class="fig red">
           <mat-icon> phone_missed</mat-icon>
         </figure>
@@ -58,7 +58,7 @@
         </div>
         <div class="_card-footer">{{ dateValue | date }}</div>
       </div>
-      <div class="_card card-3">
+      <div class="_card card-3" (click)="onClickCardFunc()">
         <figure class="fig green">
           <mat-icon> phone_in_talk</mat-icon>
         </figure>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LatestResponceComponent } from './components/latest-responce/latest-responce.component';
+import { MissedCallsComponent } from './components/missed-calls/missed-calls.component';
 import { OngoingCallsComponent } from './components/ongoing-calls/ongoing-calls.component';
 import { LayoutLiveMoniterComponent } from './layout-live-moniter/layout-live-moniter.component';
 
@@ -21,6 +22,13 @@ const routes: Routes = [
         component: OngoingCallsComponent,
         data: {
           moduleUrl: 'live-moniter/ongoing-calls'
+        }
+      },
+      {
+        path: 'missed-calls',
+        component: MissedCallsComponent,
+        data: {
+          moduleUrl: 'live-moniter/missed-calls'
         }
       },
 
