@@ -128,11 +128,20 @@ export class LatestResponceComponent implements OnInit {
     });
   }
   callReports(user) {
+    const fromDate = this.datePipe.transform(this.onFromDate, "dd/MM/yyy")
+    const toDate = this.datePipe.transform(this.onToDate, "dd/MM/yyy")
     const modalRef = this.modalService.open(CallReportsComponent, {
       size: 'lg', centered: true, backdrop: 'static',
       keyboard: false
     });
     modalRef.componentInstance.user = user;
+    modalRef.componentInstance.payload = {
+      fromDate,
+      toDate,
+      limit: this.pageSize,
+      offset: this.offset,
+      keyword: this.keyword
+    }
   }
   onChangeFromDate(event) {
     this.toMinDate = event.value;

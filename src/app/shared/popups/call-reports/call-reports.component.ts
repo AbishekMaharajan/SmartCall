@@ -10,6 +10,8 @@ import { LiveMoniterSandbox } from 'src/app/pages/live-moniter/liveMoniter.sandb
 })
 export class CallReportsComponent implements OnInit {
   user: any = ''
+  payload: any = {}
+
   constructor(
     public activeModal: NgbActiveModal,
     public liveMoniterSandbox: LiveMoniterSandbox,
@@ -18,16 +20,17 @@ export class CallReportsComponent implements OnInit {
 
   ngOnInit() {
     this.fetchTotalCallList()
-
   }
   fetchTotalCallList() {
     const params = {
       limit: 0,
       offset: 0,
-      keyword: '',
+      keyword: this.payload.keyword,
       count: 0,
       customer_id: this.user.customer_id,
-      agent_id: this.user.agent_id
+      agent_id: this.user.agent_id,
+      from_date: this.payload.fromDate ? this.payload.fromDate : '',
+      to_date: this.payload.toDate ? this.payload.toDate : '',
     }
     this.liveMoniterSandbox.totalCallList(params)
   }
@@ -43,7 +46,9 @@ export class CallReportsComponent implements OnInit {
       name: 'totalcalls',
       file: 'Total-call-list.xlsx',
       payload: {
-        customer_id: this.user.customer_id
+        customer_id: this.user.customer_id,
+        from_date: this.payload.fromDate ? this.payload.fromDate : '',
+        to_date: this.payload.toDate ? this.payload.toDate : '',
       }
     }
     this.commonSandbox.export(params)
