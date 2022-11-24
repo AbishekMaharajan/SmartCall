@@ -11,8 +11,6 @@ import { ConfirmationPopupComponent } from '../../popups/confirmation-popup/conf
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
-  isClicked: boolean = false
-
   faClapperboard = faClapperboard
   faGear = faGear
   faRightToBracket = faRightToBracket
@@ -24,7 +22,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       title: 'Dashboard',
       main: [
         {
-          icon: 'dashboard', title: 'My Dashboard', sub: [], isClicked: false, path: 'dashboard',
+          icon: 'dashboard', title: 'My Dashboard', sub: [], path: 'dashboard',
         },
       ],
     },
@@ -33,23 +31,23 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       main: [
         {
           icon: 'home', title: 'Projects',
-          isClicked: false,
+
           path: 'projects',
         },
         {
           icon: 'library_add', title: 'Add New DID',
-          isClicked: false,
+
           path: 'did/add'
         },
         {
           icon: 'phone_in_talk', title: 'Manage DID',
-          isClicked: false,
+
           path: 'did/manage'
         },
 
         {
           icon: 'mail_outline', title: 'Whatsapp Templates',
-          isClicked: false,
+
           path: 'projects/templates'
         },
       ]
@@ -59,18 +57,17 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       main: [
         {
           icon: 'person', title: 'Users',
-          isClicked: false,
+
           path: 'users'
         },
         {
           icon: 'map', title: 'Project-Agent Mapping',
-          isClicked: false,
+
           path: 'agent-mapping'
         },
         {
           icon: 'insert_chart', title: 'Status Tracker',
-          isClicked: false
-          ,
+
           path: 'status-tracker'
         },
       ]
@@ -80,18 +77,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       main: [
         {
           icon: 'phone_in_talk', title: 'Ongoing Calls',
-          isClicked: false,
+
           path: 'live-moniter/ongoing-calls'
         },
         {
           icon: 'list_alt', title: 'Latest Responses',
-          isClicked: false,
+
           path: 'live-moniter/response'
 
         },
         {
           icon: 'phone_missed', title: 'Missed Calls',
-          isClicked: false,
+
           path: 'live-moniter/missed-calls'
         },
       ]
@@ -101,23 +98,23 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       main: [
         {
           icon: 'import_contacts', title: 'Customer Info',
-          isClicked: false,
+
           path: 'customers/list'
         },
         {
           icon: 'description', title: 'Project / Agent Report',
-          isClicked: false,
+
           path: 'customers/project-agent-report'
         },
 
         {
           icon: 'group', title: 'Reassign Agent',
-          isClicked: false,
+
           path: 'customers/reassign'
         },
         {
           icon: 'block', title: 'Blocked / Unassigned',
-          isClicked: false,
+
           path: 'customers/blocked-customers'
         },
 
@@ -128,12 +125,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       main: [
         {
           icon: 'date_range', title: 'Monthwise Call Count',
-          isClicked: false,
+
           path: 'consolidated-reports/monthwise'
         },
         {
           icon: 'pie_chart', title: 'Agent / Project Call Count',
-          isClicked: false,
+
           path: 'consolidated-reports/agent-project'
         },
       ]
@@ -165,12 +162,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     if (this.userData.user_type !== 1) {
       this.menu.forEach((data) => {
+        data.isTitleDisable = false
         data.main.forEach((item) => {
           const isFound = this.disableMenu.includes(item.title)
           item.isDisable = isFound
         })
       })
     }
+
+    if (this.menu[1].title === 'Project & DID') {
+      this.menu[1].isTitleDisable = this.menu[1].main.every(nav => nav.isDisable)
+    }
+
   }
   ngAfterViewInit() {
     document.querySelector(".active")

@@ -183,7 +183,6 @@ export class DashboardComponent implements OnInit {
   }
   onClickCardFunc() {
     this.router.navigate(['/live-moniter/response']);
-    // document.querySelector(".active")
-    // console.log(' document.querySelector(".active"): ', document.querySelector(".active"));
+
   }
 }

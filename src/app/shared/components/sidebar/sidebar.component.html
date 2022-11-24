@@ -6,7 +6,7 @@
   </div>
   <nav class="customScroll">
     <div class="navigation" *ngFor="let nav of menu">
-      <div class="title">
+      <div class="title" *ngIf="!nav.isTitleDisable">
         {{ nav.title }}
       </div>
       <div

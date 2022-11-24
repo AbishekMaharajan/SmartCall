@@ -103,12 +103,27 @@ export class MissedCallsComponent implements OnInit {
     this.liveMoniterSandbox.missedCallListCount(params)
     this.subscriptions.push(this.liveMoniterSandbox.missedCallListCount$.subscribe((res) => {
       if (res) {
-        console.log('res: ', res);
         this.config.totalItems = res
       }
     }))
   }
 
+
+  onCliclToCall(user) {
+    const { agent_id, agent_number, customer_mobile, customer_id, project_id, conference_id } = user
+    if (!agent_number) return this.toster.error('This customer is blocked for this Agent')
+    const params = {
+      agent_id: agent_id,
+      agent_number: agent_number,
+      customer_id: customer_id,
+      customer_number: customer_mobile,
+      old_conference_id: conference_id.toString(),
+      organisation_id: this.orgId,
+      project_id: project_id
+    }
+    this.liveMoniterSandbox.clickToCall(params)
+
+  }
 
   onChangeFromDate(event) {
     this.toMinDate = event.value;

@@ -202,7 +202,6 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
     if (isValid) {
 
       const status = this.availability.find((data) => data.active === true).unnest;
-      console.log('status: ', status);
       const params = {
         name: 'statusTracker',
         file: 'Statustracker.xlsx',
@@ -214,7 +213,6 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
 
         }
       }
-      // console.log('params: ', params);
       this.commonSandbox.export(params)
 
     }

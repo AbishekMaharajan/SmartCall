@@ -51,7 +51,7 @@
             {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
           </td>
           <td>{{ customer.project_name ? customer.project_name : "--" }}</td>
-          <td>{{ customer.did_number ? customer.did_number : "--" }}</td>
+          <td>{{ customer.called_did ? customer.called_did : "--" }}</td>
           <td>{{ customer.customer_name ? customer.customer_name : "--" }}</td>
           <td>
             {{ customer.customer_mobile ? customer.customer_mobile : "--" }}

@@ -1,7 +1,9 @@
 <div *ngIf="liveMoniterSandbox.missedCallListLoading$ | async">
   <app-page-loader></app-page-loader>
 </div>
-
+<div *ngIf="liveMoniterSandbox.clickToCallLoading$ | async">
+  <app-call-loader></app-call-loader>
+</div>
 <main>
   <section class="header">
     <p>Missed Calls</p>
@@ -145,7 +147,9 @@
             <th>Mobile</th>
             <th>Email</th>
             <th>Last Called</th>
+            <th>Status</th>
             <th>Total Calls</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -173,15 +177,40 @@
             <td>
               {{ user.recent_call_time ? user.recent_call_time : "--" }}
             </td>
+            <td>{{ user.recent_call_status }}</td>
             <td>
-              <!-- <button
-                (click)="callReports(user)"
-                class="bttn"
-                style="width: 4rem; height: 2.5rem; vertical-align: middle"
-              >
-                {{ user.total_call }}
-              </button> -->
               {{ user.total_call }}
+            </td>
+            <td>
+              <button
+                style="color: red"
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <!-- <button mat-menu-item (click)="playRecording(user)">
+                  <mat-icon style="color: steelblue"
+                    >play_circle_filled</mat-icon
+                  >
+                  <span>Play Recording</span>
+                </button> -->
+                <button mat-menu-item (click)="onCliclToCall(user)">
+                  <mat-icon style="color: var(--success)">call</mat-icon>
+                  <span>Click To Call</span>
+                </button>
+                <!-- <button mat-menu-item (click)="blockCustomer(user)">
+                  <mat-icon style="color: #dc143c">block</mat-icon>
+                  <span>Block Customer</span>
+                </button> -->
+              </mat-menu>
+
+              <!-- <mat-menu #menu="matMenu">
+              <audio controls class="audio">
+                <source src="user.file_recording" type="audio/wav" />
+              </audio>
+            </mat-menu> -->
             </td>
           </tr>
         </tbody>
