@@ -123,14 +123,15 @@
               class="status"
               [ngClass]="
                 user.call_availability === 'Available' ||
-                user.call_availability === 'On Duty'
+                user.call_availability === 'Only Email'
                   ? 'success'
                   : user.call_availability === 'On Leave' ||
                     user.call_availability === 'Not Available'
                   ? 'warning'
-                  : user.call_availability === 'On Break'
+                  : user.call_availability === 'On Break' ||
+                    user.call_availability === 'On Duty'
                   ? '_alert'
-                  : null
+                  : '_alert'
               "
               >{{ user.call_availability }}</span
             >

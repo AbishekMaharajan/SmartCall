@@ -75,7 +75,10 @@
             (dndDrop)="onMove($event, project)"
           >
             <div class="project-head">
-              <span class="span-1">{{ project.project_name }}</span>
+              <span class="span-1"
+                >{{ project.project_name }} <br />
+                <span class="did">({{ project.did_number }})</span>
+              </span>
               <span class="span-2"> {{ project.json_data.length }}</span>
             </div>
             <div class="agent-container customScroll">
@@ -100,7 +103,10 @@
 
             <div class="overlay" dndPlaceholderRef>
               <div class="project-head">
-                <span class="span-1">{{ project.project_name }}</span>
+                <span class="span-1"
+                  >{{ project.project_name }} <br />
+                  <span class="did">({{ project.did_number }})</span>
+                </span>
                 <span class="span-2"> {{ project.json_data.length }}</span>
               </div>
               <div class="agent-container customScroll">

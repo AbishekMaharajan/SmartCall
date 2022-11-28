@@ -63,7 +63,12 @@
             <span>{{ data.call_status ? data.call_status : "--" }}</span>
           </td>
           <td>
-            <audio controls class="audio" *ngIf="data.voice_file !== ''">
+            <audio
+              [controlsList]="download"
+              controls
+              class="audio"
+              *ngIf="data.voice_file !== ''"
+            >
               <source [src]="data.voice_file" type="audio/wav" />
             </audio>
             <span *ngIf="data.voice_file === ''">N/A</span>

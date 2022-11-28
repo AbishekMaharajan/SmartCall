@@ -110,6 +110,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         this.form.controls['remarks'].setValue(res[0].remarks ? res[0].remarks : '');
         this.postUrl = res[0].image
         this.availability = this.availability.map((data) => {
+          data.active = false
           if (data.unnest === res[0].call_availability) {
             data.active = true
           }

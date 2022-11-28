@@ -182,6 +182,12 @@ export class LatestResponceComponent implements OnInit {
       customer_id: user.customer_id.toString()
     }
     this.liveMoniterSandbox.blockCustomer(params)
+    this.subscriptions.push(this.liveMoniterSandbox.blockCustomer$.subscribe((res) => {
+      if (res) {
+        this.fetchLatestResponseList();
+        this.fetchLatestResponseListCount();
+      }
+    }))
   }
 
   onSearch() {

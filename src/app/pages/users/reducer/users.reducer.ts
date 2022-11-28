@@ -265,6 +265,7 @@ export function reducer(state = initialState, { type, payload }: any): UsersStat
             const updatedData = payload.data.map((data) => {
                 data.active = false
                 if (data.unnest === 'Available') {
+                    data.active = true
                     data.class = 'success'
                 }
                 else if (data.unnest === 'Not Available' || data.unnest === 'On Leave') {
@@ -274,6 +275,9 @@ export function reducer(state = initialState, { type, payload }: any): UsersStat
                     data.class = '_alert'
                 }
                 else if (data.unnest === 'On Duty') {
+                    data.class = '_alert'
+                }
+                else if (data.unnest === "Only Email") {
                     data.class = 'success'
                 }
                 else data.class = '_alert'

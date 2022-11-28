@@ -116,14 +116,11 @@ export class StatusTrackerComponent implements OnInit, OnDestroy {
           if (data.unnest === 'All') {
             data.active = true
           }
-          if (data.unnest === 'All' || data.unnest === 'Available' || data.unnest === 'On Duty') {
+          if (data.unnest === 'All' || data.unnest === 'Available' || data.unnest === 'Only Email') {
             data.class = 'success'
           }
           else if (data.unnest === 'Not Available' || data.unnest === 'On Leave') {
             data.class = 'warning'
-          }
-          else if (data.unnest === 'On Break') {
-            data.class = '_alert'
           }
           else data.class = '_alert'
           return data

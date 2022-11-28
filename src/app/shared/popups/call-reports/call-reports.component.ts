@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
 import { LiveMoniterSandbox } from 'src/app/pages/live-moniter/liveMoniter.sandbox';
@@ -8,10 +8,12 @@ import { LiveMoniterSandbox } from 'src/app/pages/live-moniter/liveMoniter.sandb
   templateUrl: './call-reports.component.html',
   styleUrls: ['./call-reports.component.scss']
 })
-export class CallReportsComponent implements OnInit {
+export class CallReportsComponent implements OnInit, AfterViewInit {
+  @ViewChild('audio') audio: ElementRef;
   user: any = ''
+  admin = JSON.parse(localStorage.getItem('userDetails')).user_type
+  download = 'nodownload'
   payload: any = {}
-
   constructor(
     public activeModal: NgbActiveModal,
     public liveMoniterSandbox: LiveMoniterSandbox,
@@ -20,6 +22,12 @@ export class CallReportsComponent implements OnInit {
 
   ngOnInit() {
     this.fetchTotalCallList()
+
+  }
+  ngAfterViewInit() {
+    if (this.admin && this.admin == 1) {
+      this.download = 'download'
+    }
   }
   fetchTotalCallList() {
     const params = {

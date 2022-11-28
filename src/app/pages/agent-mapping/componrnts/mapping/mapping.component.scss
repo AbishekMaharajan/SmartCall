@@ -126,8 +126,15 @@
         border: var(--border);
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         .project-head {
-          margin: 0.5rem 5rem 0.5rem 1.5rem;
-          height: 5rem;
+          margin-inline: 1.5rem 3rem;
+          min-height: 5rem;
+          .did {
+            display: inline-block;
+            font-size: 1.1rem;
+            color: var(--font-muted);
+            margin-top: 0.2rem;
+            font-weight: 500;
+          }
           .span-1 {
             color: var(--font-primary);
             font-size: 1.6rem;

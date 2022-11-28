@@ -70,13 +70,13 @@ export class MappingComponent implements OnInit, OnDestroy {
   onMove(event, project) {
     const obj = project.json_data.find((agent) => agent.member_id == event.data.id)
     if (!obj) {
-      project.json_data.push({ member_id: event.data.id, member_name: event.data.member_name, days: 1, isnew: 1 })
+      project.json_data.push({ member_id: event.data.id, member_name: event.data.member_name, days: 0, isnew: 1 })
       return
     }
     this.toster.error('Agent alredy mapped to this project')
 
   }
-  onAgentSearch(event) {
+  onAgentSearch() {
     this.users = this.users.filter((user) => user.member_name.toLowerCase().includes(this.userSearch.toLowerCase()))
   }
   onProjectSearch() {

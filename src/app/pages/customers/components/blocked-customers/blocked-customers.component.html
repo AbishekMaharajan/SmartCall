@@ -39,9 +39,9 @@
           <th>DID</th>
           <th>Customer</th>
           <th>Mobile</th>
-          <th>Blocked by Agent</th>
+          <th>Blocked by</th>
           <th>Status</th>
-          <th style="width: 30%">Action</th>
+          <th style="width: 30%; text-align: center">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -68,7 +68,7 @@
               >Unassigned</span
             >
           </td>
-          <td>
+          <td style="display: flex; justify-content: center">
             <button
               class="bttn"
               (click)="reassignFunc(customer)"
