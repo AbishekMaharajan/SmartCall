@@ -25,9 +25,10 @@ import { DidEffect } from '../did/effects/did.effects';
 import { DidSandbox } from '../did/did.sandbox';
 import { DidService } from '../did/did.service';
 import { BlockedCustomersComponent } from './components/blocked-customers/blocked-customers.component';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 
 @NgModule({
-  declarations: [LayoutCustomerComponent, CustomerListComponent, ProjectAgentReportComponent, ReassignAgentComponent, BlockedCustomersComponent],
+  declarations: [LayoutCustomerComponent, CustomerListComponent, ProjectAgentReportComponent, ReassignAgentComponent, BlockedCustomersComponent, AddCustomerComponent],
   imports: [
     CommonModule,
     CustomersRoutingModule,

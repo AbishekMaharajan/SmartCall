@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { BlockedCustomersComponent } from './components/blocked-customers/blocked-customers.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { ProjectAgentReportComponent } from './components/project-agent-report/project-agent-report.component';
@@ -37,6 +38,13 @@ const routes: Routes = [
         component: BlockedCustomersComponent,
         data: {
           moduleUrl: 'customers/blocked-customers'
+        }
+      },
+      {
+        path: 'add-customer',
+        component: AddCustomerComponent,
+        data: {
+          moduleUrl: 'customers/list'
         }
       },
       {

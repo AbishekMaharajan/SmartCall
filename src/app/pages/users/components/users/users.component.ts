@@ -25,20 +25,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     itemsPerPage: this.pageSize, currentPage: this.page, totalItems: ''
   }
   public subscriptions: Array<Subscription> = [];
-  userArr = [
-    { id: 1, name: 'Swathi', mail: 'a48ssd@gmail.com', mobile: '7548493034', type: 'Sales Head', phone: 'Mobile', repoting: 'Admin' },
-    { id: 2, name: 'Dhivakar', mail: 'diva@gmail.com', mobile: '7542223034', type: 'Team Lead', phone: 'Mobile', repoting: 'Swathi' },
-    { id: 3, name: 'Bala', mail: 'a48ssd@gmail.com', mobile: '7548493034', type: 'Team Lead', phone: 'Mobile', repoting: 'Swathi' },
-    { id: 4, name: 'Abhishek', mail: 'abcd@gmail.com', mobile: '6678493034', type: 'Agent', phone: 'SIP', repoting: 'Bala' },
-    { id: 5, name: 'Kishore', mail: 'njdie@gmail.com', mobile: '9068493034', type: 'Agent', phone: 'Mobile', repoting: 'Bala' },
-    { id: 6, name: 'Vallarasan', mail: 'vallu@gmail.com', mobile: '857493034', type: 'Agent', phone: 'Mobile', repoting: 'Dhivakar' },
-    { id: 7, name: 'Priya N', mail: 'priya@gmail.com', mobile: '790684930', type: 'Agent', phone: 'SIP', repoting: 'Bala' },
-    { id: 8, name: 'Rakesh', mail: 'abcd@gmail.com', mobile: '6678493034', type: 'Agent', phone: 'Mobile', repoting: 'Bala' },
-    { id: 9, name: 'Murugan', mail: 'njdie@gmail.com', mobile: '9068493034', type: 'Agent', phone: 'Mobile', repoting: 'Bala' },
-    { id: 10, name: 'Latha', mail: 'vallu@gmail.com', mobile: '857493034', type: 'Agent', phone: 'Mobile', repoting: 'Dhivakar' },
-    { id: 11, name: 'Duraimathi', mail: 'priya@gmail.com', mobile: '790684930', type: 'Agent', phone: 'Mobile', repoting: 'Bala' },
-
-  ]
   constructor(
     private router: Router,
     public usersSandbox: UsersSandbox,

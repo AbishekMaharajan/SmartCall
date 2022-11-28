@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
@@ -26,7 +27,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   constructor(
     public modalService: NgbModal,
     public customerSandbox: CustomersSandbox,
-    public commonSandbox: CommonSandbox
+    public commonSandbox: CommonSandbox,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -58,7 +60,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     }))
   }
   onAddBtnClick() {
-
+    this.router.navigate(['customers/add-customer'])
   }
   editCustomer(customer) {
 
@@ -92,6 +94,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     this.offset = (event - 1) * this.pageSize
     this.fetchCustomerList()
   }
+
   export() {
     const params = {
       name: 'customerList',
@@ -102,6 +105,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     }
     this.commonSandbox.export(params)
   }
+
+
 
   ngOnDestroy() {
     this.subscriptions.forEach(each => each.unsubscribe());
