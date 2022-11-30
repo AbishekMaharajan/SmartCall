@@ -20,7 +20,7 @@ export class ReassignAgentComponent implements OnInit, OnDestroy {
   fromAgentId: number
   toAgentId: number
   page: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 0;
   offset: number = 0;
   keyword: string = '';
   count: number = 0;
@@ -88,7 +88,12 @@ export class ReassignAgentComponent implements OnInit, OnDestroy {
       }
     }))
   }
-
+  onSelectAll(event) {
+    this.dataArr.map((data) => {
+      data.checked = event.target.checked
+      return data
+    })
+  }
   reassignFrom(event) {
     if (!event) {
       this.fromAgentId = null

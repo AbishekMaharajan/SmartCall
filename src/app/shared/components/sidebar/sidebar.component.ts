@@ -5,6 +5,7 @@ import { Subscription, zip } from 'rxjs';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopupComponent } from '../../popups/confirmation-popup/confirmation-popup.component';
+import { SettingsComponent } from '../../popups/settings/settings.component';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -102,6 +103,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           path: 'customers/list'
         },
         {
+          icon: 'group_add', title: 'Online Leads',
+
+          path: 'customers/online-leads'
+        },
+        {
           icon: 'description', title: 'Project / Agent Report',
 
           path: 'customers/project-agent-report'
@@ -137,7 +143,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     },
   ]
 
-  constructor(public router: Router,
+  constructor(
+    public router: Router,
     public activatedRoute: ActivatedRoute,
     public modalService: NgbModal,) {
     this.router.events
@@ -187,6 +194,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.router.navigate([`${nav.path}`]);
   }
 
+  settingsFunc() {
+    const modalRef = this.modalService.open(SettingsComponent, {
+      size: 'lg', centered: true, backdrop: 'static',
+      keyboard: false
+    });
+  }
   logout() {
     const modalRef = this.modalService.open(ConfirmationPopupComponent, {
       centered: true,
@@ -198,9 +211,9 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       if (result == 'success') {
         localStorage.clear();
         this.router.navigate(['/auth']);
-
       }
     });
 
   }
 }
+

@@ -19,10 +19,10 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
   emailPattern = '^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@' + '[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$';
   public subscriptions: Array<Subscription> = [];
   areaArr: any = []
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     public activeModal: NgbActiveModal,
     public liveMoniterSandbox: LiveMoniterSandbox,
-    private datePipe: DatePipe,
   ) { }
 
   ngOnInit() {
@@ -84,8 +84,8 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
       action_taken: this.form.value.actionTaken
     }
     this.liveMoniterSandbox.updateCustomer(params)
-    this.subscriptions.push(this.liveMoniterSandbox.updateCustomerInfo$.subscribe((res) => {
-      if (res && res.status === 1) {
+    this.subscriptions.push(this.liveMoniterSandbox.updateCustomerInfoLoaded$.subscribe((res) => {
+      if (res) {
         this.activeModal.close('success')
       }
     }))
@@ -93,6 +93,7 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
 
   close() {
     this.activeModal.close();
+    this.subscriptions.forEach(each => each.unsubscribe());
   }
 
   updateCustomer() {
@@ -110,5 +111,6 @@ export class UpdateLatestResponseComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.areaArr = []
     this.subscriptions.forEach(each => each.unsubscribe());
+
   }
 }

@@ -28,6 +28,7 @@ import { PlayRecordingComponent } from './shared/popups/play-recording/play-reco
 import { ViewFileComponent } from './shared/popups/view-file/view-file.component';
 import { UploadFileComponent } from './shared/popups/upload-file/upload-file.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { SettingsComponent } from './shared/popups/settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     DaysMappedComponent,
     PlayRecordingComponent,
     ViewFileComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

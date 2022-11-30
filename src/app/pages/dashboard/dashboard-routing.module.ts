@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { SettingsComponent } from './component/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -14,13 +13,6 @@ const routes: Routes = [
         component: DashboardComponent,
         data: {
           moduleUrl: 'dashboard'
-        }
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent,
-        data: {
-          moduleUrl: 'settings'
         }
       },
       {

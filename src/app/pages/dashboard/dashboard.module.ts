@@ -5,7 +5,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 import { MatTabsModule } from '@angular/material/tabs';
-import { SettingsComponent } from './component/settings/settings.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { CommonSandbox } from 'src/app/common/common.sandbox';
@@ -14,7 +13,7 @@ import { CommonEffect } from 'src/app/common/effects/common.efects';
 
 
 @NgModule({
-  declarations: [DashboardComponent, SettingsComponent],
+  declarations: [DashboardComponent,],
   imports: [
     CommonModule,
     DashboardRoutingModule,

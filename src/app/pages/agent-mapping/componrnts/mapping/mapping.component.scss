@@ -128,11 +128,11 @@
         .project-head {
           margin-inline: 1.5rem 3rem;
           min-height: 5rem;
+          padding-block: 1rem;
           .did {
             display: inline-block;
             font-size: 1.1rem;
             color: var(--font-muted);
-            margin-top: 0.2rem;
             font-weight: 500;
           }
           .span-1 {
@@ -141,6 +141,12 @@
             font-weight: 500;
             line-height: 1.1;
             text-align: start;
+            .project-name {
+              width: 100%;
+              display: inline-block;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
           .span-2 {
             background-color: var(--purple);
@@ -155,11 +161,12 @@
             align-items: center;
             justify-content: center;
             border-bottom-left-radius: 1rem;
+            border-top-right-radius: 0.5rem;
           }
         }
         .agent-container {
           overflow-y: auto;
-          height: 80%;
+          height: 75%;
           display: flex;
           flex-direction: column;
           align-items: center;

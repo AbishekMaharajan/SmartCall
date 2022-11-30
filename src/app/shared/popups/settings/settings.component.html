@@ -1,0 +1,70 @@
+<main class="modal_container">
+  <section class="modal_header">
+    <span>Settings</span>
+    <button (click)="close()">&times;</button>
+  </section>
+  <section class="modal_content">
+    <form action="" [formGroup]="form">
+      <div class="input-box">
+        <label class="_title">To Change Password </label>
+      </div>
+      <div class="input-box">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          name="email"
+          placeholder="Enter email"
+          formControlName="email"
+        />
+      </div>
+      <div class="input-box">
+        <label for="password"> Password</label>
+        <input
+          type="text"
+          name="password"
+          placeholder="Enter password"
+          formControlName="password"
+        />
+      </div>
+      <div class="input-box">
+        <label for="newPassword">New Password</label>
+        <input
+          type="text"
+          name="newPassword"
+          placeholder="Enter new password"
+          formControlName="newPassword"
+        />
+      </div>
+      <!-- <div class="input-box">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="text"
+          name="confirmPassword"
+          placeholder="Enter confirm password"
+          formControlName="confirmPassword"
+        />
+      </div> -->
+    </form>
+    <div class="Availability">
+      <div class="availability">
+        <label class="_title">Availability Status</label>
+        <p class="availability-option">
+          <span
+            *ngFor="let state of availability"
+            class="{{ state.class }} active"
+            [ngClass]="{ active: state.active == true }"
+            (click)="OnChangeAvailability(state)"
+          >
+            {{ state.unnest }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="modal_footer">
+    <button class="bttn" (click)="onConfirm()"><span>Confirm</span></button>
+    <button class="bttn warning-outline" (click)="close()">
+      <span>Cancel</span>
+    </button>
+  </section>
+</main>

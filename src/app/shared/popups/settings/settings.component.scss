@@ -1,0 +1,116 @@
+.modal_container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 2rem 4rem;
+  position: relative;
+  .modal_header {
+    height: 10%;
+    width: 100%;
+    text-align: center;
+    span {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    button {
+      position: absolute;
+      right: 2rem;
+      top: 1rem;
+      font-size: 3.5rem;
+      color: var(--font-muted);
+      background-color: transparent;
+    }
+  }
+  .modal_content {
+    width: 100%;
+    height: 80%;
+    form {
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+      // padding-top: 2rem;
+      // justify-content: center;
+      .input-box {
+        width: 75%;
+        label {
+          display: block;
+          color: var(--font-primary);
+        }
+        input {
+          border: 1px solid #ccc;
+          padding: 1.2rem;
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+  .modal_footer {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 4rem;
+    .bttn {
+      width: 12rem;
+    }
+  }
+}
+._title {
+  font-weight: 600;
+  color: var(--purple) !important;
+  text-decoration: underline;
+}
+.Availability {
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+.availability-option {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  span {
+    display: block;
+    padding-inline: 1rem;
+    border: 1px solid;
+    border-radius: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    // background-color: var(--light);
+    box-shadow: var(--box-shadow-primary);
+    cursor: pointer;
+  }
+  .success {
+    border-color: var(--success);
+    color: var(--success);
+    &:hover,
+    &.active {
+      background-color: var(--success);
+      color: var(--light);
+    }
+  }
+  .warning {
+    border-color: var(--warning);
+    color: var(--warning);
+    &:hover,
+    &.active {
+      background-color: var(--warning);
+      color: var(--light);
+    }
+  }
+  ._alert {
+    border-color: var(--purple);
+    color: var(--purple);
+    &:hover,
+    &.active {
+      background-color: var(--purple);
+      color: var(--light);
+    }
+  }
+}

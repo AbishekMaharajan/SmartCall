@@ -32,8 +32,9 @@ main {
           display: block;
           padding-inline: 2rem;
           position: relative;
+          width: 80%;
           input {
-            min-width: 25rem;
+            width: 100%;
             padding: 1rem;
             border: var(--border);
             border-radius: 0.5rem;
@@ -52,7 +53,7 @@ main {
           }
         }
         .bttn-box {
-          width: 100%;
+          // width: 100%;
           justify-content: flex-end;
           padding-right: 2rem;
         }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { DidSandbox } from 'src/app/pages/did/did.sandbox';
 
 @Component({
   selector: 'app-add-customer',
@@ -12,13 +13,17 @@ export class AddCustomerComponent implements OnInit {
 
   form: FormGroup;
   emailPattern = '^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@' + '[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$';
+  orgId = JSON.parse(localStorage.getItem('userDetails')).organisation_id
+
   // public subscriptions: Array<Subscription> = [];
   constructor(
     private router: Router,
-    private fb: FormBuilder,) { }
+    private fb: FormBuilder,
+    public didSandbox: DidSandbox,) { }
 
   ngOnInit() {
     this.initForm()
+    this.getDropdownList()
   }
 
   initForm() {
@@ -32,7 +37,21 @@ export class AddCustomerComponent implements OnInit {
       followupDate: [null, Validators.required],
       followupTime: [null, Validators.required],
       actionTaken: [null, Validators.required],
+      project: [null, Validators.required],
+      agent: [null, Validators.required],
+      DID: [null, Validators.required],
     })
+  }
+  getDropdownList() {
+    const params = {
+      organisation_id: this.orgId,
+      type: 0
+    }
+    this.didSandbox.getProjectList(params)
+
+  }
+  onSelectProject({ id }) {
+
   }
   doCreateCustomer() {
     const params = {
@@ -57,7 +76,7 @@ export class AddCustomerComponent implements OnInit {
 
   }
   onCancelBtnClick() {
-    this.router.navigateByUrl('/customers/list')
+    this.router.navigateByUrl('/customers/online-leads')
   }
   onCreateBtnClick() {
     this.doCreateCustomer()

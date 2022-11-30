@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 import { BlockedCustomersComponent } from './components/blocked-customers/blocked-customers.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { OnlineLeadsComponent } from './components/online-leads/online-leads.component';
 import { ProjectAgentReportComponent } from './components/project-agent-report/project-agent-report.component';
 import { ReassignAgentComponent } from './components/reassign-agent/reassign-agent.component';
 import { LayoutCustomerComponent } from './layout-customer/layout-customer.component';
@@ -17,6 +18,13 @@ const routes: Routes = [
         component: CustomerListComponent,
         data: {
           moduleUrl: 'customers/list'
+        }
+      },
+      {
+        path: 'online-leads',
+        component: OnlineLeadsComponent,
+        data: {
+          moduleUrl: 'customers/online-leads'
         }
       },
       {
@@ -44,7 +52,7 @@ const routes: Routes = [
         path: 'add-customer',
         component: AddCustomerComponent,
         data: {
-          moduleUrl: 'customers/list'
+          moduleUrl: 'customers/online-leads'
         }
       },
       {

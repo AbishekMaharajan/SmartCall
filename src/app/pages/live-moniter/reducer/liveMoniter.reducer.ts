@@ -248,7 +248,7 @@ export function reducer(state = initialState, { type, payload }: any): LiveMonit
 
             return Object.assign({}, state, {
                 updateCustomerInfoLoading: false,
-                updateCustomerInfoLoaded: true,
+                updateCustomerInfoLoaded: false,
                 updateCustomerInfoFailed: true,
 
             });

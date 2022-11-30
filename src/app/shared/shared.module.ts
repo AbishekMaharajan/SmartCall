@@ -36,7 +36,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { CommonEffect } from '../common/effects/common.efects';
 import { ViewFileComponent } from './popups/view-file/view-file.component';
 import { UploadFileComponent } from './popups/upload-file/upload-file.component';
-import { HighchartsChartModule } from 'highcharts-angular'
+import { HighchartsChartModule } from 'highcharts-angular';
+import { SettingsComponent } from './popups/settings/settings.component'
 export const COMPONENTS = [
   SidebarComponent,
   ConfirmationPopupComponent,
@@ -49,7 +50,7 @@ export const COMPONENTS = [
   PlayRecordingComponent,
   ViewFileComponent,
   UploadFileComponent,
-
+  SettingsComponent
 ];
 @NgModule({
   declarations: [COMPONENTS],

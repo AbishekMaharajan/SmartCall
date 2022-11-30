@@ -6,12 +6,7 @@
   <section class="header">
     <p>Reassign Agents</p>
   </section>
-  <section
-    class="container-box"
-    [ngClass]="
-      (customerSandbox.reassignListCount$ | async) <= pageSize && 'fullheight'
-    "
-  >
+  <section class="container-box fullheight">
     <div class="filter-box">
       <div class="box">
         <label for="">Reassign From <sup>*</sup></label>
@@ -85,11 +80,17 @@
             <th>Mobile</th>
             <th>Called On</th>
             <th>Project</th>
-            <th>Select</th>
+            <th style="display: flex; gap: 1rem; align-items: center">
+              <span class="check"
+                ><input type="checkbox" (change)="onSelectAll($event)"
+              /></span>
+              <span> Select </span>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of dataArr | paginate: config; let i = index">
+          <tr *ngFor="let data of dataArr; let i = index">
+            <!-- | paginate: config;  -->
             <td>{{ i + 1 }}</td>
             <td>{{ data.customer_name ? data.customer_name : "--" }}</td>
             <td>
@@ -115,7 +116,7 @@
       </table>
     </div>
   </section>
-  <section
+  <!-- <section
     class="pagination-box"
     *ngIf="(customerSandbox.reassignListCount$ | async) > pageSize"
   >
@@ -123,5 +124,5 @@
       class="pagination"
       (pageChange)="pageChanged($event)"
     ></pagination-controls>
-  </section>
+  </section> -->
 </main>

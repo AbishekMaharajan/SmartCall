@@ -27,19 +27,16 @@
     <form [formGroup]="form" (ngSubmit)="doCreateCustomer()">
       <div class="input-box">
         <div>
-          <label>Customer Name </label>
+          <label>Customer Name <sup>*</sup></label>
           <input
             type="text"
             placeholder="Enter Username"
             formControlName="name"
           />
         </div>
+
         <div>
-          <label>Email Id </label>
-          <input type="text" placeholder="Enter Email" formControlName="mail" />
-        </div>
-        <div>
-          <label>Mobile No </label>
+          <label>Mobile No<sup>*</sup> </label>
           <input
             Decimalnumeric
             numericType="number"
@@ -49,8 +46,6 @@
             placeholder="Enter Mobile Number"
           />
         </div>
-      </div>
-      <div class="input-box">
         <div>
           <label>Alternate No </label>
           <input
@@ -63,6 +58,45 @@
             placeholder="Enter Alternate Number"
           />
         </div>
+      </div>
+      <div class="input-box">
+        <div>
+          <label>Project<sup>*</sup></label>
+          <ng-select
+            [items]="didSandbox.projectList$ | async"
+            bindLabel="project_name"
+            bindValue="id"
+            [searchable]="true"
+            placeholder="Select Projects"
+            formControlName="project"
+            (change)="onSelectProject($event)"
+          >
+          </ng-select>
+        </div>
+        <div>
+          <label>Agent <sup>*</sup></label>
+          <ng-select
+            [searchable]="true"
+            placeholder="Select Agents"
+            formControlName="agent"
+          >
+          </ng-select>
+        </div>
+        <div>
+          <label>DID <sup>*</sup></label>
+          <ng-select
+            [searchable]="true"
+            placeholder="Select DID"
+            formControlName="DID"
+          >
+          </ng-select>
+        </div>
+      </div>
+      <div class="input-box">
+        <div>
+          <label>Email Id </label>
+          <input type="text" placeholder="Enter Email" formControlName="mail" />
+        </div>
         <div>
           <label>Followup Date </label>
           <!-- <input type="date" placeholder="" /> -->
@@ -70,8 +104,6 @@
             <input
               matInput
               [matDatepicker]="toDate"
-              [min]="toMinDate"
-              [max]="toMaxDate"
               readonly
               placeholder="To Date"
               style="padding: 1.1rem"
