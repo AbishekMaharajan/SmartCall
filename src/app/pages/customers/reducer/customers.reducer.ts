@@ -257,6 +257,125 @@ export function reducer(state = initialState, { type, payload }: any): Customers
             });
 
 
+        //  DID LIST
+        case actions.ActionTypes.DID_LIST:
+
+            return Object.assign({}, state, {
+                didListLoading: true,
+                didListLoaded: false,
+                didListFailed: false,
+            });
+
+        case actions.ActionTypes.DID_LIST_SUCCESS:
+
+            return Object.assign({}, state, {
+                didList: payload.data,
+                didListLoading: false,
+                didListLoaded: true,
+                didListFailed: false,
+            });
+
+        case actions.ActionTypes.DID_LIST_FAIL:
+
+            return Object.assign({}, state, {
+                didListLoading: false,
+                didListLoaded: true,
+                didListFailed: true,
+
+            });
+
+
+
+        //  ONLINE LEADS
+        case actions.ActionTypes.ONLINE_LEADES:
+
+            return Object.assign({}, state, {
+                onlineLeadsLoading: true,
+                onlineLeadsLoaded: false,
+                onlineLeadsFailed: false,
+            });
+
+        case actions.ActionTypes.ONLINE_LEADES_SUCCESS:
+
+            return Object.assign({}, state, {
+                onlineLeads: payload.data,
+                onlineLeadsLoading: false,
+                onlineLeadsLoaded: true,
+                onlineLeadsFailed: false,
+            });
+
+        case actions.ActionTypes.ONLINE_LEADES_FAIL:
+
+            return Object.assign({}, state, {
+                onlineLeadsLoading: false,
+                onlineLeadsLoaded: true,
+                onlineLeadsFailed: true,
+
+            });
+
+
+        //  ONLINE LEADS COUNT
+        case actions.ActionTypes.ONLINE_LEADES_COUNT:
+
+            return Object.assign({}, state, {
+                onlineLeadsCountLoading: true,
+                onlineLeadsCountLoaded: false,
+                onlineLeadsCountFailed: false,
+            });
+
+        case actions.ActionTypes.ONLINE_LEADES_COUNT_SUCCESS:
+
+            return Object.assign({}, state, {
+                onlineLeadsCount: payload.data,
+                onlineLeadsCountLoading: false,
+                onlineLeadsCountLoaded: true,
+                onlineLeadsCountFailed: false,
+            });
+
+        case actions.ActionTypes.ONLINE_LEADES_COUNT_FAIL:
+
+            return Object.assign({}, state, {
+                onlineLeadsCountLoading: false,
+                onlineLeadsCountLoaded: true,
+                onlineLeadsCountFailed: true,
+
+            });
+
+        //  CREATE LEADS
+        case actions.ActionTypes.CREATE_LEADS:
+
+            return Object.assign({}, state, {
+                createLeadsLoading: true,
+                createLeadsLoaded: false,
+                createLeadsFailed: false,
+            });
+
+        case actions.ActionTypes.CREATE_LEADS_SUCCESS:
+
+            return Object.assign({}, state, {
+                createLeads: payload,
+                createLeadsLoading: false,
+                createLeadsLoaded: true,
+                createLeadsFailed: false,
+            });
+
+        case actions.ActionTypes.CREATE_LEADS_FAIL:
+
+            return Object.assign({}, state, {
+                createLeadsLoading: false,
+                createLeadsLoaded: true,
+                createLeadsFailed: true,
+
+            });
+
+
+
+
+
+
+
+
+
         //  PROJECT AGENT LIST COUNT
         case actions.ActionTypes.CLEAR_PROJECT_AGENT_LIST:
 
@@ -329,3 +448,23 @@ export const projectAgentListCount = (state: CustomersState) => state.projectAge
 export const projectAgentListCountLoading = (state: CustomersState) => state.projectAgentListCountLoading;
 export const projectAgentListCountLoaded = (state: CustomersState) => state.projectAgentListCountLoaded;
 export const projectAgentListCountFailed = (state: CustomersState) => state.projectAgentListCountFailed;
+
+export const didList = (state: CustomersState) => state.didList;
+export const didListLoading = (state: CustomersState) => state.didListLoading;
+export const didListLoaded = (state: CustomersState) => state.didListLoaded;
+export const didListFailed = (state: CustomersState) => state.didListFailed;
+
+export const onlineLeads = (state: CustomersState) => state.onlineLeads;
+export const onlineLeadsLoading = (state: CustomersState) => state.onlineLeadsLoading;
+export const onlineLeadsLoaded = (state: CustomersState) => state.onlineLeadsLoaded;
+export const onlineLeadsFailed = (state: CustomersState) => state.onlineLeadsFailed;
+
+export const onlineLeadsCount = (state: CustomersState) => state.onlineLeadsCount;
+export const onlineLeadsCountLoading = (state: CustomersState) => state.onlineLeadsCountLoading;
+export const onlineLeadsCountLoaded = (state: CustomersState) => state.onlineLeadsCountLoaded;
+export const onlineLeadsCountFailed = (state: CustomersState) => state.onlineLeadsCountFailed;
+
+export const createLeads = (state: CustomersState) => state.createLeads;
+export const createLeadsLoading = (state: CustomersState) => state.createLeadsLoading;
+export const createLeadsLoaded = (state: CustomersState) => state.createLeadsLoaded;
+export const createLeadsFailed = (state: CustomersState) => state.createLeadsFailed;

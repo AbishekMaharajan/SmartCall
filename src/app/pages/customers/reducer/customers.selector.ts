@@ -52,3 +52,24 @@ export const projectAgentListCount = createSelector(getCustomersState, customers
 export const projectAgentListCountLoading = createSelector(getCustomersState, customersReducer.projectAgentListCountLoading);
 export const projectAgentListCountLoaded = createSelector(getCustomersState, customersReducer.projectAgentListCountLoaded);
 export const projectAgentListCountFailed = createSelector(getCustomersState, customersReducer.projectAgentListCountFailed);
+
+export const didList = createSelector(getCustomersState, customersReducer.didList);
+export const didListLoading = createSelector(getCustomersState, customersReducer.didListLoading);
+export const didListLoaded = createSelector(getCustomersState, customersReducer.didListLoaded);
+export const didListFailed = createSelector(getCustomersState, customersReducer.didListFailed);
+
+export const onlineLeads = createSelector(getCustomersState, customersReducer.onlineLeads);
+export const onlineLeadsLoading = createSelector(getCustomersState, customersReducer.onlineLeadsLoading);
+export const onlineLeadsLoaded = createSelector(getCustomersState, customersReducer.onlineLeadsLoaded);
+export const onlineLeadsFailed = createSelector(getCustomersState, customersReducer.onlineLeadsFailed);
+
+export const onlineLeadsCount = createSelector(getCustomersState, customersReducer.onlineLeadsCount);
+export const onlineLeadsCountLoading = createSelector(getCustomersState, customersReducer.onlineLeadsCountLoading);
+export const onlineLeadsCountLoaded = createSelector(getCustomersState, customersReducer.onlineLeadsCountLoaded);
+export const onlineLeadsCountFailed = createSelector(getCustomersState, customersReducer.onlineLeadsCountFailed);
+
+export const createLeads = createSelector(getCustomersState, customersReducer.createLeads);
+export const createLeadsLoading = createSelector(getCustomersState, customersReducer.createLeadsLoading);
+export const createLeadsLoaded = createSelector(getCustomersState, customersReducer.createLeadsLoaded);
+export const createLeadsFailed = createSelector(getCustomersState, customersReducer.createLeadsFailed);
+

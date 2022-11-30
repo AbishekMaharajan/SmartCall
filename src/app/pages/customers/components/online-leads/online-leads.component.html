@@ -1,4 +1,4 @@
-<!-- <div *ngIf="customerSandbox.customerListLoading$ | async">
+<!-- <div *ngIf="customersSandbox.onlineLeadsLoading$ | async">
   <app-page-loader></app-page-loader>
 </div> -->
 
@@ -20,13 +20,15 @@
           <fa-icon [icon]="faSearch"></fa-icon>
         </button>
       </div>
-      <button class="bttn warning-outline" (click)="export()">
-        <!-- [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'" -->
-
-        <!-- <i
+      <button
+        class="bttn warning-outline"
+        [ngClass]="(commonSandbox.exportListLoading$ | async) && 'block'"
+        (click)="export()"
+      >
+        <i
           class="fa fa-spinner fa-spin"
           *ngIf="commonSandbox.exportListLoading$ | async"
-        ></i> -->
+        ></i>
         <span> Export </span>
       </button>
       <button class="bttn" style="width: 15rem" (click)="onAddBtnClick()">
@@ -34,10 +36,12 @@
       </button>
     </div>
   </section>
-  <section class="container-box customScroll">
-    <!-- [ngClass]="
-      (customerSandbox.customerListCount$ | async) <= pageSize && 'fullheight'
-    " -->
+  <section
+    class="container-box customScroll"
+    [ngClass]="
+      (customersSandbox.onlineLeadsCount$ | async) <= pageSize && 'fullheight'
+    "
+  >
     <table class="table">
       <thead>
         <tr>
@@ -47,75 +51,19 @@
           <th>Project</th>
           <th>Agent</th>
           <th>DID</th>
-          <!-- <th>Alternate Number</th> -->
-          <th>Email</th>
-          <!-- <th>Address</th>
-          <th>Action Taken</th>
-          <th>Followup Date</th>
-          <th>Followup Time</th> -->
-          <th>Action</th>
+          <th>Added On</th>
         </tr>
       </thead>
-      <tbody>
-        <!-- <tr
-          *ngFor="
-            let customer of customerSandbox.customerList$
-              | async
-              | paginate: config;
-            let i = index
-          "
-        >
-          <td>
-            {{ config.itemsPerPage * (config.currentPage - 1) + (i + 1) }}
-          </td>
-          <td>
-            {{ customer.customer_name ? customer.customer_name : "--" }}
-          </td>
-          <td>
-            {{ customer.customer_mobile ? customer.customer_mobile : "--" }}
-          </td>
-          <td>
-            {{ customer.alternate_number1 ? customer.alternate_number1 : "--" }}
-          </td>
-          <td>
-            {{ customer.customer_email ? customer.customer_email : "--" }}
-          </td>
-          <td>
-            {{ customer.address ? customer.address : "--" }}
-          </td>
-          <td>{{ customer.action_taken ? customer.action_taken : "--" }}</td>
-          <td>
-            {{ customer.follow_up_date ? customer.follow_up_date : "--" }}
-          </td>
-          <td>
-            {{ customer.follow_up_time ? customer.follow_up_time : "--" }}
-          </td>
-          <td>
-            <button
-              style="color: red"
-              mat-icon-button
-              [matMenuTriggerFor]="menu"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editCustomer(customer)">
-                <mat-icon style="color: steelblue">edit</mat-icon>
-                <span>Edit Customer</span>
-              </button>
-            </mat-menu>
-          </td>
-        </tr> -->
-      </tbody>
+      <tbody></tbody>
     </table>
   </section>
-  <!-- <section
+  <section
     class="pagination-box"
-    *ngIf="(customerSandbox.customerListCount$ | async) > pageSize"
+    *ngIf="(customersSandbox.onlineLeadsCount$ | async) > pageSize"
   >
     <pagination-controls
       class="pagination"
       (pageChange)="pageChanged($event)"
     ></pagination-controls>
-  </section> -->
+  </section>
 </main>

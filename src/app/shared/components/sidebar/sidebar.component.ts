@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       title: 'Dashboard',
       main: [
         {
-          icon: 'dashboard', title: 'My Dashboard', sub: [], path: 'dashboard',
+          icon: 'dashboard', title: 'My Dashboard', path: 'dashboard',
         },
       ],
     },

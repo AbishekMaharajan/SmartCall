@@ -57,4 +57,18 @@ export class CustomersService extends Api {
             return this.http.get<ResponseInterface>(this.URL + '/reports/get-project-agent-report', { params: params });
         }
     }
+
+    didList(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '', { params: params });
+    }
+
+    onlineLeads(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '', { params: params });
+    }
+    onlineLeadsCount(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '', { params: params });
+    }
+    createLeads(params: any): Observable<ResponseInterface> {
+        return this.http.get<ResponseInterface>(this.URL + '', { params: params });
+    }
 }

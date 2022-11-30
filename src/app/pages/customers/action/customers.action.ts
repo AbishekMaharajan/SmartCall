@@ -44,6 +44,22 @@ export const ActionTypes = {
     PROJECT_AGENT_LIST_COUNT_SUCCESS: type('[customer] project agent list count Success'),
     PROJECT_AGENT_LIST_COUNT_FAIL: type('[customer] project agent list count Fail'),
 
+    DID_LIST: type('[customer] did list '),
+    DID_LIST_SUCCESS: type('[customer] did list Success'),
+    DID_LIST_FAIL: type('[customer] did list Fail'),
+
+    ONLINE_LEADES: type('[customer] online leads '),
+    ONLINE_LEADES_SUCCESS: type('[customer] online leads Success'),
+    ONLINE_LEADES_FAIL: type('[customer] online leads Fail'),
+
+    ONLINE_LEADES_COUNT: type('[customer] online leads count '),
+    ONLINE_LEADES_COUNT_SUCCESS: type('[customer] online leads count Success'),
+    ONLINE_LEADES_COUNT_FAIL: type('[customer] online leads count Fail'),
+
+    CREATE_LEADS: type('[customer] createLeads '),
+    CREATE_LEADS_SUCCESS: type('[customer] createLeads Success'),
+    CREATE_LEADS_FAIL: type('[customer] createLeads Fail'),
+
     CLEAR_PROJECT_AGENT_LIST: type('[customer] clear project agent list '),
 
 };
@@ -254,6 +270,105 @@ export class ProjectAgentListCountFail implements Action {
     }
 }
 
+
+
+// DID LIST
+
+export class DidList implements Action {
+    type = ActionTypes.DID_LIST;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class DidListSuccess implements Action {
+    type = ActionTypes.DID_LIST_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class DidListFail implements Action {
+    type = ActionTypes.DID_LIST_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+// ONLINE LEADES 
+
+export class OnlineLeads implements Action {
+    type = ActionTypes.ONLINE_LEADES;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class OnlineLeadsSuccess implements Action {
+    type = ActionTypes.ONLINE_LEADES_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class OnlineLeadsFail implements Action {
+    type = ActionTypes.ONLINE_LEADES_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+// ONLINE LEADES COUNT
+
+export class OnlineLeadsCount implements Action {
+    type = ActionTypes.ONLINE_LEADES_COUNT;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class OnlineLeadsCountSuccess implements Action {
+    type = ActionTypes.ONLINE_LEADES_COUNT_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class OnlineLeadsCountFail implements Action {
+    type = ActionTypes.ONLINE_LEADES_COUNT_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+// CREATE LEADS
+
+export class CreateLeads implements Action {
+    type = ActionTypes.CREATE_LEADS;
+
+    constructor(public payload: any) {
+    }
+}
+
+export class CreateLeadsSuccess implements Action {
+    type = ActionTypes.CREATE_LEADS_SUCCESS;
+
+    constructor(public payload: ResponseInterface) {
+    }
+}
+
+export class CreateLeadsFail implements Action {
+    type = ActionTypes.CREATE_LEADS_FAIL;
+
+    constructor(public payload: any) {
+    }
+}
+
+
+
+
+
+
 // CLEAR PROJECT AGENT LIST
 
 export class ClearProjectAgentList implements Action {
@@ -299,6 +414,22 @@ export type Actions =
     | ProjectAgentListCount
     | ProjectAgentListCountSuccess
     | ProjectAgentListCountFail
+
+    | DidList
+    | DidListSuccess
+    | DidListFail
+
+    | OnlineLeads
+    | OnlineLeadsSuccess
+    | OnlineLeadsFail
+
+    | OnlineLeadsCount
+    | OnlineLeadsCountSuccess
+    | OnlineLeadsCountFail
+
+    | CreateLeads
+    | CreateLeadsSuccess
+    | CreateLeadsFail
 
     | ClearProjectAgentList
 

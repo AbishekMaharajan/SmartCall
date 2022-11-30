@@ -4,60 +4,63 @@
     <button (click)="close()">&times;</button>
   </section>
   <section class="modal_content">
-    <form action="" [formGroup]="form">
-      <div class="input-box">
-        <label class="_title">To Change Password </label>
+    <div class="content-box">
+      <div class="box1">
+        <nav
+          *ngFor="let item of dataArr"
+          (click)="onSelect(item)"
+          [ngClass]="{ activenav: item.isActive == true }"
+        >
+          {{ item.name }}
+        </nav>
       </div>
-      <div class="input-box">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          placeholder="Enter email"
-          formControlName="email"
-        />
-      </div>
-      <div class="input-box">
-        <label for="password"> Password</label>
-        <input
-          type="text"
-          name="password"
-          placeholder="Enter password"
-          formControlName="password"
-        />
-      </div>
-      <div class="input-box">
-        <label for="newPassword">New Password</label>
-        <input
-          type="text"
-          name="newPassword"
-          placeholder="Enter new password"
-          formControlName="newPassword"
-        />
-      </div>
-      <!-- <div class="input-box">
-        <label for="confirmPassword">Confirm Password</label>
-        <input
-          type="text"
-          name="confirmPassword"
-          placeholder="Enter confirm password"
-          formControlName="confirmPassword"
-        />
-      </div> -->
-    </form>
-    <div class="Availability">
-      <div class="availability">
-        <label class="_title">Availability Status</label>
-        <p class="availability-option">
-          <span
-            *ngFor="let state of availability"
-            class="{{ state.class }} active"
-            [ngClass]="{ active: state.active == true }"
-            (click)="OnChangeAvailability(state)"
-          >
-            {{ state.unnest }}
-          </span>
-        </p>
+      <div class="box2">
+        <header>{{ dataArr[data - 1].name }}</header>
+        <ng-container *ngIf="data == 1">
+          <div class="availability">
+            <p class="availability-option">
+              <span
+                *ngFor="let state of availability"
+                class="{{ state.class }} active"
+                [ngClass]="{ active: state.active == true }"
+                (click)="OnChangeAvailability(state)"
+              >
+                {{ state.unnest }}
+              </span>
+            </p>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="data == 2">
+          <form action="" [formGroup]="form">
+            <div class="input-box">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                name="email"
+                placeholder="Enter email"
+                formControlName="email"
+              />
+            </div>
+            <div class="input-box">
+              <label for="password"> Password</label>
+              <input
+                type="text"
+                name="password"
+                placeholder="Enter password"
+                formControlName="password"
+              />
+            </div>
+            <div class="input-box">
+              <label for="newPassword">New Password</label>
+              <input
+                type="text"
+                name="newPassword"
+                placeholder="Enter new password"
+                formControlName="newPassword"
+              />
+            </div>
+          </form>
+        </ng-container>
       </div>
     </div>
   </section>

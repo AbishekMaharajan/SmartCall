@@ -13,6 +13,13 @@ export class SettingsComponent implements OnInit {
   form: FormGroup
   availability = []
   public subscriptions: Array<Subscription> = [];
+  data = 1
+  dataArr = [
+    { id: 1, name: 'Availability Status', isActive: true },
+    { id: 2, name: 'Change Password', isActive: false },
+    // { id: 3, name: 'Forget Password' },
+  ]
+
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
@@ -36,6 +43,14 @@ export class SettingsComponent implements OnInit {
       newPassword: [null, Validators.required],
       confirmPassword: [null, Validators.required],
     })
+  }
+
+
+
+  onSelect(item) {
+    this.data = item.id
+    this.dataArr.forEach((data) => data.isActive = false)
+    item.isActive = true
   }
 
   OnChangeAvailability(state) {

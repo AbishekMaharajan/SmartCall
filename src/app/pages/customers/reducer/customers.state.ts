@@ -46,6 +46,26 @@ export interface CustomersState extends Map<string, any> {
     projectAgentListCountLoading: boolean;
     projectAgentListCountLoaded: boolean;
     projectAgentListCountFailed: boolean;
+
+    didList: any;
+    didListLoading: boolean;
+    didListLoaded: boolean;
+    didListFailed: boolean;
+
+    onlineLeads: any;
+    onlineLeadsLoading: boolean;
+    onlineLeadsLoaded: boolean;
+    onlineLeadsFailed: boolean;
+
+    onlineLeadsCount: any;
+    onlineLeadsCountLoading: boolean;
+    onlineLeadsCountLoaded: boolean;
+    onlineLeadsCountFailed: boolean;
+
+    createLeads: any;
+    createLeadsLoading: boolean;
+    createLeadsLoaded: boolean;
+    createLeadsFailed: boolean;
 }
 
 export const CustomersStateRecord = Record({
@@ -94,6 +114,26 @@ export const CustomersStateRecord = Record({
     projectAgentListCountLoading: false,
     projectAgentListCountLoaded: false,
     projectAgentListCountFailed: false,
+
+    didList: [],
+    didListLoading: false,
+    didListLoaded: false,
+    didListFailed: false,
+
+    onlineLeads: [],
+    onlineLeadsLoading: false,
+    onlineLeadsLoaded: false,
+    onlineLeadsFailed: false,
+
+    onlineLeadsCount: 0,
+    onlineLeadsCountLoading: false,
+    onlineLeadsCountLoaded: false,
+    onlineLeadsCountFailed: false,
+
+    createLeads: {},
+    createLeadsLoading: false,
+    createLeadsLoaded: false,
+    createLeadsFailed: false,
 
 });
 

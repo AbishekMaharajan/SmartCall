@@ -1,25 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 import { DidSandbox } from 'src/app/pages/did/did.sandbox';
+import { UsersSandbox } from 'src/app/pages/users/users.sandbox';
+import { CustomersSandbox } from '../../customers.sandbox';
 
 @Component({
   selector: 'app-add-customer',
   templateUrl: './add-customer.component.html',
   styleUrls: ['./add-customer.component.scss']
 })
-export class AddCustomerComponent implements OnInit {
+export class AddCustomerComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   emailPattern = '^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@' + '[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$';
   orgId = JSON.parse(localStorage.getItem('userDetails')).organisation_id
 
-  // public subscriptions: Array<Subscription> = [];
+  public subscriptions: Array<Subscription> = [];
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    public didSandbox: DidSandbox,) { }
+    public didSandbox: DidSandbox,
+    public customerSandbox: CustomersSandbox,
+    public userSandbox: UsersSandbox
+  ) { }
 
   ngOnInit() {
     this.initForm()
@@ -31,18 +37,13 @@ export class AddCustomerComponent implements OnInit {
       name: [null, Validators.required],
       mail: [null, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])],
       mobile: [null, Validators.required],
-      alterMobile: [null, Validators.required],
-      area: [null, Validators.required],
-      pinCode: [null, Validators.required],
-      followupDate: [null, Validators.required],
-      followupTime: [null, Validators.required],
-      actionTaken: [null, Validators.required],
       project: [null, Validators.required],
       agent: [null, Validators.required],
       DID: [null, Validators.required],
     })
   }
   getDropdownList() {
+    this.userSandbox.agentList(this.orgId)
     const params = {
       organisation_id: this.orgId,
       type: 0
@@ -51,7 +52,11 @@ export class AddCustomerComponent implements OnInit {
 
   }
   onSelectProject({ id }) {
-
+    // console.log('id: ', id);
+    const params = {
+      project_id: id
+    }
+    this.customerSandbox.didList(params)
   }
   doCreateCustomer() {
     const params = {
@@ -59,20 +64,18 @@ export class AddCustomerComponent implements OnInit {
       customer_name: this.form.value.name,
       customer_email: this.form.value.mail,
       customer_mobile: this.form.value.mobile,
-      customer_alternate_mobile: this.form.value.alterMobile,
-      customer_pincode: this.form.value.pinCode,
-      customer_area: this.form.value.area,
-      follow_up_date: this.form.value.followupDate ? moment(this.form.value.followupDate, 'YYYY-MM-DD').format('DD/MM/YYYY') : '',
-      follow_up_time: this.form.value.followupTime,
-      action_taken: this.form.value.actionTaken
+      project_id: this.form.value.project,
+      agent_id: this.form.value.agent,
+      did: this.form.value.DID
     }
 
-    // this.liveMoniterSandbox.updateCustomer(params)
-    // this.subscriptions.push(this.liveMoniterSandbox.updateCustomerInfo$.subscribe((res) => {
-    //   if (res && res.status === 1) {
-    //     this.router.navigateByUrl('/customers/list')
-    //   }
-    // }))
+
+    this.customerSandbox.createLeads(params)
+    this.subscriptions.push(this.customerSandbox.createLeads$.subscribe((res) => {
+      if (res && res.status === 1) {
+        this.router.navigateByUrl('/customers/list')
+      }
+    }))
 
   }
   onCancelBtnClick() {
@@ -82,5 +85,7 @@ export class AddCustomerComponent implements OnInit {
     this.doCreateCustomer()
   }
 
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(each => each.unsubscribe());
+  }
 }

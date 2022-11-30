@@ -173,6 +173,74 @@ export class CustomersEffect {
             }
             )
         );
+    // DID LIST
+    @Effect()
+    didList$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.DID_LIST),
+            map((action: actions.DidList) => action.payload),
+            switchMap((state) => {
+                return this.api.didList(state)
+                    .pipe(
+                        map((customer) =>
+                            new actions.DidListSuccess(customer),
+                        ),
+                        catchError(error => of(new actions.DidListFail(error.error)))
+                    );
+            }
+            )
+        );
+    // ONLINE LEADS
+    @Effect()
+    onlineLeads$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.ONLINE_LEADES),
+            map((action: actions.OnlineLeads) => action.payload),
+            switchMap((state) => {
+                return this.api.onlineLeads(state)
+                    .pipe(
+                        map((customer) =>
+                            new actions.OnlineLeadsSuccess(customer),
+                        ),
+                        catchError(error => of(new actions.OnlineLeadsFail(error.error)))
+                    );
+            }
+            )
+        );
+    // ONLINE LEADS COUNT
+    @Effect()
+    onlineLeadsCount$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.ONLINE_LEADES_COUNT),
+            map((action: actions.OnlineLeadsCount) => action.payload),
+            switchMap((state) => {
+                return this.api.onlineLeadsCount(state)
+                    .pipe(
+                        map((customer) =>
+                            new actions.OnlineLeadsCountSuccess(customer),
+                        ),
+                        catchError(error => of(new actions.OnlineLeadsCountFail(error.error)))
+                    );
+            }
+            )
+        );
+    // CREATE LEADS
+    @Effect()
+    createLeads$: Observable<Action> = this.action$
+        .pipe(
+            ofType(actions.ActionTypes.CREATE_LEADS),
+            map((action: actions.CreateLeads) => action.payload),
+            switchMap((state) => {
+                return this.api.createLeads(state)
+                    .pipe(
+                        map((customer) =>
+                            new actions.CreateLeadsSuccess(customer),
+                        ),
+                        catchError(error => of(new actions.CreateLeadsFail(error.error)))
+                    );
+            }
+            )
+        );
 
 
 

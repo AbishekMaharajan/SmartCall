@@ -12,6 +12,10 @@ import {
     projectList, projectListLoading, projectListLoaded, projectListFailed,
     projectAgentList, projectAgentListLoading, projectAgentListLoaded, projectAgentListFailed,
     projectAgentListCount, projectAgentListCountLoading, projectAgentListCountLoaded, projectAgentListCountFailed,
+    didList, didListLoading, didListLoaded, didListFailed,
+    onlineLeads, onlineLeadsLoading, onlineLeadsLoaded, onlineLeadsFailed,
+    onlineLeadsCount, onlineLeadsCountLoading, onlineLeadsCountLoaded, onlineLeadsCountFailed,
+    createLeads, createLeadsLoading, createLeadsLoaded, createLeadsFailed,
 
 } from './reducer/customers.selector';
 
@@ -64,6 +68,29 @@ export class CustomersSandbox {
     public projectAgentListCountLoaded$ = this.appState.select(projectAgentListCountLoaded);
     public projectAgentListCountFailed$ = this.appState.select(projectAgentListCountFailed);
 
+    public didList$ = this.appState.select(didList);
+    public didListLoading$ = this.appState.select(didListLoading);
+    public didListLoaded$ = this.appState.select(didListLoaded);
+    public didListFailed$ = this.appState.select(didListFailed);
+
+    public onlineLeads$ = this.appState.select(onlineLeads);
+    public onlineLeadsLoading$ = this.appState.select(onlineLeadsLoading);
+    public onlineLeadsLoaded$ = this.appState.select(onlineLeadsLoaded);
+    public onlineLeadsFailed$ = this.appState.select(onlineLeadsFailed);
+
+    public onlineLeadsCount$ = this.appState.select(onlineLeadsCount);
+    public onlineLeadsCountLoading$ = this.appState.select(onlineLeadsCountLoading);
+    public onlineLeadsCountLoaded$ = this.appState.select(onlineLeadsCountLoaded);
+    public onlineLeadsCountFailed$ = this.appState.select(onlineLeadsCountFailed);
+
+    public createLeads$ = this.appState.select(createLeads);
+    public createLeadsLoading$ = this.appState.select(createLeadsLoading);
+    public createLeadsLoaded$ = this.appState.select(createLeadsLoaded);
+    public createLeadsFailed$ = this.appState.select(createLeadsFailed);
+
+
+
+
     constructor(protected appState: Store<store.AppState>) {
     }
 
@@ -104,6 +131,19 @@ export class CustomersSandbox {
     }
     public clearProjectAgentList() {
         this.appState.dispatch(new CustomersActions.ClearProjectAgentList(''));
+    }
+
+    public didList(params) {
+        this.appState.dispatch(new CustomersActions.DidList(params));
+    }
+    public onlineLeads(params) {
+        this.appState.dispatch(new CustomersActions.OnlineLeads(params));
+    }
+    public onlineLeadsCount(params) {
+        this.appState.dispatch(new CustomersActions.OnlineLeadsCount(params));
+    }
+    public createLeads(params) {
+        this.appState.dispatch(new CustomersActions.CreateLeads(params));
     }
 }
 
