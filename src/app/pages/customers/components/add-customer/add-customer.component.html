@@ -47,7 +47,7 @@
           />
         </div>
         <div>
-          <!-- <label>Alternate No </label>
+          <label>Alternate No </label>
           <input
             type="text"
             Decimalnumeric
@@ -56,7 +56,7 @@
             [maxlength]="10"
             formControlName="alterMobile"
             placeholder="Enter Alternate Number"
-          /> -->
+          />
         </div>
       </div>
       <div class="input-box">
@@ -85,9 +85,6 @@
           >
           </ng-select>
         </div>
-        <div></div>
-      </div>
-      <div class="input-box">
         <div>
           <label>DID <sup>*</sup></label>
           <ng-select
@@ -100,6 +97,20 @@
           >
           </ng-select>
         </div>
+      </div>
+      <div class="input-box">
+        <!-- <div>
+          <label>DID <sup>*</sup></label>
+          <ng-select
+            [items]="customerSandbox.didList$ | async"
+            bindLabel=""
+            bindValue="id"
+            [searchable]="true"
+            placeholder="Select DID"
+            formControlName="DID"
+          >
+          </ng-select>
+        </div> -->
       </div>
     </form>
   </section>
